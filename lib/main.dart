@@ -33,13 +33,17 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.purple,
-          primary: Colors.white,
+          // primary: Colors.white,
           surface: Colors.purple,
           onPrimary: Colors.purple,
         ),
 
+        scaffoldBackgroundColor: const Color.fromARGB(
+            255, 218, 200, 250), // const Color(0xFFDDDDDD),
+
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.white,
             shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
