@@ -9,6 +9,6 @@ class LayourtTwiceBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayourtCategoriesBuilder(xs: mobile, sm: mobile, lg: desktop);
+    return LayourtCategoriesBuilder(xs: mobile, sm: mobile, md: desktop);
   }
 }

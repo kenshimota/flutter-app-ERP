@@ -38,8 +38,9 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.purple,
         ),
 
-        scaffoldBackgroundColor: const Color.fromARGB(
-            255, 218, 200, 250), // const Color(0xFFDDDDDD),
+        scaffoldBackgroundColor: const Color(0xFFdddddd),
+        /*Color.fromARGB(
+            255, 218, 200, 250), // const Color(0xFFDDDDDD),*/
 
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
