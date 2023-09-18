@@ -13,25 +13,28 @@ class SigninScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Center(
-                    child: ContainerLimit(
-                      maxHeight: 400,
-                      maxWidth: 350,
-                      child: FormSignin(),
-                    ),
+      body:
+
+          ///Center(
+          Column(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Center(
+                  child: ContainerLimit(
+                    maxHeight: 400,
+                    maxWidth: 350,
+                    child: FormSignin(),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+
+      // ),
     );
   }
 }
@@ -55,11 +58,15 @@ class ContainerLimit extends StatelessWidget {
     return LimitedBox(
       maxWidth: maxWidth,
       maxHeight: maxHeight,
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          color: color,
-          child: child,
+      child: OverflowBox(
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        child: AspectRatio(
+          aspectRatio: 2.0,
+          child: Container(
+            color: color,
+            child: child,
+          ),
         ),
       ),
     );
