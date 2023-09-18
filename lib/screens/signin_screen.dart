@@ -12,13 +12,22 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: ContainerBodyApp(
+        child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10.0, top: 100.0),
-              child: const FormSignin(),
+            Expanded(
+              child: Column(
+                children: [
+                  Center(
+                    child: ContainerLimit(
+                      maxHeight: 400,
+                      maxWidth: 350,
+                      child: FormSignin(),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -27,39 +36,30 @@ class SigninScreen extends StatelessWidget {
   }
 }
 
-// El container centrado, el que va a llevar a email y password
-class ContainerBodyApp extends StatelessWidget {
-  // final Widget? child;
-  final List<Widget>? children;
-  final Color color = Colors.white;
+class ContainerLimit extends StatelessWidget {
+  final double maxWidth;
+  final double maxHeight;
+  final Color? color;
+  final Widget? child;
 
-  const ContainerBodyApp({super.key, this.children});
+  const ContainerLimit({
+    super.key,
+    required this.maxWidth,
+    required this.maxHeight,
+    this.child,
+    this.color = Colors.white,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget>? children = this.children;
-    final Color color = this.color;
-
-    return Flexible(
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: FractionallySizedBox(
-            // heightFactor: 1,
-            widthFactor: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: color,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Column(
-                  children: children ?? [],
-                ),
-              ),
-            ),
-          ),
+    return LimitedBox(
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          color: color,
+          child: child,
         ),
       ),
     );
