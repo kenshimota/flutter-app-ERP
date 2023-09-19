@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/form_signin.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter_app_erp/widgets/signin_screen_desktop.dart';
+import 'package:flutter_app_erp/widgets/container_limit.dart';
 
 class SigninScreen extends StatelessWidget {
   const SigninScreen({super.key});
@@ -16,53 +18,6 @@ class SigninScreen extends StatelessWidget {
     return const LayourtTwiceBuilder(
       mobile: SigninScreenMobile(),
       desktop: SigninScreenDesktop(),
-    );
-  }
-}
-
-class SigninScreenDesktop extends StatelessWidget {
-  const SigninScreenDesktop({super.key});
-
-  onPressed() {
-    Logger logger = Logger();
-    logger.w("test: fluytter");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ContainerLimit(
-        maxWidth: 1024,
-        minHeight: 600,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(children: [
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                          "https://interseguridad.org/wp-content/uploads/2018/12/contadorpublico.jpeg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 350,
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: FormSignin(),
-              ),
-            ),
-          ]),
-        ),
-      ),
     );
   }
 }
@@ -83,57 +38,6 @@ class SigninScreenMobile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(10),
           child: FormSignin(),
-        ),
-      ),
-    );
-  }
-}
-
-class ContainerLimit extends StatelessWidget {
-  final double maxWidth;
-  final double maxHeight;
-  final double minWidth;
-  final double minHeight;
-  final Color? color;
-  final Widget? child;
-
-  const ContainerLimit({
-    super.key,
-    this.maxWidth = double.infinity,
-    this.maxHeight = double.infinity,
-    this.minWidth = 0,
-    this.minHeight = 0,
-    this.child,
-    this.color = Colors.white,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    double screenWidth =
-        maxWidth == double.infinity || maxWidth <= width ? maxWidth : width;
-    double screenHeight = maxHeight == double.infinity || maxHeight <= height
-        ? maxHeight
-        : height;
-
-    return LimitedBox(
-      maxWidth: screenWidth,
-      maxHeight: screenHeight,
-      child: OverflowBox(
-        maxWidth: screenWidth,
-        maxHeight: screenHeight,
-        minHeight: minHeight,
-        minWidth: minWidth,
-        child: FractionallySizedBox(
-          widthFactor: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: child,
-          ),
         ),
       ),
     );
