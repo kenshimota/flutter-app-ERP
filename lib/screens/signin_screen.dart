@@ -109,12 +109,20 @@ class ContainerLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double screenWidth =
+        maxWidth == double.infinity || maxWidth <= width ? maxWidth : width;
+    double screenHeight = maxHeight == double.infinity || maxHeight <= height
+        ? maxHeight
+        : height;
+
     return LimitedBox(
-      maxWidth: maxWidth,
-      maxHeight: maxHeight,
+      maxWidth: screenWidth,
+      maxHeight: screenHeight,
       child: OverflowBox(
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
+        maxWidth: screenWidth,
+        maxHeight: screenHeight,
         minHeight: minHeight,
         minWidth: minWidth,
         child: FractionallySizedBox(
