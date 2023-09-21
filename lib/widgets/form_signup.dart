@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/input_email.dart';
+import 'package:flutter_app_erp/widgets/input_identity.dart';
 import 'package:flutter_app_erp/widgets/input_name.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_last_name.dart';
+import 'package:flutter_app_erp/widgets/input_password.dart';
 import 'package:flutter_app_erp/widgets/input_user_name.dart';
 
 class FormSignup extends StatefulWidget {
@@ -31,6 +33,34 @@ class _FormSignupState extends State<FormSignup> {
               _GridColumn(
                 child: FormControl(
                   child: InputName(),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              _GridColumn(
+                child: FormControl(
+                  child: InputLasName(),
+                ),
+              ),
+              _GridColumn(
+                child: FormControl(
+                  child: InputIdentityDocumenten(),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              _GridColumn(
+                child: FormControl(
+                  child: InputUserName(),
+                ),
+              ),
+              _GridColumn(
+                child: FormControl(
+                  child: InputPassword(),
                 ),
               ),
             ],
