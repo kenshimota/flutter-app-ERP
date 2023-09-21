@@ -15,7 +15,7 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: ContainerLimit(
-        maxWidth: 200,
+        maxWidth: 600,
         child: FormSignup(),
       ),
     );
