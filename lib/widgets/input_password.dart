@@ -3,9 +3,15 @@ import "package:validatorless/validatorless.dart";
 
 class InputPassword extends StatefulWidget {
   final String? label;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
 
-  const InputPassword({super.key, this.label, this.validator});
+  @override
+  void dispose() {
+    controller!.dispose();
+  }
+
+  const InputPassword({super.key, this.label, this.controller, this.validator});
 
   @override
   State<InputPassword> createState() => _InputPassword();
@@ -33,14 +39,14 @@ class _InputPassword extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     final String? label = widget.label;
-    final RegExp regExp = RegExp(
-        r"/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,20}/");
+    final RegExp regExp =
+        RegExp(r"/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.])/");
 
     final List<String? Function(String?)> listValidations = [
       Validatorless.min(8, 'Password must be at least 8 characters'),
       Validatorless.max(20, 'Password must be at most 20 characters'),
-      Validatorless.regex(regExp,
-          "La contraseña debe tener al menos una letra mayuscula, una minuscula, debe tener uno o varios numeros 0-9 y un caracter especial")
+      // Validatorless.regex(regExp,
+      //    "La contraseña debe tener al menos una letra mayuscula, una minuscula, debe tener uno o varios numeros 0-9 y un caracter especial")
     ];
 
     if (widget.validator != null) {
@@ -49,6 +55,7 @@ class _InputPassword extends State<InputPassword> {
 
     return TextFormField(
       obscureText: !visible,
+      controller: widget.controller,
       decoration: InputDecoration(
         labelText: label ?? "Contraseña",
         hintText: 'Enter your Password',

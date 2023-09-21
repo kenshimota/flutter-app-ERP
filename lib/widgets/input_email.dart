@@ -4,9 +4,19 @@ import "package:validatorless/validatorless.dart";
 class InputEmail extends StatelessWidget {
   final String? label;
   final bool? isRequired;
+  final TextEditingController? controller;
 
-  const InputEmail(
-      {super.key, this.isRequired = false, this.label = "Correo Electronico"});
+  const InputEmail({
+    super.key,
+    this.isRequired = false,
+    this.label = "Correo Electronico",
+    this.controller,
+  });
+
+  @override
+  void dispose() {
+    controller!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +33,7 @@ class InputEmail extends StatelessWidget {
         labelText: label,
         hintText: "user@example.com",
       ),
+      controller: controller,
       validator: Validatorless.multiple(listValidations),
     );
   }
