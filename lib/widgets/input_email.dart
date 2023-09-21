@@ -13,7 +13,6 @@ class InputEmail extends StatelessWidget {
     this.controller,
   });
 
-  @override
   void dispose() {
     controller!.dispose();
   }

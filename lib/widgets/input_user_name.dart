@@ -3,7 +3,13 @@ import "package:validatorless/validatorless.dart";
 
 class InputUserName extends StatelessWidget {
   final String? label;
-  const InputUserName({super.key, this.label = 'Username'});
+  final TextEditingController? controller;
+
+  const InputUserName({super.key, this.label = 'Username', this.controller});
+
+  void dispose() {
+    controller!.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,7 @@ class InputUserName extends StatelessWidget {
         hintText: 'UserName',
       ),
       validator: Validatorless.multiple(listValidations),
+      controller: controller,
     );
   }
 }

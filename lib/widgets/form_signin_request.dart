@@ -22,7 +22,8 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     } on Exception catch (e) {
       showError(context, e);
     } catch (e) {
-      showError(context, Exception("Chequee su conexión"));
+      debugPrint(e.toString());
+      showError(context, Exception("Verifique su conexión"));
     }
 
     return response;

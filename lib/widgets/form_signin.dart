@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_user_name.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
@@ -19,7 +20,7 @@ class FormSignin extends StatefulWidget {
 
 class _FormSigninState extends State<FormSignin> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
   onSubmit() {
@@ -27,7 +28,7 @@ class _FormSigninState extends State<FormSignin> {
       return null;
     }
 
-    widget.onSubmit({"username": _email.text, "password": _password.text});
+    widget.onSubmit({"username": _username.text, "password": _password.text});
   }
 
   @override
@@ -61,10 +62,7 @@ class _FormSigninState extends State<FormSignin> {
             ]),
           ),
           FormControl(
-            child: InputEmail(
-              controller: _email,
-              isRequired: true,
-            ),
+            child: InputUserName(controller: _username),
           ),
           FormControl(
             child: InputPassword(controller: _password),
