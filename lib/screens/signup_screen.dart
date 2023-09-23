@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/container_limit.dart';
 import 'package:flutter_app_erp/widgets/form_signup.dart';
+import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/signup_screen_desktop.dart';
 import 'package:logger/logger.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -14,9 +16,12 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: ContainerLimit(
-        maxWidth: 600,
-        child: FormSignup(),
+      body: LayourtTwiceBuilder(
+        mobile: ContainerLimit(
+          maxWidth: 450,
+          child: FormSignup(),
+        ),
+        desktop: SignupScreenDesktop(),
       ),
     );
   }
