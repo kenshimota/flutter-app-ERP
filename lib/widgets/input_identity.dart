@@ -16,9 +16,8 @@ class InputIdentityDocumenten extends StatelessWidget {
     ];
 
     var maskFormatter = MaskTextInputFormatter(
-      mask: '@ #### #### #### #### ####',
+      mask: '###.###,##',
       filter: {
-        "@": RegExp(r'[A-Z]'),
         "#": RegExp(r'[0-9]'),
       },
     );
@@ -27,7 +26,7 @@ class InputIdentityDocumenten extends StatelessWidget {
       inputFormatters: [maskFormatter],
       decoration: InputDecoration(
         labelText: label,
-        hintText: 'J 0000 0000',
+        hintText: '000 000 000',
       ),
       validator: Validatorless.multiple(listValidations),
     );

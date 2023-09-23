@@ -4,7 +4,6 @@ import 'package:flutter_app_erp/widgets/input_user_name.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
-import 'package:flutter_app_erp/widgets/input_email.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_password.dart';
 

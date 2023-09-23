@@ -5,7 +5,7 @@ class InputUserName extends StatelessWidget {
   final String? label;
   final TextEditingController? controller;
 
-  const InputUserName({super.key, this.label = 'Username', this.controller});
+  const InputUserName({super.key, this.label = 'Usuario', this.controller});
 
   void dispose() {
     controller!.dispose();
@@ -21,7 +21,7 @@ class InputUserName extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
-        hintText: 'UserName',
+        hintText: 'minombre-apellido',
       ),
       validator: Validatorless.multiple(listValidations),
       controller: controller,

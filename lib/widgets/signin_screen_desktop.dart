@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/form_signin.dart';
 import 'package:flutter_app_erp/widgets/form_signin_request.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_app_erp/widgets/container_limit.dart';
@@ -16,7 +15,7 @@ class SigninScreenDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ContainerLimit(
-        maxWidth: 1024,
+        maxWidth: 1200,
         minHeight: 600,
         child: Padding(
           padding: const EdgeInsets.all(10),

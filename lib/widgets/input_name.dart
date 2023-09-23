@@ -5,12 +5,11 @@ class InputName extends StatelessWidget {
   final String? label;
   final bool? isRequired;
 
-  const InputName({super.key, this.label = 'Name', this.isRequired = false});
+  const InputName({super.key, this.label = 'Nombre', this.isRequired = false});
 
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      Validatorless.required('Name is required'),
       Validatorless.min(3, 'Name must be at least 3 characters'),
       Validatorless.max(20, 'Name must be at least 20 characters'),
     ];
@@ -21,7 +20,7 @@ class InputName extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
-        hintText: "Name",
+        hintText: "Nombre",
       ),
       validator: Validatorless.multiple(listValidations),
     );

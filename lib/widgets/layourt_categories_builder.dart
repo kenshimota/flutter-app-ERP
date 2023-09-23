@@ -4,26 +4,27 @@ class LayourtCategoriesBuilder extends StatelessWidget {
   final Widget? lg;
   final Widget? md;
   final Widget? sm;
-  final Widget? xs;
+  final Widget xs;
+  final String log;
 
   const LayourtCategoriesBuilder(
-      {super.key, required this.xs, this.lg, this.sm, this.md});
+      {super.key, required this.xs, this.lg, this.sm, this.md, this.log = ""});
 
   Widget _createScreen(BuildContext context, BoxConstraints constraints) {
-    Widget? node;
+    Widget node = xs;
     final double maxWidth = constraints.maxWidth;
 
+    // debugPrint("${maxWidth} --> ${log}");
+
     if (lg != null && maxWidth >= 1200) {
-      node = lg;
+      node = lg ?? Container();
     } else if (md != null && maxWidth >= 900) {
-      node = md;
+      node = md ?? Container();
     } else if (sm != null && maxWidth >= 600) {
-      node = sm;
-    } else {
-      node = xs;
+      node = sm ?? Container();
     }
 
-    return Container(child: node);
+    return node;
   }
 
   @override

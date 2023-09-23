@@ -6,7 +6,7 @@ class InputLasName extends StatelessWidget {
   final bool? isRequired;
 
   const InputLasName(
-      {super.key, this.label = 'Last Name', this.isRequired = false});
+      {super.key, this.label = 'Apellido', this.isRequired = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class InputLasName extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         labelText: label,
-        hintText: "Last Name",
+        hintText: "Mi apellido",
       ),
       validator: Validatorless.multiple(listValidations),
     );
