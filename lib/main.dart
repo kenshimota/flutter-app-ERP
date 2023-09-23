@@ -40,6 +40,16 @@ class MyApp extends StatelessWidget {
           onPrimary: Colors.purple,
         ),
 
+        iconTheme: const IconThemeData(color: Colors.purple),
+
+        inputDecorationTheme: InputDecorationTheme(
+          iconColor: Colors.purple,
+          contentPadding: const EdgeInsets.all(20),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100.0),
+          ),
+        ),
+
         scaffoldBackgroundColor: const Color(0xFFdddddd),
         /*Color.fromARGB(
             255, 218, 200, 250), // const Color(0xFFDDDDDD),*/
