@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:flutter/gestures.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,6 +9,10 @@ class HomeScreen extends StatelessWidget {
   onPressed() {
     Logger logger = Logger();
     logger.w("test: fluytter");
+  }
+
+  onPretion(BuildContext context) {
+    context.go("/signup");
   }
 
   @override
@@ -37,6 +43,12 @@ class HomeScreen extends StatelessWidget {
                 onPressed: onPressed,
                 child: const Text("text button"),
               )),
+          ElevatedButton(
+            onPressed: () {
+              context.go("/signin");
+            },
+            child: const Text("Iniciar sesión"),
+          )
         ],
       )),
     );
