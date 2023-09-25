@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/form_signup.dart';
-import 'package:logger/logger.dart';
 import 'package:flutter_app_erp/widgets/container_limit.dart';
+import 'package:flutter_app_erp/widgets/form_signup_request.dart';
 
 class SignupScreenDesktop extends StatelessWidget {
   const SignupScreenDesktop({super.key});
-
-  onPressed() {
-    Logger logger = Logger();
-    logger.w("test: fluytter");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +22,7 @@ class SignupScreenDesktop extends StatelessWidget {
                 width: 450,
                 child: Padding(
                   padding: EdgeInsets.all(16),
-                  child: FormSignup(),
+                  child: FormSignupRequest(),
                 ),
               ),
             ],

@@ -1,44 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/form_signin.dart';
-import 'package:flutter_app_erp/core/http/sessions/create_session.dart';
+import 'package:flutter_app_erp/core/exception/form_errors.dart';
+import 'package:flutter_app_erp/widgets/form_signup.dart';
+import 'package:flutter_app_erp/core/http/users/create_user.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
 
-class FormSigninRequest extends StatefulWidget {
-  const FormSigninRequest({super.key});
+class FormSignupRequest extends StatefulWidget {
+  const FormSignupRequest({super.key});
 
   @override
-  State<FormSigninRequest> createState() => _FormSigninRequestState();
+  State<FormSignupRequest> createState() => _FormSignupRequestState();
 }
 
-class _FormSigninRequestState extends State<FormSigninRequest> {
+class _FormSignupRequestState extends State<FormSignupRequest> {
   Future<UserResponse?>? _futureSession;
+  FormErrors errors = FormErrors(map: {});
 
   Future<UserResponse?> onRequest(
       Map<String, dynamic> params, BuildContext context) async {
     UserResponse? response;
 
     try {
-      response = await createSession(
+      response = await createUser(
         username: params["username"],
         password: params["password"],
+        firstName: params["first_name"],
+        lastName: params["last_name"],
+        identityDocument: 123123123123,
+        email: params["email"],
       );
     } on Exception catch (e) {
       showError(context, e);
+    } on FormErrors catch (e) {
+      setState(() {
+        errors = e;
+      });
     } catch (e) {
       debugPrint(e.toString());
       showError(context, Exception("Verifique su conexión"));
     }
 
     return response;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_futureSession == null) {
-      return buildForm(context);
-    }
-
-    return buildFuture(context);
   }
 
   void showError(BuildContext context, Object? error) {
@@ -52,21 +53,11 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     );
   }
 
-  Widget buildFuture(BuildContext context) {
-    return FutureBuilder<UserResponse?>(
+  @override
+  Widget build(BuildContext context) {
+    return FormSignup(
+      errors: errors,
       future: _futureSession,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return buildForm(context, loading: loading);
-      },
-    );
-  }
-
-  Widget buildForm(BuildContext context, {bool loading = false}) {
-    return FormSignin(
-      loading: loading,
       onSubmit: (Map<String, dynamic> params) {
         setState(() {
           _futureSession = onRequest(params, context);

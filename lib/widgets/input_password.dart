@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import "package:validatorless/validatorless.dart";
 
 class InputPassword extends StatefulWidget {
+  final bool enabled;
   final String? label;
+  final String? errorText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
 
-  @override
-  void dispose() {
-    controller!.dispose();
-  }
-
-  const InputPassword({super.key, this.label, this.controller, this.validator});
+  const InputPassword({
+    super.key,
+    this.label,
+    this.controller,
+    this.validator,
+    this.enabled = true,
+    this.errorText,
+  });
 
   @override
   State<InputPassword> createState() => _InputPassword();
@@ -39,8 +43,8 @@ class _InputPassword extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     final String? label = widget.label;
-    final RegExp regExp =
-        RegExp(r"/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.])/");
+    /*final RegExp regExp =
+        RegExp(r"/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.])/");*/
 
     final List<String? Function(String?)> listValidations = [
       Validatorless.min(8, 'Password must be at least 8 characters'),
@@ -54,9 +58,11 @@ class _InputPassword extends State<InputPassword> {
     }
 
     return TextFormField(
+      enabled: widget.enabled,
       obscureText: !visible,
       controller: widget.controller,
       decoration: InputDecoration(
+        errorText: widget.errorText,
         labelText: label ?? "Contraseña",
         hintText: 'Enter your Password',
         suffixIcon: IconButton(

@@ -7,6 +7,7 @@ class UserResponse {
   final int identityDocument;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String token;
 
   const UserResponse({
     required this.id,
@@ -17,6 +18,7 @@ class UserResponse {
     required this.identityDocument,
     required this.createdAt,
     required this.updatedAt,
+    required this.token,
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,7 @@ class UserResponse {
       username: json['username'],
       firstName: json['first_name'],
       lastName: json['last_name'],
+      token: "",
       identityDocument: json['identity_document'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),

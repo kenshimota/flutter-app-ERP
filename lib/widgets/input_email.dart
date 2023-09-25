@@ -3,7 +3,9 @@ import "package:validatorless/validatorless.dart";
 
 class InputEmail extends StatelessWidget {
   final String? label;
+  final bool enabled;
   final bool? isRequired;
+  final String? errorText;
   final TextEditingController? controller;
 
   const InputEmail({
@@ -11,6 +13,8 @@ class InputEmail extends StatelessWidget {
     this.isRequired = false,
     this.label = "Correo Electronico",
     this.controller,
+    this.errorText,
+    this.enabled = true,
   });
 
   void dispose() {
@@ -28,8 +32,10 @@ class InputEmail extends StatelessWidget {
     }
 
     return TextFormField(
+      enabled: enabled,
       decoration: InputDecoration(
         labelText: label,
+        errorText: errorText,
         hintText: "user@example.com",
       ),
       controller: controller,
