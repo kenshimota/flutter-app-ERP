@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/form_signin.dart';
-import 'package:flutter_app_erp/widgets/form_signup.dart';
+import 'package:flutter_app_erp/widgets/form_signup_request.dart';
 
 class DialogApp extends StatelessWidget {
   const DialogApp({super.key});
@@ -32,7 +31,7 @@ class DialogDesign extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const FormSignup(),
+                    const FormSignupRequest(),
                     const Text('This is a typical dialog.'),
                     const SizedBox(height: 15),
                     TextButton(
@@ -45,12 +44,6 @@ class DialogDesign extends StatelessWidget {
                 ),
               ),
             ),
-            /* return Dialog(
-                // Establecer en true para mostrar en pantalla completa
-                child: Container(
-                  child: Text('Hola jessica, lo lograste.'),
-                ),
-              );*/
           ),
           child: const Text('Show Fullscreen Dialog'),
         ),
