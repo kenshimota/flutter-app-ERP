@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/dialog.dart';
+import 'package:flutter_app_erp/widgets/drawer_app.dart';
+import 'package:flutter_app_erp/widgets/scaffold_app.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/gestures.dart';
 import 'package:go_router/go_router.dart';
@@ -17,40 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("app"),
-        // backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
-      body: Center(
-          child: Column(
-        children: [
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: OutlinedButton(
-                onPressed: onPressed,
-                child: const Text("outlined"),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton(
-                onPressed: onPressed,
-                child: const Text("elevation"),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextButton(
-                onPressed: onPressed,
-                child: const Text("text button"),
-              )),
-          ElevatedButton(
-            onPressed: () {
-              context.go("/signin");
-            },
-            child: const Text("Iniciar sesión"),
-          )
-        ],
-      )),
+    return const ScaffoldApp(
+      body: DialogApp(),
     );
   }
 }

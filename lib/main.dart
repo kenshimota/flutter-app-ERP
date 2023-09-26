@@ -8,7 +8,9 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: 'Flutter Demo',
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -51,8 +54,18 @@ class MyApp extends StatelessWidget {
         ),
 
         scaffoldBackgroundColor: const Color(0xFFdddddd),
-        /*Color.fromARGB(
-            255, 218, 200, 250), // const Color(0xFFDDDDDD),*/
+
+        drawerTheme: const DrawerThemeData(
+          // Definir los colores deseados para el Drawer
+          backgroundColor: Colors.white,
+          // Otros atributos del tema
+        ),
+
+        dialogTheme: const DialogTheme(
+          // Personaliza los atributos del Dialog
+          backgroundColor: Colors.white,
+          // Otros atributos del DialogTheme
+        ),
 
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -81,6 +94,7 @@ class MyApp extends StatelessWidget {
 
         useMaterial3: true,
       ),
+
       // home:   // const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
