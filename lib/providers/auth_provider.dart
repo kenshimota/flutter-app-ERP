@@ -1,15 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app_erp/core/http/users/create_user.dart';
+import 'package:flutter_app_erp/core/http/sessions/create_session.dart';
+import 'package:flutter_app_erp/core/response/users/user_response.dart';
 
 class AuthProvider extends ChangeNotifier {
-  Future<void> signIn(String email, String password) async {
-    // Implement sign-in logic here
+  UserResponse? _currentUser;
+
+  String? getToken() {
+    return _currentUser?.token;
   }
 
-  Future<void> signUp(String email, String password) async {
-    // Implement sign-up logic here
+  bool hasSession() {
+    return _currentUser != null;
+  }
+
+  Future<void> signIn({
+    required String username,
+    required String password,
+  }) async {
+    final UserResponse user = await createSession(
+      username: username,
+      password: password,
+    );
+
+    _currentUser = user;
+    notifyListeners();
+  }
+
+  Future<void> signUp({
+    required String username,
+    required String password,
+    required String firstName,
+    required String lastName,
+    required int identityDocument,
+    required String email,
+  }) async {
+    final UserResponse user = await createUser(
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      identityDocument: identityDocument,
+      email: email,
+    );
+
+    _currentUser = user;
   }
 
   Future<void> signOut() async {
-    // Implement sign-out logic here
+    _currentUser = null;
+    notifyListeners();
   }
 }

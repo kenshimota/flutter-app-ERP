@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/widgets/form_signin.dart';
+import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/core/http/sessions/create_session.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
 
@@ -18,7 +20,9 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     UserResponse? response;
 
     try {
-      response = await createSession(
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+      await authProvider.signIn(
         username: params["username"],
         password: params["password"],
       );
