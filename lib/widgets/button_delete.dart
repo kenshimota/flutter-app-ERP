@@ -28,23 +28,26 @@ class _DeleteButtonTaxesState extends State<DeleteButtonTaxes> {
 }
 
 Widget _DialogDeleteTaxes(BuildContext context) {
-  return Dialog(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text('This is a typical dialog.'),
-          const SizedBox(height: 15),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Close'),
-          ),
-        ],
-      ),
+  return AlertDialog(
+  title: const Text('Eliminar'),
+  content: const Text('Esta seguro que deseas eliminar este elemento de la tabla?'),
+  actions: [
+    ButtonBar(
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            // Acción del primer botón
+          },
+          child: const Text('Si'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('No'),
+        ),
+      ],
     ),
-  );
+  ],
+);
 }
