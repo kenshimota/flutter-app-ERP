@@ -24,8 +24,6 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
   ) async {
     bool success = false;
 
-    debugPrint(jsonEncode(params));
-
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
