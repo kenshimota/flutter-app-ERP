@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
+import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
 import 'package:flutter_app_erp/widgets/elevate_button_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/input_email.dart';
@@ -11,11 +12,10 @@ import 'package:flutter_app_erp/widgets/input_password.dart';
 import 'package:flutter_app_erp/widgets/input_user_name.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
-import 'package:flutter_app_erp/core/response/users/user_response.dart';
 
 class FormSignup extends StatefulWidget {
+  final Future? future;
   final FormErrors? errors;
-  final Future<UserResponse?>? future;
   final void Function(Map<String, dynamic>) onSubmit;
 
   const FormSignup({
@@ -53,174 +53,6 @@ class _FormSignupState extends State<FormSignup> {
     });
   }
 
-  Widget buildInputName() {
-    if (widget.future == null) {
-      return InputName(
-        label: "Nombre",
-        controller: _firstName,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputName(
-          label: "Nombre",
-          enabled: !loading,
-          errorText: widget.errors?.getValue("first_name"),
-          controller: _firstName,
-        );
-      },
-    );
-  }
-
-  Widget buildInputLastName() {
-    if (widget.future == null) {
-      return InputName(
-        label: "Apellido",
-        controller: _lastName,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputName(
-          label: "Apellido",
-          enabled: !loading,
-          errorText: widget.errors?.getValue("last_name"),
-          controller: _lastName,
-        );
-      },
-    );
-  }
-
-  Widget buildInputEmail() {
-    if (widget.future == null) {
-      return InputEmail(
-        controller: _email,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputEmail(
-          enabled: !loading,
-          controller: _email,
-          errorText: widget.errors?.getValue("email"),
-        );
-      },
-    );
-  }
-
-  Widget buildInputPassword() {
-    if (widget.future == null) {
-      return InputPassword(
-        controller: _password,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputPassword(
-          enabled: !loading,
-          controller: _password,
-          errorText: widget.errors?.getValue("password"),
-        );
-      },
-    );
-  }
-
-  Widget buildInputUsername() {
-    if (widget.future == null) {
-      return InputUserName(
-        controller: _identityDocument,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputUserName(
-          enabled: !loading,
-          controller: _username,
-          errorText: widget.errors?.getValue("username"),
-        );
-      },
-    );
-  }
-
-  Widget buildInputDocument() {
-    if (widget.future == null) {
-      return InputIdentityDocumenten(
-        controller: _identityDocument,
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return InputIdentityDocumenten(
-          enabled: !loading,
-          controller: _identityDocument,
-          errorText: widget.errors?.getValue("identity_document"),
-        );
-      },
-    );
-  }
-
-  Widget buildButton() {
-    if (widget.future == null) {
-      return ElevatedButtonShadow(
-        child: ElevatedButton(
-          onPressed: onSubmit,
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50), // NEW
-          ),
-          child: const Text('Registrar'),
-        ),
-      );
-    }
-
-    return FutureBuilder<UserResponse?>(
-      future: widget.future,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return ElevatedButtonShadow(
-          child: ElevatedButton(
-            onPressed: !loading ? onSubmit : null,
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(50), // NEW
-            ),
-            child: const Text('Registrar'),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return FormPadding(
@@ -236,12 +68,24 @@ class _FormSignupState extends State<FormSignup> {
               children: [
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputName(),
+                    child: InputName(
+                      isRequired: true,
+                      label: "Nombre",
+                      future: widget.future,
+                      controller: _firstName,
+                      errorText: widget.errors?.getValue("first_name"),
+                    ),
                   ),
                 ),
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputLastName(),
+                    child: InputName(
+                      isRequired: true,
+                      label: "Apellido",
+                      future: widget.future,
+                      controller: _lastName,
+                      errorText: widget.errors?.getValue("last_name"),
+                    ),
                   ),
                 ),
               ],
@@ -250,12 +94,21 @@ class _FormSignupState extends State<FormSignup> {
               children: [
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputEmail(),
+                    child: InputEmail(
+                      isRequired: true,
+                      controller: _email,
+                      future: widget.future,
+                      errorText: widget.errors?.getValue("email"),
+                    ),
                   ),
                 ),
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputDocument(),
+                    child: InputIdentityDocument(
+                      future: widget.future,
+                      controller: _identityDocument,
+                      errorText: widget.errors?.getValue("identity_document"),
+                    ),
                   ),
                 ),
               ],
@@ -264,18 +117,35 @@ class _FormSignupState extends State<FormSignup> {
               children: [
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputUsername(),
+                    child: InputUserName(
+                      future: widget.future,
+                      controller: _username,
+                      errorText: widget.errors?.getValue("username"),
+                    ),
                   ),
                 ),
                 _GridColumn(
                   child: FormControl(
-                    child: buildInputPassword(),
+                    child: InputPassword(
+                      future: widget.future,
+                      controller: _password,
+                      errorText: widget.errors?.getValue("password"),
+                    ),
                   ),
                 ),
               ],
             ),
             FormControl(
-              child: buildButton(),
+              child: ElevatedButtonShadow(
+                child: ElevatedButtonFuture(
+                  future: widget.future,
+                  onPressed: onSubmit,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50), // NEW
+                  ),
+                  child: const Text('Registrar'),
+                ),
+              ),
             ),
           ],
         ),

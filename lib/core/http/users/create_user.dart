@@ -48,8 +48,13 @@ Future<UserResponse> createUser({
     throw FormErrors(map: map);
   }
 
+  final String? authorization = response.headers["authorization"];
   final Map<String, dynamic> json = jsonDecode(response.body);
-  json["authenticate"] = response.headers["authenticate"];
+  final UserResponse user = UserResponse.fromJson(json);
 
-  return UserResponse.fromJson(json);
+  if (authorization != null) {
+    user.token = authorization.split(" ").last;
+  }
+
+  return user;
 }

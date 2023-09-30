@@ -39,15 +39,6 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     return response;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    if (_futureSession == null) {
-      return buildForm(context);
-    }
-
-    return buildFuture(context);
-  }
-
   void showError(BuildContext context, Object? error) {
     final String message = error.toString().split(":")[1];
 
@@ -59,21 +50,10 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     );
   }
 
-  Widget buildFuture(BuildContext context) {
-    return FutureBuilder<UserResponse?>(
-      future: _futureSession,
-      builder: (ctx, snapshot) {
-        final bool loading =
-            snapshot.connectionState == ConnectionState.waiting;
-
-        return buildForm(context, loading: loading);
-      },
-    );
-  }
-
-  Widget buildForm(BuildContext context, {bool loading = false}) {
+  @override
+  Widget build(BuildContext context) {
     return FormSignin(
-      loading: loading,
+      future: _futureSession,
       onSubmit: (Map<String, dynamic> params) {
         setState(() {
           _futureSession = onRequest(params, context);

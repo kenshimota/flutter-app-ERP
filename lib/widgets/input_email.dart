@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
 import "package:validatorless/validatorless.dart";
 
 class InputEmail extends StatelessWidget {
@@ -6,20 +7,18 @@ class InputEmail extends StatelessWidget {
   final bool enabled;
   final bool? isRequired;
   final String? errorText;
+  final Future? future;
   final TextEditingController? controller;
 
   const InputEmail({
     super.key,
+    this.enabled = true,
     this.isRequired = false,
     this.label = "Correo Electronico",
     this.controller,
     this.errorText,
-    this.enabled = true,
+    this.future,
   });
-
-  void dispose() {
-    controller!.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +30,12 @@ class InputEmail extends StatelessWidget {
       listValidations.add(Validatorless.required("El campo es requerido"));
     }
 
-    return TextFormField(
+    return InputBaseApp(
       enabled: enabled,
-      decoration: InputDecoration(
-        labelText: label,
-        errorText: errorText,
-        hintText: "user@example.com",
-      ),
+      label: label,
+      future: future,
+      errorText: errorText,
+      placeholder: "user@example.com",
       controller: controller,
       validator: Validatorless.multiple(listValidations),
     );

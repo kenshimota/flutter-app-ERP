@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
 import 'package:flutter_app_erp/widgets/input_user_name.dart';
 
 import 'package:go_router/go_router.dart';
@@ -8,10 +9,10 @@ import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_password.dart';
 
 class FormSignin extends StatefulWidget {
-  final bool? loading;
+  final Future? future;
   final void Function(Map<String, dynamic>) onSubmit;
 
-  const FormSignin({super.key, required this.onSubmit, this.loading});
+  const FormSignin({super.key, required this.onSubmit, this.future});
 
   @override
   State<FormSignin> createState() => _FormSigninState();
@@ -61,14 +62,21 @@ class _FormSigninState extends State<FormSignin> {
             ]),
           ),
           FormControl(
-            child: InputUserName(controller: _username),
+            child: InputUserName(
+              controller: _username,
+              future: widget.future,
+            ),
           ),
           FormControl(
-            child: InputPassword(controller: _password),
+            child: InputPassword(
+              controller: _password,
+              future: widget.future,
+            ),
           ),
           FormControl(
-            child: ElevatedButton(
-              onPressed: widget.loading! ? null : onSubmit,
+            child: ElevatedButtonFuture(
+              onPressed: onSubmit,
+              future: widget.future,
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50), // NEW
               ),

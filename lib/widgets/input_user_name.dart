@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import "package:validatorless/validatorless.dart";
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
 
 class InputUserName extends StatelessWidget {
   final bool enabled;
   final String? label;
+  final Future? future;
   final String? errorText;
   final TextEditingController? controller;
 
@@ -13,26 +15,22 @@ class InputUserName extends StatelessWidget {
     this.controller,
     this.enabled = true,
     this.errorText,
+    this.future,
   });
-
-  void dispose() {
-    controller!.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      //Validatorless.required('${label} es requerido'),
-      //Validatorless.min(3, '${label} es demasiado corto (3 caracteres mínimo)'),
+      Validatorless.required('$label es requerido'),
+      Validatorless.min(3, '$label es demasiado corto (3 caracteres mínimo)'),
     ];
 
-    return TextFormField(
+    return InputBaseApp(
       enabled: enabled,
-      decoration: InputDecoration(
-        labelText: label,
-        errorText: errorText,
-        hintText: 'minombre-apellido',
-      ),
+      label: label,
+      future: future,
+      errorText: errorText,
+      placeholder: "minombre-apellido",
       validator: Validatorless.multiple(listValidations),
       controller: controller,
     );

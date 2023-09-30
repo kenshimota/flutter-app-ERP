@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
 import "package:validatorless/validatorless.dart";
 
 class InputName extends StatelessWidget {
@@ -7,6 +8,7 @@ class InputName extends StatelessWidget {
   final bool? isRequired;
   final String? placeholder;
   final String? errorText;
+  final Future? future;
   final TextEditingController? controller;
 
   const InputName({
@@ -17,26 +19,26 @@ class InputName extends StatelessWidget {
     this.isRequired = false,
     this.enabled = true,
     this.errorText,
+    this.future,
   });
 
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      Validatorless.min(3, "${label} debe tener al menos 3 letras"),
-      Validatorless.max(20, "${label} debe maximo 20 letras"),
+      Validatorless.min(3, "$label debe tener al menos 3 letras"),
+      Validatorless.max(20, "$label debe maximo 20 letras"),
     ];
 
     if (isRequired == true) {
       listValidations.add(Validatorless.required("El campo es requerido"));
     }
 
-    return TextFormField(
+    return InputBaseApp(
       enabled: enabled,
-      decoration: InputDecoration(
-        labelText: label,
-        errorText: errorText,
-        hintText: placeholder,
-      ),
+      label: label,
+      future: future,
+      errorText: errorText,
+      placeholder: placeholder,
       controller: controller,
       validator: Validatorless.multiple(listValidations),
     );
