@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/core/http/users/create_user.dart';
 import 'package:flutter_app_erp/core/http/sessions/create_session.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';

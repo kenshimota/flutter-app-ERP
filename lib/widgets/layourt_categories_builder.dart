@@ -14,8 +14,6 @@ class LayourtCategoriesBuilder extends StatelessWidget {
     Widget node = xs;
     final double maxWidth = constraints.maxWidth;
 
-    // debugPrint("${maxWidth} --> ${log}");
-
     if (lg != null && maxWidth >= 1200) {
       node = lg ?? Container();
     } else if (md != null && maxWidth >= 900) {

@@ -15,7 +15,6 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   List<TaxesResponse> result = <TaxesResponse>[];
 
   Future<void> onRequest(String token) async {
-    debugPrint(token);
     List<TaxesResponse> taxes = await getListTaxes(token: token);
 
     setState(() {

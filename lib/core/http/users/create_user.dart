@@ -45,8 +45,6 @@ Future<UserResponse> createUser({
   if (response.statusCode == 422) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     final Map<String, dynamic> map = json["errors"] ?? {};
-
-    print(map);
     throw FormErrors(map: map);
   }
 

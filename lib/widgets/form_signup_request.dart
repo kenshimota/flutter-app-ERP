@@ -38,7 +38,6 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
         errors = e;
       });
     } catch (e) {
-      debugPrint(e.toString());
       showError(context, Exception("Verifique su conexión"));
     }
 

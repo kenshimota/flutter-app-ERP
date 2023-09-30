@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 
@@ -12,6 +13,8 @@ class DrawerApp extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     authProvider.signOut();
     onClose();
+
+    GoRouter.of(context).go("/login");
   }
 
   @override
@@ -25,7 +28,7 @@ class DrawerApp extends StatelessWidget {
             const Text('This is the Drawer'),
             ElevatedButton(
               onPressed: () => onSignup(context),
-              child: const Text('Close Drawer'),
+              child: const Text('Cerrar Sessión'),
             ),
           ],
         ),

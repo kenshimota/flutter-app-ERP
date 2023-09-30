@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 class TaxesResponse {
   final String name;
@@ -26,13 +25,12 @@ class TaxesResponse {
   @override
   String toString() {
     final Map<String, dynamic> map = {
-      "name": this.name,
-      "percetange": this.percentage,
-      "createdAt": this.createdAt.toString(),
-      "updatedAt": this.updatedAt.toString(),
+      "name": name,
+      "percetange": percentage,
+      "createdAt": createdAt.toString(),
+      "updatedAt": updatedAt.toString(),
     };
 
-    // TODO: implement toString
     return jsonEncode(map);
   }
 }
