@@ -24,30 +24,35 @@ class DialogDesign extends StatelessWidget {
         TextButton(
           onPressed: () => showDialog(
             context: context,
-            builder: (BuildContext context) => Dialog(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const FormSignupRequest(),
-                    const Text('This is a typical dialog.'),
-                    const SizedBox(height: 15),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Close'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            builder: (BuildContext context) => DialogExample(context),
           ),
           child: const Text('Show Fullscreen Dialog'),
         ),
       ],
     );
   }
+}
+
+// ignore: non_constant_identifier_names
+Widget DialogExample(BuildContext context) {
+  return Dialog(
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const FormSignupRequest(),
+          const Text('This is a typical dialog.'),
+          const SizedBox(height: 15),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    ),
+  );
 }

@@ -7,9 +7,9 @@ class UserResponse {
   final int identityDocument;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String token;
+  String token;
 
-  const UserResponse({
+  UserResponse({
     required this.id,
     required this.email,
     required this.username,

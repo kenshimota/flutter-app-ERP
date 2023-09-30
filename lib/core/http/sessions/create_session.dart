@@ -30,6 +30,13 @@ Future<UserResponse> createSession({
     throw Exception(json["error"]);
   }
 
+  final String? authorization = response.headers["authorization"];
   final Map<String, dynamic> json = jsonDecode(response.body);
-  return UserResponse.fromJson(json);
+  final UserResponse user = UserResponse.fromJson(json);
+
+  if (authorization != null) {
+    user.token = authorization.split(" ").last;
+  }
+
+  return user;
 }
