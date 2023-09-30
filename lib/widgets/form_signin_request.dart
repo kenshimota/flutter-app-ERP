@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/form_signin.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/core/http/sessions/create_session.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
 
 class FormSigninRequest extends StatefulWidget {
@@ -31,6 +31,10 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     } catch (e) {
       debugPrint(e.toString());
       showError(context, Exception("Verifique su conexión"));
+    }
+
+    if (context.mounted) {
+      GoRouter.of(context).go("/");
     }
 
     return response;

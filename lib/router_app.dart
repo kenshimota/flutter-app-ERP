@@ -19,7 +19,7 @@ final router = GoRouter(
     GoRoute(path: "/signup", builder: (context, state) => const SignupScreen())
   ],
   redirect: (context, state) {
-    final authProvider = Provider.of<AuthProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String path = state.uri.toString();
 
     debugPrint(authProvider.hasSession().toString());

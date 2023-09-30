@@ -3,6 +3,7 @@ import 'package:flutter_app_erp/core/exception/form_errors.dart';
 import 'package:flutter_app_erp/widgets/form_signup.dart';
 import 'package:flutter_app_erp/core/http/users/create_user.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
+import 'package:go_router/go_router.dart';
 
 class FormSignupRequest extends StatefulWidget {
   const FormSignupRequest({super.key});
@@ -16,7 +17,9 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
   FormErrors errors = FormErrors(map: {});
 
   Future<UserResponse?> onRequest(
-      Map<String, dynamic> params, BuildContext context) async {
+    Map<String, dynamic> params,
+    BuildContext context,
+  ) async {
     UserResponse? response;
 
     try {
@@ -37,6 +40,10 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
     } catch (e) {
       debugPrint(e.toString());
       showError(context, Exception("Verifique su conexión"));
+    }
+
+    if (context.mounted) {
+      GoRouter.of(context).go("/");
     }
 
     return response;
