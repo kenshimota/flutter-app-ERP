@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 class TaxesResponse {
+  final int id;
   final String name;
   final double percentage;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   const TaxesResponse({
+    required this.id,
     required this.name,
     required this.percentage,
     required this.createdAt,
@@ -15,6 +17,7 @@ class TaxesResponse {
 
   factory TaxesResponse.fromJson(Map<String, dynamic> json) {
     return TaxesResponse(
+      id: json['id'],
       name: json['name'],
       percentage: double.parse(json['percentage']),
       createdAt: DateTime.parse(json['created_at']),
@@ -25,6 +28,7 @@ class TaxesResponse {
   @override
   String toString() {
     final Map<String, dynamic> map = {
+      "id": id,
       "name": name,
       "percetange": percentage,
       "createdAt": createdAt.toString(),

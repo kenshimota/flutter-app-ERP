@@ -10,7 +10,7 @@ Future<List<TaxesResponse>> getListTaxes({required String token}) async {
 
   final Map<String, String> headers = {
     'content-Type': 'application/json',
-    "Authorization": "Bearer ${token}",
+    "Authorization": "Bearer $token",
   };
 
   http.Response response = await http.get(url, headers: headers);

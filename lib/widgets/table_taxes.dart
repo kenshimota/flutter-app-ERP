@@ -17,7 +17,7 @@ class DataTableTaxes extends StatelessWidget {
               DataCell(Text(tax.createdAt.toString())),
               DataCell(Text(tax.updatedAt.toString())),
               DataCell(
-                DeleteButtonTaxes(),
+                DeleteButtonTaxes(taxId: tax.id, context: context),
               ),
             ],
           ),
