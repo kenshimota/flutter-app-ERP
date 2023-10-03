@@ -43,6 +43,7 @@ class InputBaseApp extends StatelessWidget {
           labelText: label,
           errorText: errorText,
           hintText: placeholder,
+                      suffixIcon: suffixIcon,
         ),
         validator: validator,
       );
