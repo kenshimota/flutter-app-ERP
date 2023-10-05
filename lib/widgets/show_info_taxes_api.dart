@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 class ShowInfoTaxes extends StatefulWidget {
-  const ShowInfoTaxes({super.key});
+  final List<DataRow> rows;
+  const ShowInfoTaxes({super.key, required this.rows});
   @override
   State<ShowInfoTaxes> createState() => _ShowInfotaxesState();
 }
@@ -16,11 +17,13 @@ class ShowInfoTaxes extends StatefulWidget {
 class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   String search = '';
   Map<String, String>? order;
+  int numberPage = 1;
+
   List<TaxesResponse> result = <TaxesResponse>[];
 
   Future<void> onRequest(String token) async {
     List<TaxesResponse> taxes =
-        await getListTaxes(token: token, search: search, order: order);
+        await getListTaxes(token: token, search: search, order: order, page: numberPage);
 
     setState(() {
       result = taxes;
@@ -30,6 +33,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   onSortOrder(Map<String, String> o, String token) {
     setState(() {
       order = o;
+      numberPage = 1;
     });
     onRequest(token);
   }
@@ -37,8 +41,25 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   onSearch(String s, String token) {
     setState(() {
       search = s;
+      numberPage = 1;
     });
 
+    onRequest(token);
+  }
+
+  onBack( String token ){
+      setState(() {
+        numberPage -=  1;
+      });
+    
+    onRequest(token);
+  }
+
+
+  onForwad(String token){
+    setState(() {
+      numberPage += 1;
+    });
     onRequest(token);
   }
 
@@ -76,6 +97,9 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
                 list: result,
                 onOrden: (Map<String, String> order) =>
                     onSortOrder(order, token ?? ''),
+                    onBack: ()=> onBack(token??''),
+                    onForwad: ()=> onForwad(token??''),
+                    numberPage: numberPage,
               ),
             ),
           ),

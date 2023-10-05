@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:flutter_app_erp/widgets/button_delete.dart';
+import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 
 class DataTableTaxes extends StatefulWidget {
+  final void Function()? onBack;
+  final void Function()? onForwad;
+  final int numberPage;
   final List<TaxesResponse> list;
   final Function(Map<String, String>)? onOrden;
-  const DataTableTaxes({super.key, required this.list, required this.onOrden});
+  const DataTableTaxes({super.key, required this.list, required this.onOrden, this.onBack, this.onForwad, this.numberPage = 1});
 
   @override
   State<DataTableTaxes> createState() => _DataTableTaxesState();
@@ -47,8 +51,10 @@ class _DataTableTaxesState extends State<DataTableTaxes>{
         )
         .toList();
 
-    return SingleChildScrollView(
-      child: DataTable(
+    return DataTablePaginated(
+        onBack: widget.onBack,
+        onForwad: widget.onForwad,
+        numberPage: widget.numberPage,
         columnSpacing: 16, // Espacio entre columnas
         horizontalMargin: 16,
         sortColumnIndex: sortColumnIndex,
@@ -81,26 +87,27 @@ class _DataTableTaxesState extends State<DataTableTaxes>{
             ),
             onSort: onSort,
           ),
-          const DataColumn(
-            label: Expanded(
+          DataColumn(
+            label: const Expanded(
               child: Text(
                 'Fecha de actualizacion',
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
             ),
+            onSort: onSort,
           ),
-          DataColumn(
-            label: const Expanded(
+          const DataColumn(
+            label: Expanded(
               child: Text(
                 'Acciones',
                 style: TextStyle(fontStyle: FontStyle.italic),
               ),
             ),
-            onSort: onSort,
+          
           ),
         ],
         rows: rows,
-      ),
-    );
+      );
+    
   }
 }
