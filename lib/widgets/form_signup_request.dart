@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/exception/form_errors.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/form_signup.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_app_erp/widgets/form_signup.dart';
+import 'package:flutter_app_erp/providers/auth_provider.dart';
+import 'package:flutter_app_erp/core/exception/form_errors.dart';
 
 class FormSignupRequest extends StatefulWidget {
   const FormSignupRequest({super.key});
@@ -47,7 +45,7 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
       showError(context, Exception("Verifique su conexión"));
     }
 
-    if (success != null && context.mounted) {
+    if (success && context.mounted) {
       GoRouter.of(context).go("/");
     }
   }
