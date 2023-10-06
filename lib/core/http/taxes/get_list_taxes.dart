@@ -9,10 +9,11 @@ Future<List<TaxesResponse>> getListTaxes({
   String search = '',
   Map<String, String>? order,
   int page = 1,
+  Future? futureDelete
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/taxes?q=$search&page=$page";
+  String path = "$hostname/taxes?q=$search&page=$page&";
 
   if (order != null &&
       order.containsKey('field') &&

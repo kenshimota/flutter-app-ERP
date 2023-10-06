@@ -4,12 +4,13 @@ import 'package:flutter_app_erp/widgets/button_delete.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 
 class DataTableTaxes extends StatefulWidget {
+   final void Function()? onAfterDelete;
   final void Function()? onBack;
   final void Function()? onForwad;
   final int numberPage;
   final List<TaxesResponse> list;
   final Function(Map<String, String>)? onOrden;
-  const DataTableTaxes({super.key, required this.list, required this.onOrden, this.onBack, this.onForwad, this.numberPage = 1});
+  const DataTableTaxes({super.key, required this.list, required this.onOrden, this.onAfterDelete, this.onBack, this.onForwad, this.numberPage = 1});
 
   @override
   State<DataTableTaxes> createState() => _DataTableTaxesState();
@@ -44,7 +45,7 @@ class _DataTableTaxesState extends State<DataTableTaxes>{
               DataCell(Text(tax.createdAt.toString())),
               DataCell(Text(tax.updatedAt.toString())),
               DataCell(
-                DeleteButtonTaxes(taxId: tax.id, context: context),
+                DeleteButtonTaxes(taxId: tax.id, context: context, onAfterDelete: widget.onAfterDelete),
               ),
             ],
           ),

@@ -6,6 +6,7 @@ import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/table_taxes.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
+import 'package:flutter_app_erp/widgets/dialog_new_tax.dart';
 
 class ShowInfoTaxes extends StatefulWidget {
   final List<DataRow> rows;
@@ -63,8 +64,8 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
     onRequest(token);
   }
 
-  onPressed() {
-    debugPrint('hola');
+  onPepi(BuildContext context) {
+    showDialog( context: context,  builder: (BuildContext context) => const AlertDialogNewTax());
   }
 
   @override
@@ -100,6 +101,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
                     onBack: ()=> onBack(token??''),
                     onForwad: ()=> onForwad(token??''),
                     numberPage: numberPage,
+                    onAfterDelete: () => token == null ? null :  onRequest(token),
               ),
             ),
           ),
@@ -109,11 +111,13 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularButton(
+                  context:context,
+                  onPressed: () => onPepi(context),
                     icon: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    onPressed: onPressed),
+                ),
               ],
             ),
           ),

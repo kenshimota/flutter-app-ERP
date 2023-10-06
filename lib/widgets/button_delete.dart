@@ -5,40 +5,41 @@ import 'package:flutter_app_erp/core/http/taxes/delete_taxes.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
 import 'package:provider/provider.dart';
+// lo acabo de colocal
 
-
-Widget DeleteButtonTaxes({ required int taxId, required BuildContext context  }) {
-
-
-    return IconButton(
-      onPressed: () => showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => AlertDialogDelete(taxId: taxId),
-        
+Widget DeleteButtonTaxes(
+    {required int taxId,
+    required BuildContext context,
+    void Function()? onAfterDelete}) {
+  return IconButton(
+    onPressed: () => showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => AlertDialogDelete(
+        taxId: taxId,
+        onAfterDelete: onAfterDelete,
       ),
-      icon: const Icon(Icons.delete),
-    );
-
+    ),
+    icon: const Icon(Icons.delete),
+  );
 }
+
+/* */
 
 class AlertDialogDelete extends StatefulWidget {
   final int taxId;
+  final void Function()? onAfterDelete;
 
-  const AlertDialogDelete({super.key, required this.taxId });
+  const AlertDialogDelete({super.key, required this.taxId, this.onAfterDelete});
 
   @override
   // ignore: library_private_types_in_public_api
-  _AlertDialogDelete  createState() => _AlertDialogDelete();
+  _AlertDialogDelete createState() => _AlertDialogDelete();
 }
-
 
 class _AlertDialogDelete extends State<AlertDialogDelete> {
   Future? _futureDelete;
-
-  onClick() {
-    debugPrint('Hola como estas');
-  }
+  String message = 'No se pudo eliminar';
 
 // este funcion espera una respuest
   Future<void> onDeleteRequest(BuildContext context) async {
@@ -51,51 +52,61 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
 
     debugPrint("after request");
 
-    if(!context.mounted){
+    if (!context.mounted) {
       return;
     }
 
-    if(response == false){
-      debugPrint('No se pudo eliminar');
+    if (response == false) {
+      showError(context, message);
+      return;
     }
 
     Navigator.pop(context);
+
+    // debugPrint(widget.onAfterDelete.toString());
+    
+     widget.onAfterDelete!();
   }
 
-  onDelete(BuildContext context){
+  void showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Theme.of(context).colorScheme.error,
+        content: Text(message),
+      ),
+    );
+  }
+
+  onDelete(BuildContext context) {
     setState(() {
       _futureDelete = onDeleteRequest(context);
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
     return AlertDialog(
       title: const Text('Eliminar'),
-      content: const Text('Esta seguro que deseas eliminar este elemento de la tabla?'),
+      content: const Text(
+          'Esta seguro que deseas eliminar este elemento de la tabla?'),
       actions: [
         ButtonBar(
           children: [
             ElevatedButtonFuture(
               future: _futureDelete,
-              onPressed: () =>   onDelete(context),
-            child: const Text('Si'),
-         ),
-        ElevatedButtonFuture(
-          future:_futureDelete,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('No'),
+              onPressed: () => onDelete(context),
+              child: const Text('Si'),
+            ),
+            ElevatedButtonFuture(
+              future: _futureDelete,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('No'),
+            ),
+          ],
         ),
       ],
-    ),
-  ],
-);
-}
-
+    );
+  }
 }

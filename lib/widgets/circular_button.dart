@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names
 Widget CircularButton
-  ({required Icon icon, required void Function()? onPressed,}) {
+  ({required Icon icon, required BuildContext context, required void Function()? onPressed,}) {
   return InkWell(
-    onTap: () {
-      // handle button press
-    },
+    onTap: onPressed,
     child: Container(
       width: 56,
       height: 56,
