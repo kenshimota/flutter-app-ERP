@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
             // primary: Colors.white,
             surface: Colors.purple,
             onPrimary: Colors.purple,
+            
           ),
 
           scaffoldBackgroundColor: const Color(0xFFdddddd),
@@ -100,6 +101,9 @@ class MyApp extends StatelessWidget {
               foregroundColor: Colors.purple,
             ),
           ),
+
+          
+          dialogBackgroundColor: Colors.white,
 
           outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(

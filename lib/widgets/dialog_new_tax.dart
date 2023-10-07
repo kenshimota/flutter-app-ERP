@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/form_tax.dart';
 
 
 
@@ -14,10 +15,10 @@ class _AlertDialogNewTax extends State<AlertDialogNewTax>{
   @override
   Widget build(BuildContext context){
     return const AlertDialog(
-      title: Text('Este es mi formulario'),
-      content: Text('AlertDialog description'),
+      title: Text('Nuevo impuesto'),
+      //content: Text(''),
       actions:  [
-        Text('Hola como estas'),
+        FormTax(),
       ]
       
     );

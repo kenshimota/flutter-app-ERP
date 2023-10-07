@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/table_taxes.dart';
-import 'package:flutter_app_erp/widgets/input_search.dart';
-import 'package:flutter_app_erp/widgets/dialog_new_tax.dart';
-import 'package:flutter_app_erp/widgets/circular_button.dart';
 import 'package:flutter_app_erp/core/http/taxes/get_list_taxes.dart';
+import 'package:flutter_app_erp/widgets/button_new_tax.dart';
+
+import 'package:flutter_app_erp/widgets/input_search.dart';
+import 'package:flutter_app_erp/widgets/table_taxes.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 class ShowInfoTaxes extends StatefulWidget {
@@ -90,11 +90,6 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
     onRequest();
   }
 
-  onPepi(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) => const AlertDialogNewTax());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,19 +124,12 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10),
+          const Padding(
+            padding: EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularButton(
-                  context: context,
-                  onPressed: () => onPepi(context),
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
+                ButtonNewTax()
               ],
             ),
           ),
