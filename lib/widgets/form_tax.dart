@@ -56,7 +56,7 @@ class ButtonCloseDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButtonFuture(
-      onPressed: () => {},
+      onPressed: () => { Navigator.pop(context)},
       child: Row(
         children: [
           icon,
