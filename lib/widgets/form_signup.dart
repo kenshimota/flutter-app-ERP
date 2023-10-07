@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
-import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
+import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/elevate_button_shadow.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/input_email.dart';

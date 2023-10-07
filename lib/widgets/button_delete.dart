@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/taxes/delete_taxes.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
+import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:provider/provider.dart';
 // lo acabo de colocal
 
@@ -64,8 +64,8 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     Navigator.pop(context);
 
     // debugPrint(widget.onAfterDelete.toString());
-    
-     widget.onAfterDelete!();
+
+    widget.onAfterDelete!();
   }
 
   void showError(BuildContext context, String message) {

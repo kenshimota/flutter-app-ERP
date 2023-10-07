@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/ElevatedButtonFuture.dart';
+import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/input_user_name.dart';
 
 import 'package:go_router/go_router.dart';

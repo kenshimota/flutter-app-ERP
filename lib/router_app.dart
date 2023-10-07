@@ -1,4 +1,5 @@
 import "dart:core";
+import 'package:flutter_app_erp/screens/taxes_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/screens/home_screen.dart';
@@ -14,6 +15,7 @@ final Set<String> routesWithoutSignin = <String>{
 final router = GoRouter(
   routes: [
     GoRoute(path: "/", builder: (context, state) => const HomeScreen()),
+    GoRoute(path: "/taxes", builder: (context, state) => const TaxesScreen()),
     GoRoute(path: "/signin", builder: (context, state) => const SigninScreen()),
     GoRoute(path: "/signup", builder: (context, state) => const SignupScreen())
   ],

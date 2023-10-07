@@ -1,78 +1,103 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/http/taxes/get_list_taxes.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/circular_button.dart';
-import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/table_taxes.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
+import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/dialog_new_tax.dart';
+import 'package:flutter_app_erp/widgets/circular_button.dart';
+import 'package:flutter_app_erp/core/http/taxes/get_list_taxes.dart';
+import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 class ShowInfoTaxes extends StatefulWidget {
-  final List<DataRow> rows;
-  const ShowInfoTaxes({super.key, required this.rows});
+  final String token;
+
+  const ShowInfoTaxes({
+    super.key,
+    required this.token,
+  });
+
   @override
   State<ShowInfoTaxes> createState() => _ShowInfotaxesState();
 }
 
 class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   String search = '';
-  Map<String, String>? order;
   int numberPage = 1;
-
+  Future? futureList;
+  Map<String, String>? order;
   List<TaxesResponse> result = <TaxesResponse>[];
 
-  Future<void> onRequest(String token) async {
-    List<TaxesResponse> taxes =
-        await getListTaxes(token: token, search: search, order: order, page: numberPage);
+  @override
+  initState() {
+    super.initState();
+    setState(() {
+      futureList = onRequestApi();
+    });
+  }
+
+  Future<void> onRequestApi() async {
+    debugPrint("init fetch");
+
+    List<TaxesResponse> taxes = await getListTaxes(
+      order: order,
+      search: search,
+      page: numberPage,
+      token: widget.token,
+    );
+
+    debugPrint("finish fetch");
 
     setState(() {
       result = taxes;
     });
   }
 
-  onSortOrder(Map<String, String> o, String token) {
+  Future<void> onRequest() async {
+    setState(() {
+      futureList = onRequestApi();
+    });
+  }
+
+  onSortOrder(Map<String, String> o) {
     setState(() {
       order = o;
       numberPage = 1;
     });
-    onRequest(token);
+
+    onRequest();
   }
 
-  onSearch(String s, String token) {
+  onSearch(String s) {
     setState(() {
       search = s;
       numberPage = 1;
     });
 
-    onRequest(token);
+    onRequest();
   }
 
-  onBack( String token ){
-      setState(() {
-        numberPage -=  1;
-      });
-    
-    onRequest(token);
+  onBack() {
+    setState(() {
+      numberPage -= 1;
+    });
+
+    onRequest();
   }
 
-
-  onForwad(String token){
+  void onForwad() {
     setState(() {
       numberPage += 1;
     });
-    onRequest(token);
+
+    onRequest();
   }
 
   onPepi(BuildContext context) {
-    showDialog( context: context,  builder: (BuildContext context) => const AlertDialogNewTax());
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => const AlertDialogNewTax());
   }
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context);
-    final String? token = authProvider.getToken();
-
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -85,8 +110,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               children: [
                 SizedBox(
                   width: 400,
-                  child: InputSearch(
-                      onSearch: (String s) => onSearch(s, token ?? '')),
+                  child: InputSearch(onSearch: onSearch),
                 )
               ],
             ),
@@ -95,13 +119,13 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
             child: Container(
               color: Colors.white,
               child: DataTableTaxes(
+                future: futureList,
                 list: result,
-                onOrden: (Map<String, String> order) =>
-                    onSortOrder(order, token ?? ''),
-                    onBack: ()=> onBack(token??''),
-                    onForwad: ()=> onForwad(token??''),
-                    numberPage: numberPage,
-                    onAfterDelete: () => token == null ? null :  onRequest(token),
+                onOrden: onSortOrder,
+                onBack: onBack,
+                onForwad: onForwad,
+                numberPage: numberPage,
+                onAfterDelete: onRequest,
               ),
             ),
           ),
@@ -111,19 +135,15 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircularButton(
-                  context:context,
+                  context: context,
                   onPressed: () => onPepi(context),
-                    icon: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                    ),
+                  icon: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
-          ),
-          ElevatedButton(
-            onPressed: () => token == null ? null : onRequest(token),
-            child: const Text('hacer Click'),
           ),
         ],
       ),
