@@ -6,14 +6,16 @@ import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 Future<TaxesResponse> createTax({
   required String name,
-  required String percentage,
+  required double percentage,
+  required String? token,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
   final Uri url = Uri.parse("$hostname/taxes");
 
   final Map<String, String> headers = {
-    'Content-Type': 'application/json; charset=UTF-8'
+    'Content-Type': 'application/json; charset=UTF-8',
+    "Authorization": "Bearer $token",
   };
 
   String body = jsonEncode({
