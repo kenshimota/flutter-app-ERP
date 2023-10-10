@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
@@ -39,6 +40,13 @@ Future<TaxesResponse> createTax({
     final Map<String, dynamic> json = jsonDecode(response.body);
     final Map<String, dynamic> map = json["errors"] ?? {};
     throw FormErrors(map: map);
+  }
+
+
+  if(response.statusCode >= 500){
+    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
+    debugPrint(msg);
+    throw Exception(msg);
   }
 
   final Map<String, dynamic> json = jsonDecode(response.body);

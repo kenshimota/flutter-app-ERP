@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
@@ -37,6 +38,11 @@ Future<UserResponse> createSession({
   if (authorization != null) {
     user.token = authorization.split(" ").last;
   }
-
+  
+  if(response.statusCode >= 500){
+    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
+    debugPrint(msg);
+    throw Exception(msg);
+  }
   return user;
 }
