@@ -3,12 +3,19 @@ import 'package:flutter_app_erp/widgets/circular_button.dart';
 import 'package:flutter_app_erp/widgets/dialog_new_tax.dart';
 
 class ButtonNewTax extends StatelessWidget {
-  const ButtonNewTax({super.key});
+  final void Function()? onSave;
+
+  const ButtonNewTax({
+    super.key,
+    this.onSave,
+  });
 
   onNewTax(BuildContext context) {
     showDialog(
       context: context,
-      builder: (BuildContext context) => const AlertDialogNewTax(),
+      builder: (BuildContext context) => AlertDialogNewTax(
+        onSave: onSave,
+      ),
     );
   }
 

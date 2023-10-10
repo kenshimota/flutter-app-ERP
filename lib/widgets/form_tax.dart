@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/http/taxes/create_tax.dart';
-import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
-import 'package:flutter_app_erp/widgets/button_create_tax.dart';
-import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_tax.dart';
 import 'package:flutter_app_erp/widgets/input_name.dart';
-// import elevateFuture
+import 'package:flutter_app_erp/widgets/form_control.dart';
+import 'package:flutter_app_erp/widgets/button_create_tax.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:provider/provider.dart';
 
 class FormTax extends StatefulWidget {
+  final String? nameDefault;
+  final String? percentageDefault;
   final void Function()? onClick;
+  final Future<void> Function(Map<String, dynamic>)? onRequest;
 
-  final void Function()? onAfterSave;
   const FormTax(
-      {super.key, this.onClick, this.onAfterSave});
+      {super.key,
+      this.onClick,
+      this.onRequest,
+      this.nameDefault,
+      this.percentageDefault});
 
   @override
   State<FormTax> createState() => _FormTaxState();
@@ -23,35 +24,25 @@ class FormTax extends StatefulWidget {
 
 class _FormTaxState extends State<FormTax> {
   Future? futureCreateTax;
+  String message = 'No se pudo crear el impuesto';
+
   TextEditingController name = TextEditingController();
   TextEditingController percentage = TextEditingController();
 
-  String message = 'No se pudo crear el impuesto';
-
-  Future<void> onCreateRequeste(BuildContext context) async {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final String? token = authProvider.getToken();
-    
-    debugPrint("before request");
-
-    double amount = double.parse(percentage.text);
-
-     await createTax(
-      token: token,
-      name: name.text,
-      percentage: amount / 100,
-    );
-
-    if (!context.mounted) {
-      return;
-    }
-    
-    widget.onAfterSave!();    
+  @override
+  void initState() {
+    name.text = widget.nameDefault ?? "";
+    percentage.text = widget.percentageDefault ?? "";
   }
 
   onSubmit(BuildContext context) {
+    Map<String, dynamic> params = {
+      "name": name.text,
+      "percentage": double.parse(percentage.text) / 100
+    };
+
     setState(() {
-      futureCreateTax = onCreateRequeste(context);
+      futureCreateTax = widget.onRequest!(params);
     });
   }
 
@@ -99,8 +90,11 @@ class ButtonCloseDialog extends StatelessWidget {
   final Icon icon;
   final Future? future;
 
-  const ButtonCloseDialog({super.key, required this.icon, this.future,});
-
+  const ButtonCloseDialog({
+    super.key,
+    required this.icon,
+    this.future,
+  });
 
   @override
   Widget build(BuildContext context) {

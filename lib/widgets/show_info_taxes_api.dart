@@ -90,7 +90,6 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
     onRequest();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -104,7 +103,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
-                  width: 400,
+                  width: 320,
                   child: InputSearch(onSearch: onSearch),
                 )
               ],
@@ -124,12 +123,14 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(10),
+          Padding(
+            padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ButtonNewTax()
+                ButtonNewTax(
+                  onSave: () => onRequest(),
+                )
               ],
             ),
           ),

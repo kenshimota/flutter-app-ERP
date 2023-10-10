@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import "package:validatorless/validatorless.dart";
 
 class InputPercentage extends StatelessWidget {
   final String? label;
   final TextEditingController? percentage;
 
-  const  InputPercentage({super.key, this.label = 'Porcentage', this.percentage});
+  const InputPercentage(
+      {super.key, this.label = 'Porcentage', this.percentage});
 
   String? validatePercentage(String? value) {
     if (value!.isEmpty) {

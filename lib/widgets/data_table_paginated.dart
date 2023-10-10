@@ -81,6 +81,8 @@ class DataTablePaginated extends StatelessWidget {
                     columns: columns,
                     rows: rows,
                     columnSpacing: columnSpacing,
+                    sortAscending: sortAscending,
+                    sortColumnIndex: sortColumnIndex,
                   ),
                 ),
               ),

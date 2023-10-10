@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:flutter_app_erp/widgets/button_delete.dart';
+import 'package:flutter_app_erp/widgets/button_edit_tax.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 
 class DataTableTaxes extends StatefulWidget {
@@ -53,12 +54,23 @@ class _DataTableTaxesState extends State<DataTableTaxes> {
               DataCell(Text("${tax.percentage * 100}")),
               DataCell(Text(tax.createdAt.toString())),
               DataCell(Text(tax.updatedAt.toString())),
-              DataCell(
-                DeleteButtonTaxes(
+              DataCell(Row(
+                children: [
+                  ButtonEditTax(
+                    tax: tax,
+                    onSave: widget.onAfterDelete,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                    height: 8,
+                  ),
+                  DeleteButtonTaxes(
                     taxId: tax.id,
                     context: context,
-                    onAfterDelete: widget.onAfterDelete),
-              ),
+                    onAfterDelete: widget.onAfterDelete,
+                  ),
+                ],
+              )),
             ],
           ),
         )

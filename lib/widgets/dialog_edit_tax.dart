@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
-import 'package:flutter_app_erp/widgets/form_tax_create.dart';
+import 'package:flutter_app_erp/widgets/form_tax_update.dart';
+import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
-class AlertDialogNewTax extends StatefulWidget {
+class AlertDialogEditTax extends StatefulWidget {
+  final TaxesResponse tax;
   final void Function()? onSave;
 
-  const AlertDialogNewTax({
+  const AlertDialogEditTax({
     super.key,
     this.onSave,
+    required this.tax,
   });
 
   @override
-  _AlertDialogNewTax createState() => _AlertDialogNewTax();
+  _AlertDialogEditTax createState() => _AlertDialogEditTax();
 }
 
-class _AlertDialogNewTax extends State<AlertDialogNewTax> {
+class _AlertDialogEditTax extends State<AlertDialogEditTax> {
   void onAfterSave(context) {
     if (context.mounted == false) {
       return;
@@ -28,11 +31,12 @@ class _AlertDialogNewTax extends State<AlertDialogNewTax> {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: const TypographyApp(
-          text: 'Nuevo impuesto',
+          text: 'Editar Impuesto',
           variant: "h2",
         ),
         actions: [
-          FormTaxCreate(
+          FormTaxUpdate(
+            tax: widget.tax,
             onAfterSave: () => onAfterSave(context),
           ),
         ]);
