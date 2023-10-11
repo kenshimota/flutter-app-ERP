@@ -30,9 +30,10 @@ class _FormTaxState extends State<FormTax> {
   TextEditingController percentage = TextEditingController();
 
   @override
-  void initState() {
+  initState() {
     name.text = widget.nameDefault ?? "";
     percentage.text = widget.percentageDefault ?? "";
+    super.initState();
   }
 
   onSubmit(BuildContext context) {
