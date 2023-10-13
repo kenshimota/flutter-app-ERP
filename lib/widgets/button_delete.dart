@@ -24,6 +24,30 @@ Widget DeleteButtonTaxes(
   );
 }
 
+Widget TextButtonDeleteTax({
+  required int taxId,
+  required BuildContext context,
+  void Function()? onAfterDelete,
+  child,
+  Color? color,
+}) {
+  final style =
+      color == null ? null : TextButton.styleFrom(foregroundColor: color);
+
+  return TextButton(
+    style: style,
+    onPressed: () => showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => AlertDialogDelete(
+        taxId: taxId,
+        onAfterDelete: onAfterDelete,
+      ),
+    ),
+    child: Text('Eliminar'),
+  );
+}
+
 /* */
 
 class AlertDialogDelete extends StatefulWidget {

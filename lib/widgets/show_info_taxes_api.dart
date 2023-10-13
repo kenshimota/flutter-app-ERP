@@ -5,13 +5,15 @@ import 'package:flutter_app_erp/widgets/button_new_tax.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/table_taxes.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
-
+import 'package:flutter_app_erp/widgets/listitem_tax.dart';
 class ShowInfoTaxes extends StatefulWidget {
   final String token;
+
 
   const ShowInfoTaxes({
     super.key,
     required this.token,
+  
   });
 
   @override
@@ -112,7 +114,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
           Expanded(
             child: Container(
               color: Colors.white,
-              child: DataTableTaxes(
+              child: /*ListTileApp(listTax: result, onAfterChange: onRequest,),*/DataTableTaxes(
                 future: futureList,
                 list: result,
                 onOrden: onSortOrder,
@@ -120,7 +122,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
                 onForwad: onForwad,
                 numberPage: numberPage,
                 onAfterDelete: onRequest,
-              ),
+              ), 
             ),
           ),
           Padding(

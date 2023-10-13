@@ -30,3 +30,38 @@ class ButtonEditTax extends StatelessWidget {
     );
   }
 }
+
+class TextButtonEditTax extends StatelessWidget {
+  final void Function()? onSave;
+  final TaxesResponse tax;
+  final Color? color;
+
+  const TextButtonEditTax({
+    super.key,
+    this.onSave,
+    this.color,
+    required this.tax,
+  });
+
+  onNewTax(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialogEditTax(
+        tax: tax,
+        onSave: onSave,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style =
+        color == null ? null : TextButton.styleFrom(foregroundColor: color);
+
+    return TextButton(
+      style: style,
+      onPressed: () => onNewTax(context),
+      child: const Text('Editar'),
+    );
+  }
+}
