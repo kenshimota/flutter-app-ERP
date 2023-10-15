@@ -60,7 +60,7 @@ class _SortTaxesName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = Colors.white;
+    Color color = Colors.white;
     final List<Widget> children = [const SizedBox(width: 8), Text(text, style: TextStyle(color: color))];
 
     if(isAccending != null) {
