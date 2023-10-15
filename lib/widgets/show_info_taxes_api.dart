@@ -3,17 +3,18 @@ import 'package:flutter_app_erp/core/http/taxes/get_list_taxes.dart';
 import 'package:flutter_app_erp/widgets/button_new_tax.dart';
 
 import 'package:flutter_app_erp/widgets/input_search.dart';
+import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:flutter_app_erp/widgets/table_taxes.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:flutter_app_erp/widgets/listitem_tax.dart';
+import 'package:flutter_app_erp/widgets/toobal_taxes.dart';
+
 class ShowInfoTaxes extends StatefulWidget {
   final String token;
-
 
   const ShowInfoTaxes({
     super.key,
     required this.token,
-  
   });
 
   @override
@@ -36,7 +37,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   }
 
   Future<void> onRequestApi() async {
-    debugPrint("init fetch");
+
 
     List<TaxesResponse> taxes = await getListTaxes(
       order: order,
@@ -45,7 +46,7 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
       token: widget.token,
     );
 
-    debugPrint("finish fetch");
+
 
     setState(() {
       result = taxes;
@@ -99,31 +100,28 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            height: 70,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  width: 320,
-                  child: InputSearch(onSearch: onSearch),
-                )
-              ],
-            ),
-          ),
+         ToobalTaxes(inputSearch: InputSearch(onSearch: onSearch,)),
           Expanded(
             child: Container(
-              color: Colors.white,
-              child: /*ListTileApp(listTax: result, onAfterChange: onRequest,),*/DataTableTaxes(
-                future: futureList,
-                list: result,
-                onOrden: onSortOrder,
-                onBack: onBack,
-                onForwad: onForwad,
-                numberPage: numberPage,
-                onAfterDelete: onRequest,
-              ), 
-            ),
+                color: Colors.white,
+                child: LayourtTwiceBuilder(
+                  mobile: ListTileApp(
+                    listTax: result,
+                    onAfterChange: onRequest,
+                  ),
+                  desktop: DataTableTaxes(
+                    future: futureList,
+                    list: result,
+                    onOrden: onSortOrder,
+                    onBack: onBack,
+                    onForwad: onForwad,
+                    numberPage: numberPage,
+                    onAfterDelete: onRequest,
+                  ),
+                )
+
+                /*, */
+                ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),

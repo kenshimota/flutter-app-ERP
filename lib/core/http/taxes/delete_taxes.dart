@@ -18,7 +18,7 @@ Future<bool> deleteTax({ required int id, required String token  }) async {
 
   if(response.statusCode >= 500){
     const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
-    debugPrint(msg);
+  
     throw Exception(msg);
   }
 

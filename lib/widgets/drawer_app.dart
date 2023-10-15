@@ -37,9 +37,6 @@ class DrawerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute = ModalRoute.of(context)!.settings.name;
-
-    debugPrint(currentRoute);
 
     return Drawer(
       child: ListView(

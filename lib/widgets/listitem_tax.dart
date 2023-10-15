@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:flutter_app_erp/widgets/popup_menu_button_tax.dart';
+import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
 
 
 class ListTileTax extends StatelessWidget {
@@ -17,7 +18,7 @@ class ListTileTax extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(child: Text(firstLetter)),
       title: Text(name),
-      subtitle: Text('${tax.percentage * 100}'),
+      subtitle: Text(NumberFormatterApp.percentageFormat(tax.percentage)),
      trailing: PopupMenuApp(tax: tax, onAfterChange: onAfterChange,),
     );
   }
@@ -26,6 +27,7 @@ class ListTileTax extends StatelessWidget {
 class ListTileApp extends StatelessWidget {
   final List<TaxesResponse> listTax;
     final void Function()? onAfterChange;
+    
 
   const ListTileApp({super.key, required this.listTax, this.onAfterChange});
 
@@ -39,7 +41,7 @@ class ListTileApp extends StatelessWidget {
         )
         .toList();
 
-    debugPrint(taxes.toString());
+
 
     return ListView(children: taxes);
   }

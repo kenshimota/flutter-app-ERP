@@ -27,23 +27,21 @@ Future<List<TaxesResponse>> getListTaxes({
     "Authorization": "Bearer $token",
   };
 
-  debugPrint(path);
   final Uri url = Uri.parse(path);
 
   http.Response response = await http.get(url, headers: headers);
 
 
-  debugPrint("${response.statusCode} ${response.body}");
-
+  
   if (response.statusCode == 401) {
-    debugPrint('se me cerro la sesion');
+  
     final Map<String, dynamic> json = jsonDecode(response.body);
     throw Exception(json["Error"]);
   }
 
   if(response.statusCode >= 500){
     const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
-    debugPrint(msg);
+
     throw Exception(msg);
   }
 

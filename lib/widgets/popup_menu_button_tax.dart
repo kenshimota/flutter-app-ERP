@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/button_delete.dart';
 import 'package:flutter_app_erp/widgets/button_edit_tax.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
+import 'package:flutter_app_erp/widgets/dialog_edit_tax.dart';
+import 'package:flutter_app_erp/widgets/button_delete.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
@@ -36,34 +38,47 @@ class _PopupMenuTaxState extends State<PopupMenuTax> {
     return PopupMenuButton<SampleItem>(
       initialValue: selectedMenu,
 
-
       // Callback that sets the selected popup menu item.
       onSelected: (SampleItem item) {
+        Widget Function(BuildContext)? builder;
+
         setState(() {
           selectedMenu = item;
         });
+        
+        if(item == SampleItem.itemOne){
+           builder = (context) => AlertDialogEditTax(tax: widget.tax, onSave: widget.onAfterChange,);
+          debugPrint('Aqui debe abrir el dialogo de editar');
+        } else if(item == SampleItem.itemTwo){
+          builder = (context) => AlertDialogDelete(taxId: widget.tax.id,  onAfterDelete: widget.onAfterChange,);
+          debugPrint('Aqui debe abrir el dialogo de eliminar');
+        }
+        
+        
+        if(builder != null){
+          showDialog(context: context, builder: builder);
+        }
+
+
       },
 
-
-
-      color: Colors.grey,
-      itemBuilder: (BuildContext context,) => <PopupMenuEntry<SampleItem>>[
-        
-        PopupMenuItem<SampleItem>(
+      itemBuilder: (
+        BuildContext context,
+      ) =>
+          <PopupMenuEntry<SampleItem>>[
+        const PopupMenuItem<SampleItem>(
           value: SampleItem.itemOne,
-          child:  TextButtonEditTax (
-            color: Colors.white,
-            tax: widget.tax,
-            onSave: widget.onAfterChange,
+          child: Text(
+            'Editar',
+            style: TextStyle(color: Colors.white),
           ),
         ),
-        PopupMenuItem<SampleItem>(
+       const PopupMenuItem<SampleItem>(
+        
           value: SampleItem.itemTwo,
-          child: TextButtonDeleteTax(
-            color: Colors.white,
-            taxId: widget.tax.id,
-            context: context,
-            onAfterDelete: widget.onAfterChange,
+          child: Text(
+           'Eliminar',
+           style: TextStyle(color: Colors.white),
           ),
         ),
       ],

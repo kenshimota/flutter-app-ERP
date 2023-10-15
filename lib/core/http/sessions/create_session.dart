@@ -41,7 +41,6 @@ Future<UserResponse> createSession({
   
   if(response.statusCode >= 500){
     const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
-    debugPrint(msg);
     throw Exception(msg);
   }
   return user;

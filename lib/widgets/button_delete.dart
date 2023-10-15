@@ -70,11 +70,10 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String? token = authProvider.getToken();
 
-    debugPrint("before request");
 
     bool response = await deleteTax(id: widget.taxId, token: token ?? '');
 
-    debugPrint("after request");
+ 
 
     if (!context.mounted) {
       return;
@@ -86,8 +85,6 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     }
 
     Navigator.pop(context);
-
-    // debugPrint(widget.onAfterDelete.toString());
 
     widget.onAfterDelete!();
   }

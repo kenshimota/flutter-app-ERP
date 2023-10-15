@@ -16,7 +16,6 @@ class FormTaxCreate extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String? token = authProvider.getToken();
 
-    debugPrint("before request");
 
     await createTax(
       token: token,
