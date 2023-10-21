@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/screens/home_screen.dart';
 import 'package:flutter_app_erp/screens/signin_screen.dart';
 import 'package:flutter_app_erp/screens/signup_screen.dart';
+import 'package:flutter_app_erp/screens/warehouse_screen.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 
 final Set<String> routesWithoutSignin = <String>{
@@ -17,7 +18,8 @@ final router = GoRouter(
     GoRoute(path: "/", builder: (context, state) => const HomeScreen()),
     GoRoute(path: "/taxes", builder: (context, state) => const TaxesScreen()),
     GoRoute(path: "/signin", builder: (context, state) => const SigninScreen()),
-    GoRoute(path: "/signup", builder: (context, state) => const SignupScreen())
+    GoRoute(path: "/signup", builder: (context, state) => const SignupScreen()),
+    GoRoute(path: "/warehouse", builder: (context, state) => const WarehouseScreen()),
   ],
   redirect: (context, state) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);

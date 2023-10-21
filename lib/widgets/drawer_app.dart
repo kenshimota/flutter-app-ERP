@@ -52,6 +52,11 @@ class DrawerApp extends StatelessWidget {
             pathname: "/taxes",
             context: context,
           ),
+            listItemRouter(
+            title: "Deposito",
+            pathname: "/warehouse",
+            context: context,
+          ),
           ListTile(
             title: const TypographyApp(text: "Cerrar Sesión"),
             onTap: () => onSignout(context),
