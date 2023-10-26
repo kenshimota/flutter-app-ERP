@@ -6,6 +6,7 @@ import 'package:flutter_app_erp/screens/home_screen.dart';
 import 'package:flutter_app_erp/screens/signin_screen.dart';
 import 'package:flutter_app_erp/screens/signup_screen.dart';
 import 'package:flutter_app_erp/screens/warehouse_screen.dart';
+import 'package:flutter_app_erp/screens/currencies_screen.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 
 final Set<String> routesWithoutSignin = <String>{
@@ -20,6 +21,7 @@ final router = GoRouter(
     GoRoute(path: "/signin", builder: (context, state) => const SigninScreen()),
     GoRoute(path: "/signup", builder: (context, state) => const SignupScreen()),
     GoRoute(path: "/warehouse", builder: (context, state) => const WarehouseScreen()),
+     GoRoute(path: "/currencies", builder: (context, state) => const CurrenciesScreen()),
   ],
   redirect: (context, state) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);

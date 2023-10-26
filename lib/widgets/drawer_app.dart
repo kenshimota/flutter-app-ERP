@@ -57,6 +57,11 @@ class DrawerApp extends StatelessWidget {
             pathname: "/warehouse",
             context: context,
           ),
+            listItemRouter(
+            title: "Monedas",
+            pathname: "/currencies",
+            context: context,
+          ),
           ListTile(
             title: const TypographyApp(text: "Cerrar Sesión"),
             onTap: () => onSignout(context),
