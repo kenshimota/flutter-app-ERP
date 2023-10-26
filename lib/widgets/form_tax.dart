@@ -4,11 +4,13 @@ import 'package:flutter_app_erp/widgets/input_name.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/button_create_tax.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
+import 'package:flutter_app_erp/core/exception/form_errors.dart';
 
 class FormTax extends StatefulWidget {
   final String? nameDefault;
   final String? percentageDefault;
   final void Function()? onClick;
+  final FormErrors? errors;
   final Future<void> Function(Map<String, dynamic>)? onRequest;
 
   const FormTax(
@@ -16,7 +18,8 @@ class FormTax extends StatefulWidget {
       this.onClick,
       this.onRequest,
       this.nameDefault,
-      this.percentageDefault});
+      this.percentageDefault,
+      this.errors});
 
   @override
   State<FormTax> createState() => _FormTaxState();
@@ -53,10 +56,13 @@ class _FormTaxState extends State<FormTax> {
       child: Column(
         children: [
           FormControl(
-            child: InputName(controller: name),
+            child: InputName(controller: name,
+            errorText: widget.errors?.getValue("name"),
+            ),
           ),
           FormControl(
-            child: InputPercentage(percentage: percentage),
+            child: InputPercentage(percentage: percentage,
+            errorText: widget.errors?.getValue("percentage"),),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

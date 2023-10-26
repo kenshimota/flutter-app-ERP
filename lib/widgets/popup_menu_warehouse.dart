@@ -1,41 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 
-import 'package:flutter_app_erp/widgets/button_delete.dart';
-import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
-import 'package:flutter_app_erp/widgets/dialog_edit_tax.dart';
+import 'package:flutter_app_erp/widgets/button_delete_warehouse.dart';
+
+import 'package:flutter_app_erp/widgets/dialog_edit_warehouse.dart';
 
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class PopupMenuApp extends StatelessWidget {
+class PopupMenuWarehouse extends StatelessWidget {
   final void Function()? onAfterChange;
-  final TaxesResponse tax;
-  const PopupMenuApp({super.key, this.onAfterChange, required this.tax});
+  final WarehouseResponse ware;
+
+  const PopupMenuWarehouse({ super.key, this.onAfterChange, required this.ware});
 
   @override
-  Widget build(BuildContext context) {
-    return PopupMenuTax(onAfterChange: onAfterChange, tax: tax);
+  Widget build(BuildContext context){
+    return PopupWare(onAfterChange: onAfterChange, ware: ware);
   }
 }
 
-class PopupMenuTax extends StatefulWidget {
+class PopupWare extends StatefulWidget {
   final void Function()? onAfterChange;
-  final TaxesResponse tax;
+  final WarehouseResponse ware;
 
-  const PopupMenuTax({super.key, this.onAfterChange, required this.tax});
+  const PopupWare({ super.key, this.onAfterChange, required this.ware});
 
   @override
-  State<PopupMenuTax> createState() => _PopupMenuTaxState();
+  State<PopupWare> createState() => _PopupWareState();
 }
 
-class _PopupMenuTaxState extends State<PopupMenuTax> {
+class _PopupWareState extends State<PopupWare> {
   SampleItem? selectedMenu;
   Color? color;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return PopupMenuButton<SampleItem>(
-      initialValue: selectedMenu,
+       initialValue: selectedMenu,
 
       // Callback that sets the selected popup menu item.
       onSelected: (SampleItem item) {
@@ -46,10 +48,10 @@ class _PopupMenuTaxState extends State<PopupMenuTax> {
         });
         
         if(item == SampleItem.itemOne){
-           builder = (context) => AlertDialogEditTax(tax: widget.tax, onSave: widget.onAfterChange,);
+           builder = (context) => AlertDialogEditWarehouse(ware: widget.ware, onSave: widget.onAfterChange,);
           debugPrint('Aqui debe abrir el dialogo de editar');
         } else if(item == SampleItem.itemTwo){
-          builder = (context) => AlertDialogDelete(taxId: widget.tax.id,  onAfterDelete: widget.onAfterChange,);
+          builder = (context) => AlertDialogDelete(wareId: widget.ware.id,  onAfterDelete: widget.onAfterChange,);
           debugPrint('Aqui debe abrir el dialogo de eliminar');
         }
         
@@ -60,8 +62,18 @@ class _PopupMenuTaxState extends State<PopupMenuTax> {
 
 
       },
-
-      itemBuilder: (
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      itemBuilder:  (
         BuildContext context,
       ) =>
           <PopupMenuEntry<SampleItem>>[

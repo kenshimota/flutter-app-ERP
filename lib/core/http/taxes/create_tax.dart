@@ -36,6 +36,7 @@ Future<TaxesResponse> createTax({
     final Map<String, dynamic> json = jsonDecode(response.body);
     throw Exception(json["error"]);
   }
+  
   if (response.statusCode == 422) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     final Map<String, dynamic> map = json["errors"] ?? {};

@@ -100,7 +100,11 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-         ToobalTaxes(inputSearch: InputSearch(onSearch: onSearch,)),
+         ToobalTaxes(
+          onOrden: onSortOrder,
+          inputSearch: InputSearch(
+            onSearch: onSearch,)
+          ),
           Expanded(
             child: Container(
                 color: Colors.white,

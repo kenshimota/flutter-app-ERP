@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
-class ButtonSortTaxes extends StatelessWidget {
+class ButtonSortWarehouse extends StatelessWidget {
   final Function(Map<String, String>)? onOrden;
-  const ButtonSortTaxes({super.key, this.onOrden});
+
+  const ButtonSortWarehouse({super.key, this.onOrden});
 
   @override
   Widget build(BuildContext context) {
-    return  PopupButtonTaxes(onOrden: onOrden,);
+    return  PopupButtonWarehouses(onOrden: onOrden,);
   }
 }
 
-class PopupButtonTaxes extends StatefulWidget {
+class PopupButtonWarehouses extends StatefulWidget {
   final Function(Map<String, String>)? onOrden;
-  const PopupButtonTaxes({super.key, this.onOrden});
+  const PopupButtonWarehouses({super.key, this.onOrden});
 
   @override
-  State<PopupButtonTaxes> createState() => _PopupButtonTaxesState();
+  State<PopupButtonWarehouses> createState() => _PopupButtonWarehousesState();
 }
 
-class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
+class _PopupButtonWarehousesState extends State<PopupButtonWarehouses> {
   SampleItem? selectedMenu;
   bool isAccending = false;
 
@@ -30,18 +31,21 @@ class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
     final list = <String>["name", "address"];
 
     setState(() {
-      selectedMenu = item;
-      isAccending = b;
+            selectedMenu = item;
+            isAccending = b;
     });
 
-    debugPrint("$b $index");
+
+    debugPrint(  "$b $index"  );
+
 
     String type = b ? "asc" : "desc";
 
-    if (widget.onOrden != null) {
+    if(widget.onOrden != null) {
       widget.onOrden!({'field': list[index], 'type': type});
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +53,12 @@ class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
         icon: const Icon(Icons.sort),
         initialValue: selectedMenu,
         onSelected: onSort,
+
+
         itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
               PopupMenuItem<SampleItem>(
                 value: SampleItem.itemOne,
-                child: _SortTaxesName(
+                child: _SortWarehouseName(
                     text: 'Nombre',
                     isAccending: selectedMenu == SampleItem.itemOne
                         ? isAccending
@@ -60,8 +66,8 @@ class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
               ),
               PopupMenuItem<SampleItem>(
                 value: SampleItem.itemTwo,
-                child: _SortTaxesName(
-                  text: 'Impuesto',
+                child: _SortWarehouseName(
+                  text: 'Direccion',
                   isAccending:
                       selectedMenu == SampleItem.itemTwo ? isAccending : null,
                 ),
@@ -70,11 +76,11 @@ class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
   }
 }
 
-class _SortTaxesName extends StatelessWidget {
+class _SortWarehouseName extends StatelessWidget {
   final bool? isAccending;
   final String text;
 
-  const _SortTaxesName(
+  const _SortWarehouseName(
       {super.key, required this.text, required this.isAccending});
 
   @override

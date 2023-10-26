@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
 
 class InputPercentage extends StatelessWidget {
   final String? label;
   final TextEditingController? percentage;
+  final String? errorText;
 
   const InputPercentage(
-      {super.key, this.label = 'Porcentage', this.percentage});
+      {super.key, this.label = 'Porcentage', this.percentage, this.errorText});
 
   String? validatePercentage(String? value) {
     if (value!.isEmpty) {
@@ -27,12 +29,19 @@ class InputPercentage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return InputBaseApp(
+      enabled: true,
+      label: label ?? 'Porcentaje',
+      controller: percentage,
+      errorText: errorText,
+      validator: validatePercentage,
+    );
+
+    /*return TextFormField(
       controller: percentage,
       validator: validatePercentage,
       decoration: const InputDecoration(
         labelText: 'Porcentaje',
-      ),
-    );
+      ),*/
   }
 }

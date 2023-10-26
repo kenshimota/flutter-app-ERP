@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/warehouse/get_list_warehouse.dart';
 import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 import 'package:flutter_app_erp/widgets/button_new_warehouse.dart';
+import 'package:flutter_app_erp/widgets/list_warehouse_mobile.dart';
 import 'package:flutter_app_erp/widgets/table_warehouse.dart';
-import 'package:flutter_app_erp/widgets/toobal_taxes.dart';
+import 'package:flutter_app_erp/widgets/toobal_warehouse.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
+import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 
 class ShowTableWarehouse extends StatefulWidget {
   final String token;
@@ -23,7 +25,6 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
 
   @override
   void initState() {
-
     setState(() {
       futureList = onRequestApi();
     });
@@ -41,16 +42,15 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
 
     debugPrint('$warehouses');
 
-
     setState(() {
       result = warehouses;
     });
   }
-  
+
   Future<void> onRequest() async {
-      setState(() {
-        futureList = onRequestApi();
-      });
+    setState(() {
+      futureList = onRequestApi();
+    });
   }
 
   onSortOrder(Map<String, String> o) {
@@ -62,7 +62,7 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
     onRequest();
   }
 
-   onSearch(String s) {
+  onSearch(String s) {
     setState(() {
       search = s;
       numberPage = 1;
@@ -87,7 +87,6 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
     onRequest();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -95,20 +94,31 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ToobalTaxes(inputSearch: InputSearch(onSearch: onSearch,)),
+          ToobalWarehouses(
+              onOrden: onSortOrder,
+              inputSearch: InputSearch(
+                onSearch: onSearch,
+              ),
+          ),
           Expanded(
             child: Container(
-              color: Colors.white,
-              child: DataTableWarehouse(
-                list: result, 
-                future: futureList, 
-                onOrden: onSortOrder,
-                onBack: onBack,
-                onForwad: onForwad,
-                numberPage: numberPage,
-                onAfterDelete: onRequest,
+                color: Colors.white,
+                child: LayourtTwiceBuilder(
+                  mobile: ListTileWarehouse(
+                    listWare: result,
+                    onAfterChange: onRequest,
+                  ),
+                  desktop: DataTableWarehouse(
+                    list: result,
+                    future: futureList,
+                    onOrden: onSortOrder,
+                    onBack: onBack,
+                    onForwad: onForwad,
+                    numberPage: numberPage,
+                    onAfterDelete: onRequest,
+                  ),
+                ) /*  */
                 ),
-            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),

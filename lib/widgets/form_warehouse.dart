@@ -5,11 +5,13 @@ import 'package:flutter_app_erp/widgets/input_name.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/button_create_warehouse.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
+import 'package:flutter_app_erp/core/exception/form_errors.dart';
 
 class FormWarehouse extends StatefulWidget {
   final String? nameDefault;
     final String? addressDefault;
   final void Function()? onClick;
+   final FormErrors? errors;
   final Future<void> Function(Map<String, dynamic>)? onRequest;
 
   const FormWarehouse({
@@ -17,7 +19,8 @@ class FormWarehouse extends StatefulWidget {
     this.nameDefault,
     this.addressDefault,
     this.onClick,
-    this.onRequest
+    this.onRequest,
+    this.errors
   });
 
   @override
@@ -55,10 +58,15 @@ class _FormWarehouseState extends State<FormWarehouse> {
       child: Column(
         children: [
           FormControl(
-            child: InputName(controller: name),
+            child: InputName(controller: name, 
+            errorText: widget.errors?.getValue("name"),
+            ),
+            
           ),
            FormControl(
-            child: InputAddress(controller: address),
+            child: InputAddress(controller: address,
+            errorText: widget.errors?.getValue("address"),
+            ),
           ),
           
           Row(
