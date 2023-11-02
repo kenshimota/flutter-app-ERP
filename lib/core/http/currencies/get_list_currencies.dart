@@ -1,10 +1,9 @@
 import 'dart:convert';
-
+import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
-Future<List<TaxesResponse>> getListTaxes({
+Future<List<CurrenciesResponse>> getListCurrencies({
   required String token,
   String search = '',
   Map<String, String>? order,
@@ -13,7 +12,7 @@ Future<List<TaxesResponse>> getListTaxes({
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/taxes?q=$search&page=$page&";
+  String path = "$hostname/currencies?q=$search&page=$page&";
 
   if (order != null &&
       order.containsKey('field') &&
@@ -49,7 +48,7 @@ Future<List<TaxesResponse>> getListTaxes({
 
   return json
       .map(
-        (e) => TaxesResponse.fromJson(e),
+        (e) => CurrenciesResponse.fromJson(e),
       )
       .toList();
 }

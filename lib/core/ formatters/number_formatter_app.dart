@@ -1,7 +1,14 @@
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
+
 
 class NumberFormatterApp {
+
+  static format(double amount){
+    final f = NumberFormat("###.00#", "en_US");
+
+    return f.format(amount);
+  }
+
   static String percentageFormat(double percentage) { 
 
     if(percentage == 0){
