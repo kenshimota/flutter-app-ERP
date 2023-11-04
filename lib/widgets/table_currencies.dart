@@ -3,6 +3,7 @@ import 'package:flutter_app_erp/core/response/currencies/currencies_response.dar
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/widgets/button_edit_currencie.dart';
 
 class DataTableCurrencies extends StatefulWidget {
   final int numberPage;
@@ -54,19 +55,24 @@ class _DataTableCurrencies extends State<DataTableCurrencies> {
   @override
   Widget build(BuildContext context) {
     final List<DataRow> rows = widget.list
-        .map((curren) => DataRow(cells: <DataCell>[
-              DataCell(Text(curren.name)),
-              DataCell(Text(curren.symbol)),
-              DataCell(Text(curren.code)),
-              DataCell(Text(NumberFormatterApp.format(curren.exchangeRate))),
+        .map((currencie) => DataRow(cells: <DataCell>[
+              DataCell(Text(currencie.name)),
+              DataCell(Text(currencie.symbol)),
+              DataCell(Text(currencie.code)),
+              DataCell(Text(NumberFormatterApp.format(currencie.exchangeRate))),
               DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(curren.createdAt),
+                DateFormatterApp.dateTimeFormatter(currencie.createdAt),
               )),
               DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(curren.updatedAt),
+                DateFormatterApp.dateTimeFormatter(currencie.updatedAt),
               )),
               DataCell(Row(
-                children: [const Text('esta en construccion')],
+                children: [
+                   ButtonEditCurrencie(
+                    currencie: currencie,
+                    onSave: widget.onAfterDelete,
+                  ),
+                ],
               )),
             ]))
         .toList();
