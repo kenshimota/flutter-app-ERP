@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
+import 'package:flutter_app_erp/widgets/button_delete_currencie.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
@@ -72,6 +73,15 @@ class _DataTableCurrencies extends State<DataTableCurrencies> {
                     currencie: currencie,
                     onSave: widget.onAfterDelete,
                   ),
+                  const SizedBox(
+                    width: 8,
+                    height: 8,
+                  ),
+                  ButtonDeleteCurrencie(
+                    currencieId: currencie.id, 
+                    context: context,
+                    onAfterDelete: widget.onAfterDelete,
+                  )
                 ],
               )),
             ]))

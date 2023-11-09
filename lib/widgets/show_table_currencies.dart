@@ -5,6 +5,8 @@ import 'package:flutter_app_erp/widgets/butto_new_currencie.dart';
 import 'package:flutter_app_erp/widgets/table_currencies.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/toobal_currencies.dart';
+import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/list_currencie.dart';
 
 class ShowTableCurrencies extends StatefulWidget {
   final String token;
@@ -102,7 +104,10 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
           Expanded(
             child: Container(
             color: Colors.white,
-            child: DataTableCurrencies(
+            child: ListTileApp(
+              listcurrencie: result,
+              onAfterChange: onRequest, 
+            ) /*DataTableCurrencies(
               list: result,
               future: futureList,
               onOrden: onSortOrder,
@@ -110,7 +115,7 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
               onForwad: onForwad,
               numberPage: numberPage,
               onAfterDelete: onRequest,
-            ),
+            ), */
 
           ),),
           Padding(
