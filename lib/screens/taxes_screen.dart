@@ -14,6 +14,7 @@ class TaxesScreen extends StatelessWidget {
     final String? token = authProvider.getToken();
 
     return ScaffoldApp(
+      title: "Impuestos",
       body: ShowInfoTaxes(token: token ?? ''),
     );
   }

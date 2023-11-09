@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const ScaffoldApp(
+      title: "Inicio",
       body: Text("Inicio home"),
     );
   }

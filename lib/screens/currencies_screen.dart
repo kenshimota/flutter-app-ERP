@@ -12,6 +12,7 @@ class CurrenciesScreen extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     final String? token = authProvider.getToken();
     return ScaffoldApp(
+      title: "Monedas",
       body: ShowTableCurrencies(token: token ?? ''),
     );
   }

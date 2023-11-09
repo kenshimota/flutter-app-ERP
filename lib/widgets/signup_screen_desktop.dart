@@ -45,8 +45,7 @@ class ImageContain extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           image: const DecorationImage(
-            image: NetworkImage(
-                "https://interseguridad.org/wp-content/uploads/2018/12/contadorpublico.jpeg"),
+            image: AssetImage('assets/img/first-image.jpeg'),
             fit: BoxFit.cover,
           ),
         ),

@@ -45,7 +45,6 @@ class _FormSigninState extends State<FormSignin> {
                     child: Center(
                   child: Icon(
                     Icons.person,
-                    color: Colors.purple,
                     size: 80.0,
                   ),
                 ))
@@ -54,9 +53,7 @@ class _FormSigninState extends State<FormSignin> {
                 Expanded(
                     child: Center(
                   child: TypographyApp(
-                    text: "Iniciar Sesión",
-                    variant: "h4",
-                  ),
+                      text: "Iniciar Sesión", variant: "h4", color: "primary"),
                 ))
               ]),
             ]),

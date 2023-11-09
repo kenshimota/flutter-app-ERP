@@ -15,8 +15,8 @@ class SigninScreenDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ContainerLimit(
-        maxWidth: 1200,
-        minHeight: 600,
+        maxWidth: 1024,
+        minHeight: 500,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(children: [
@@ -28,8 +28,7 @@ class SigninScreenDesktop extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     image: const DecorationImage(
-                      image: NetworkImage(
-                          "https://interseguridad.org/wp-content/uploads/2018/12/contadorpublico.jpeg"),
+                      image: AssetImage('assets/img/first-image.jpeg'),
                       fit: BoxFit.cover,
                     ),
                   ),

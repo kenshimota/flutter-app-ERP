@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/drawer_app.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class ScaffoldApp extends StatefulWidget {
   final Widget? body;
-  const ScaffoldApp({super.key, this.body});
+  final String? title;
+
+  const ScaffoldApp({
+    super.key,
+    this.body,
+    this.title,
+  });
 
   @override
   State<ScaffoldApp> createState() => _ScaffoldApp();
@@ -30,13 +37,15 @@ class _ScaffoldApp extends State<ScaffoldApp> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('Drawer Demo'),
+        title: TypographyApp(
+          text: widget.title ?? 'Drawer Demo',
+          variant: "h3",
+          color: "white",
+        ),
       ),
       body: widget.body,
-      drawer: Container(
-        child: DrawerApp(
-          onClose: _closeDrawer,
-        ),
+      drawer: DrawerApp(
+        onClose: _closeDrawer,
       ),
       drawerEnableOpenDragGesture: false,
     );
