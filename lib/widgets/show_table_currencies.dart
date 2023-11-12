@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_search.dart';
+import 'package:flutter_app_erp/widgets/list_currencie.dart';
+import 'package:flutter_app_erp/widgets/toobal_currencies.dart';
+import 'package:flutter_app_erp/widgets/butto_new_currencie.dart';
 import 'package:flutter_app_erp/core/http/currencies/get_list_currencies.dart';
 import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
-import 'package:flutter_app_erp/widgets/butto_new_currencie.dart';
-import 'package:flutter_app_erp/widgets/table_currencies.dart';
-import 'package:flutter_app_erp/widgets/input_search.dart';
-import 'package:flutter_app_erp/widgets/toobal_currencies.dart';
-import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
-import 'package:flutter_app_erp/widgets/list_currencie.dart';
 
 class ShowTableCurrencies extends StatefulWidget {
   final String token;
@@ -14,7 +12,6 @@ class ShowTableCurrencies extends StatefulWidget {
 
   @override
   State<ShowTableCurrencies> createState() => _ShowTableCurrencies();
-
 }
 
 class _ShowTableCurrencies extends State<ShowTableCurrencies> {
@@ -25,8 +22,8 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
   List<CurrenciesResponse> result = <CurrenciesResponse>[];
 
   @override
-  void initState(){
-    setState((){
+  void initState() {
+    setState(() {
       futureList = onRequestApi();
     });
 
@@ -89,25 +86,24 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
   }
 
   @override
-  Widget build(BuildContext build){
+  Widget build(BuildContext build) {
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ToobalCurrencies(
-            onOrden: onSortOrder,
-            inputSearch: InputSearch(
-              onSearch: onSearch,
-            )
-          ),
-          Expanded(
-            child: Container(
-            color: Colors.white,
-            child: ListTileApp(
-              listcurrencie: result,
-              onAfterChange: onRequest, 
-            ) /*DataTableCurrencies(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ToobalCurrencies(
+                onOrden: onSortOrder,
+                inputSearch: InputSearch(
+                  onSearch: onSearch,
+                )),
+            Expanded(
+              child: Container(
+                  color: Colors.white,
+                  child: ListTileApp(
+                    listcurrencie: result,
+                    onAfterChange: onRequest,
+                  ) /*DataTableCurrencies(
               list: result,
               future: futureList,
               onOrden: onSortOrder,
@@ -117,22 +113,20 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
               onAfterDelete: onRequest,
             ), */
 
-          ),),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child:  Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ButtonNewCurrencie(
-                  onSave: () => onRequest(),
-                )
-              ],
+                  ),
             ),
-          )
-        ],
-        )
-    );
-      
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ButtonNewCurrencie(
+                    onSave: () => onRequest(),
+                  )
+                ],
+              ),
+            )
+          ],
+        ));
   }
-
 }

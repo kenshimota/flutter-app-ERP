@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/http/currencies/delete_currencie.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/button_delete.dart';
-import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_app_erp/providers/auth_provider.dart';
+import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
+import 'package:flutter_app_erp/core/http/currencies/delete_currencie.dart';
 
-Widget ButtonDeleteCurrencie({
-  required int currencieId,
-  required BuildContext context,
-  void Function()? onAfterDelete
-}) {
+Widget ButtonDeleteCurrencie(
+    {required int currencieId,
+    required BuildContext context,
+    void Function()? onAfterDelete}) {
   return IconButton(
     onPressed: () => showDialog(
       context: context,
-      barrierDismissible: false, 
+      barrierDismissible: false,
       builder: (BuildContext context) => AlertDialogDelete(
         currencieId: currencieId,
         onAfterDelete: onAfterDelete,
@@ -33,22 +31,20 @@ class AlertDialogDelete extends StatefulWidget {
     this.onAfterDelete,
   });
 
-   @override
-
-   _AlertDialogDelete createState() => _AlertDialogDelete();
+  @override
+  _AlertDialogDelete createState() => _AlertDialogDelete();
 }
 
 class _AlertDialogDelete extends State<AlertDialogDelete> {
   Future? _futureDelete;
   String message = 'No se pudo eliminar';
 
-
   Future<void> onDeleteRequest(BuildContext context) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String? token = authProvider.getToken();
 
-
-    bool response = await deteleCurrencie(id: widget.currencieId, token: token ?? '');
+    bool response =
+        await deteleCurrencie(id: widget.currencieId, token: token ?? '');
 
     debugPrint('${context.mounted}');
 
@@ -67,9 +63,6 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     debugPrint('${context.mounted}');
   }
 
-
-
-  
   void showError(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -84,8 +77,6 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
       _futureDelete = onDeleteRequest(context);
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +104,4 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
       ],
     );
   }
-
-
 }

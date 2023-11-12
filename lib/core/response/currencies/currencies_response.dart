@@ -10,7 +10,6 @@ class CurrenciesResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-
   const CurrenciesResponse({
     required this.id,
     required this.name,
@@ -22,9 +21,6 @@ class CurrenciesResponse {
   });
 
   factory CurrenciesResponse.fromJson(Map<String, dynamic> json) {
-
-    debugPrint('$json');
-
     return CurrenciesResponse(
       id: json['id'],
       name: json['name'],
@@ -39,7 +35,7 @@ class CurrenciesResponse {
   @override
   String toString() {
     final Map<String, dynamic> map = {
-      "id":id,
+      "id": id,
       "name": name,
       "symbol": symbol,
       "code": code,

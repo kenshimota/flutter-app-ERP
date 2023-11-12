@@ -1,13 +1,14 @@
 import 'dart:convert';
+import 'package:flutter_app_erp/core/response/response_base.dart';
 
-class TaxesResponse {
+class TaxesResponse implements ResponseBase {
   final int id;
   final String name;
   final double percentage;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const TaxesResponse({
+  TaxesResponse({
     required this.id,
     required this.name,
     required this.percentage,
