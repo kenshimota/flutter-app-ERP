@@ -14,7 +14,6 @@ class ShowTableCurrencies extends StatefulWidget {
 
   @override
   State<ShowTableCurrencies> createState() => _ShowTableCurrencies();
-
 }
 
 class _ShowTableCurrencies extends State<ShowTableCurrencies> {
@@ -25,8 +24,8 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
   List<CurrenciesResponse> result = <CurrenciesResponse>[];
 
   @override
-  void initState(){
-    setState((){
+  void initState() {
+    setState(() {
       futureList = onRequestApi();
     });
 
@@ -89,50 +88,49 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
   }
 
   @override
-  Widget build(BuildContext build){
+  Widget build(BuildContext build) {
     return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ToobalCurrencies(
-            onOrden: onSortOrder,
-            inputSearch: InputSearch(
-              onSearch: onSearch,
-            )
-          ),
-          Expanded(
-            child: Container(
-            color: Colors.white,
-            child: ListTileApp(
-              listcurrencie: result,
-              onAfterChange: onRequest, 
-            ) /*DataTableCurrencies(
-              list: result,
-              future: futureList,
-              onOrden: onSortOrder,
-              onBack: onBack,
-              onForwad: onForwad,
-              numberPage: numberPage,
-              onAfterDelete: onRequest,
-            ), */
-
-          ),),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child:  Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ButtonNewCurrencie(
-                  onSave: () => onRequest(),
-                )
-              ],
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ToobalCurrencies(
+                onOrden: onSortOrder,
+                inputSearch: InputSearch(
+                  onSearch: onSearch,
+                )),
+            Expanded(
+              child: Container(
+                color: Colors.white,
+                child: LayourtTwiceBuilder(
+                  mobile: ListTileApp(
+                    listcurrencie: result,
+                    onAfterChange: onRequest,
+                  ),
+                  desktop: DataTableCurrencies(
+                    list: result,
+                    future: futureList,
+                    onOrden: onSortOrder,
+                    onBack: onBack,
+                    onForwad: onForwad,
+                    numberPage: numberPage,
+                    onAfterDelete: onRequest,
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
-        )
-    );
-      
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ButtonNewCurrencie(
+                    onSave: () => onRequest(),
+                  )
+                ],
+              ),
+            )
+          ],
+        ));
   }
-
 }
