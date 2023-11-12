@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
 import "package:validatorless/validatorless.dart";
 
 class InputPassword extends StatefulWidget {
   final String? label;
+  final Future? future;
+  final String? errorText;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
 
-  const InputPassword({super.key, this.label, this.validator});
+  const InputPassword({
+    super.key,
+    this.label,
+    this.controller,
+    this.validator,
+    this.errorText,
+    this.future,
+  });
 
   @override
   State<InputPassword> createState() => _InputPassword();
@@ -33,8 +44,8 @@ class _InputPassword extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     final String? label = widget.label;
-    final RegExp regExp = RegExp(
-        r"/(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,20}/");
+    final RegExp regExp =
+        RegExp(r"(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.])");
 
     final List<String? Function(String?)> listValidations = [
       Validatorless.min(8, 'Password must be at least 8 characters'),
@@ -47,17 +58,18 @@ class _InputPassword extends State<InputPassword> {
       listValidations.add(_createValidor);
     }
 
-    return TextFormField(
+    return InputBaseApp(
+      future: widget.future,
       obscureText: !visible,
-      decoration: InputDecoration(
-        labelText: label ?? "Contraseña",
-        hintText: 'Enter your Password',
-        suffixIcon: IconButton(
-          icon: Icon(
-            visible ? Icons.visibility : Icons.visibility_off,
-          ),
-          onPressed: invertVisible,
+      controller: widget.controller,
+      errorText: widget.errorText,
+      label: label ?? "Contraseña",
+      placeholder: 'Enter your Password',
+      suffixIcon: IconButton(
+        icon: Icon(
+          visible ? Icons.visibility : Icons.visibility_off,
         ),
+        onPressed: invertVisible,
       ),
       validator: Validatorless.multiple(listValidations),
     );

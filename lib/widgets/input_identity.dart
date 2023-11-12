@@ -1,34 +1,49 @@
 import 'package:flutter/material.dart';
 import "package:validatorless/validatorless.dart";
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:flutter_app_erp/widgets/input_base_app.dart';
+import 'package:number_text_input_formatter/number_text_input_formatter.dart';
 
-class InputIdentityDocumenten extends StatelessWidget {
+class InputIdentityDocument extends StatelessWidget {
+  final bool enabled;
   final String? label;
-  const InputIdentityDocumenten(
-      {super.key, this.label = 'Documento de identidad'});
+  final Future? future;
+  final String? errorText;
+  final TextEditingController? controller;
+
+  const InputIdentityDocument({
+    super.key,
+    this.label = 'Documento de identidad',
+    this.controller,
+    this.enabled = true,
+    this.errorText,
+    this.future,
+  });
 
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      Validatorless.min(7, 'The ID must have at least 8 characters'),
+      Validatorless.min(
+        7,
+        'El documento de identidad debe tener como minimo 7 caracteres',
+      ),
       Validatorless.max(10,
-          'El documento de identidad debe tener como máximo 20 caracteres.'),
+          'El documento de identidad debe tener como máximo 10 caracteres.'),
     ];
 
-    var maskFormatter = MaskTextInputFormatter(
-      mask: '@ #### #### #### #### ####',
-      filter: {
-        "@": RegExp(r'[A-Z]'),
-        "#": RegExp(r'[0-9]'),
-      },
-    );
-
-    return TextFormField(
-      inputFormatters: [maskFormatter],
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: 'J 0000 0000',
-      ),
+    return InputBaseApp(
+      enabled: enabled,
+      inputFormatters: [
+        NumberTextInputFormatter(
+          decimalDigits: 2,
+          decimalSeparator: '.',
+          groupSeparator: ',',
+        ),
+      ],
+      label: label,
+      future: future,
+      controller: controller,
+      errorText: errorText,
+      placeholder: '1.000.000',
       validator: Validatorless.multiple(listValidations),
     );
   }

@@ -10,16 +10,36 @@ final Map<String, TextStyle? Function(BuildContext)> _variants = {
   "body": (BuildContext context) => Theme.of(context).textTheme.bodySmall,
 };
 
+final Map<String, TextStyle? Function(BuildContext)> _colors = {
+  "inherit": (BuildContext context) => const TextStyle(color: Colors.black),
+  "primary": (BuildContext context) => const TextStyle(color: Colors.teal),
+  "secondary": (BuildContext context) => const TextStyle(color: Colors.pink),
+  "white": (BuildContext context) => const TextStyle(color: Colors.white),
+};
+
 class TypographyApp extends StatelessWidget {
   final String? text;
+  final String? color;
   final String? variant;
 
-  const TypographyApp({super.key, required this.text, this.variant});
+  const TypographyApp({
+    super.key,
+    required this.text,
+    this.variant,
+    this.color = "inherit",
+  });
 
   @override
   Widget build(BuildContext context) {
     final getStyle = _variants[variant] ?? _variants["body"];
-    final TextStyle? style = getStyle!(context);
+    final getColor = _colors[color] ?? _colors["inherit"];
+    TextStyle? style = getStyle!(context);
+
+    if (style != null) {
+      style = style.merge(getColor!(context));
+    } else {
+      style = getColor!(context);
+    }
 
     return Text(text ?? "", style: style);
   }
