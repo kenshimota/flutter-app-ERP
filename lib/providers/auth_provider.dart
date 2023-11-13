@@ -14,6 +14,10 @@ class AuthProvider extends ChangeNotifier {
     return _currentUser != null;
   }
 
+  UserResponse? getCurrentUser() {
+    return _currentUser;
+  }
+
   Future<void> signIn({
     required String username,
     required String password,
