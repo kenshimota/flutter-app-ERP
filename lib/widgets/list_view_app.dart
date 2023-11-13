@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_app_erp/core/response/response_base.dart';
 import 'package:flutter_app_erp/widgets/list_view_scrolling_infinite.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class ListViewApp extends StatefulWidget {
   final int page;
@@ -65,12 +66,45 @@ class _ListViewApp extends State<ListViewApp> {
     );
   }
 
+  Widget buildNotFound({required BuildContext context}) {
+    return const Center(
+      child: SizedBox(
+        height: 200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Center(
+                  child: Icon(
+                    Icons.search_off,
+                    size: 80,
+                  ),
+                ),
+                Center(
+                  child: TypographyApp(
+                    text: "No se han encontrado resultados",
+                    variant: "h5",
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget buildLayout({required BuildContext context, loading = false}) {
     List<Widget> children =
         resources.map((e) => widget.buildItems(context, e)).toList();
 
     if (loading) {
       children.add(circuleProgress(context));
+    }
+
+    if (!loading && children.isEmpty) {
+      children.add(buildNotFound(context: context));
     }
 
     return ListViewScrollingInfinite(

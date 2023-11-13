@@ -7,6 +7,10 @@ final Map<String, TextStyle? Function(BuildContext)> _variants = {
   "h4": (BuildContext context) => Theme.of(context).textTheme.titleLarge,
   "h5": (BuildContext context) => Theme.of(context).textTheme.titleMedium,
   "h6": (BuildContext context) => Theme.of(context).textTheme.titleSmall,
+  "subtitle1": (BuildContext context) => Theme.of(context).textTheme.labelLarge,
+  "subtitle2": (BuildContext context) =>
+      Theme.of(context).textTheme.labelMedium,
+  "subtitle3": (BuildContext context) => Theme.of(context).textTheme.labelSmall,
   "body": (BuildContext context) => Theme.of(context).textTheme.bodySmall,
 };
 
