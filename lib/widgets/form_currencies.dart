@@ -33,6 +33,7 @@ class FormCurrencie extends StatefulWidget {
 class _FormCurrencieState extends State<FormCurrencie> {
   Future? futureCreateCurrencie;
   String message = 'No se pudo crear la moneda';
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController name = TextEditingController();
   TextEditingController symbol = TextEditingController();
@@ -43,12 +44,18 @@ class _FormCurrencieState extends State<FormCurrencie> {
   initState() {
     name.text = widget.nameDefault ?? "";
     symbol.text = widget.symbolDefault ?? "";
-    symbol.text = widget.codeDefault ?? "";
+    code.text = widget.codeDefault ?? "";
     exchangeRate.text = (widget.exchangeRateDefault ?? "").toString();
     super.initState();
   }
 
   onSubmit(BuildContext context) {
+     if (!_formKey.currentState!.validate()) {
+      return null;
+    }
+
+
+
     Map<String, dynamic> params = {
       "name": name.text,
       "symbol": symbol.text,
@@ -65,23 +72,30 @@ class _FormCurrencieState extends State<FormCurrencie> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           FormControl(
             child: InputName(
               controller: name,
+              future: futureCreateCurrencie,
+              isRequired: true,
               errorText: widget.errors?.getValue("name"),
             ),
           ),
           FormControl(
             child: InputSymbol(
               controller: symbol,
+              future: futureCreateCurrencie,
+              isRequired: true,
               errorText: widget.errors?.getValue("symbol"),
             ),
           ),
            FormControl(
             child: InputName(
               controller: code,
+              future: futureCreateCurrencie,
+              isRequired: true,
               label: 'code',
               errorText: widget.errors?.getValue("code"),
             ),
@@ -89,6 +103,8 @@ class _FormCurrencieState extends State<FormCurrencie> {
           FormControl(
             child: InputExchangeRate(
               exchangeRate: exchangeRate,
+              future: futureCreateCurrencie,
+              isRequired: true,
               errorText: widget.errors?.getValue("exachangeRate"),
             ),
           ),
