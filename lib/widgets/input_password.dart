@@ -44,14 +44,18 @@ class _InputPassword extends State<InputPassword> {
   @override
   Widget build(BuildContext context) {
     final String? label = widget.label;
-    final RegExp regExp =
-        RegExp(r"(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.])");
 
     final List<String? Function(String?)> listValidations = [
-      Validatorless.min(8, 'Password must be at least 8 characters'),
-      Validatorless.max(20, 'Password must be at most 20 characters'),
-      Validatorless.regex(regExp,
-          "La contraseña debe tener al menos una letra mayuscula, una minuscula, debe tener uno o varios numeros 0-9 y un caracter especial")
+      Validatorless.required("La contraseña es requerida"),
+      Validatorless.min(8, 'Debe tener mas de 8 caracteres'),
+      Validatorless.max(20, 'Debe tener menos de 20 caracteres'),
+      Validatorless.regex(
+          RegExp(r"(?=.*?[A-Z])"), "Debe tener una letra mayuscula"),
+      Validatorless.regex(
+          RegExp(r"(?=.*?[a-z])"), "Debe tener una letra minuscula"),
+      Validatorless.regex(RegExp(r"(?=.*?[0-9])"), "Debe tener un número"),
+      Validatorless.regex(RegExp(r"(?=.*?[#?!@$%^&*-.])"),
+          "Debe tener un caracter especial como # ? ! @ &*-."),
     ];
 
     if (widget.validator != null) {
@@ -64,7 +68,7 @@ class _InputPassword extends State<InputPassword> {
       controller: widget.controller,
       errorText: widget.errorText,
       label: label ?? "Contraseña",
-      placeholder: 'Enter your Password',
+      placeholder: 'Ingrese su contraseña',
       suffixIcon: IconButton(
         icon: Icon(
           visible ? Icons.visibility : Icons.visibility_off,

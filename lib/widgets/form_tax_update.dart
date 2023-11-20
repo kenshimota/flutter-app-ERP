@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/http/taxes/update_tax.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:provider/provider.dart';
@@ -16,22 +17,27 @@ class FormTaxUpdate extends StatelessWidget {
     required Map<String, dynamic> params,
   }) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final String? token = authProvider.getToken();
 
-    debugPrint("before request");
+    try {
+      final String? token = authProvider.getToken();
 
-    await updateTax(
-      token: token,
-      taxId: tax.id,
-      name: params["name"],
-      percentage: params["percentage"],
-    );
+      debugPrint("before request");
 
-    if (!context.mounted) {
-      return;
+      await updateTax(
+        token: token,
+        taxId: tax.id,
+        name: params["name"],
+        percentage: params["percentage"],
+      );
+
+      if (!context.mounted) {
+        return;
+      }
+
+      onAfterSave!();
+    } on AuthErrors {
+      authProvider.signOut();
     }
-
-    onAfterSave!();
   }
 
   @override

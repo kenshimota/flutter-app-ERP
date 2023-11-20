@@ -1,49 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/http/warehouse/get_list_warehouse.dart';
-import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
-import 'package:flutter_app_erp/widgets/button_new_warehouse.dart';
-import 'package:flutter_app_erp/widgets/list_warehouse_mobile.dart';
-import 'package:flutter_app_erp/widgets/table_warehouse.dart';
-import 'package:flutter_app_erp/widgets/toobal_warehouse.dart';
+import 'package:flutter_app_erp/core/http/products/get_list_products.dart';
+import 'package:flutter_app_erp/core/response/products/products_response.dart';
+
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/products/button_new_product.dart';
+import 'package:flutter_app_erp/widgets/products/table_products.dart';
+import 'package:flutter_app_erp/widgets/products/toolbar_products.dart';
 
-class ShowTableWarehouse extends StatefulWidget {
+class ShowInfoProducts extends StatefulWidget {
   final String token;
-  const ShowTableWarehouse({super.key, required this.token});
+
+  const ShowInfoProducts({
+    super.key,
+    required this.token,
+  });
 
   @override
-  State<ShowTableWarehouse> createState() => _ShowTableWarehouse();
+  State<ShowInfoProducts> createState() => _ShowInfoProductsState();
 }
 
-class _ShowTableWarehouse extends State<ShowTableWarehouse> {
+class _ShowInfoProductsState extends State<ShowInfoProducts> {
   String search = '';
   int numberPage = 1;
   Future? futureList;
   Map<String, String>? order;
-  List<WarehouseResponse> result = <WarehouseResponse>[];
+  List<ProductsResponse> result = <ProductsResponse>[];
 
   @override
-  void initState() {
+  initState() {
+    super.initState();
     setState(() {
       futureList = onRequestApi();
     });
-
-    super.initState();
   }
 
   Future<void> onRequestApi() async {
-    final List<WarehouseResponse> warehouses = await getListWarehouse(
-      token: widget.token,
+    List<ProductsResponse> products = await getListProducts(
       order: order,
       search: search,
       page: numberPage,
+      token: widget.token,
     );
 
-    debugPrint('$warehouses');
-
     setState(() {
-      result = warehouses;
+      result = products;
     });
   }
 
@@ -94,7 +95,7 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ToobalWarehouses(
+          ToobalProducts(
             onOrden: onSortOrder,
             inputSearch: InputSearch(
               onSearch: onSearch,
@@ -102,30 +103,26 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
           ),
           Expanded(
             child: Container(
-                color: Colors.white,
-                child: LayourtTwiceBuilder(
-                  mobile: ListTileWarehouse(
-                    listWare: result,
-                    onAfterChange: onRequest,
-                  ),
-                  desktop: DataTableWarehouse(
-                    list: result,
-                    future: futureList,
-                    onOrden: onSortOrder,
-                    onBack: onBack,
-                    onForwad: onForwad,
-                    numberPage: numberPage,
-                    onAfterDelete: onRequest,
-                  ),
-                ) /*  */
+              color: Colors.white,
+              child: LayourtTwiceBuilder(
+                mobile: DataTableProducts(
+                  future: futureList,
+                  list: result,
+                  onOrden: onSortOrder,
+                  onBack: onBack,
+                  onForwad: onForwad,
+                  numberPage: numberPage,
+                  onAfterDelete: onRequest,
                 ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ButtonNewWarehouse(
+                ButtonNewProduct(
                   onSave: () => onRequest(),
                 )
               ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
@@ -30,7 +31,7 @@ Future<UserResponse> createSession({
 
   if (response.statusCode == 401) {
     final Map<String, dynamic> json = jsonDecode(response.body);
-    throw Exception(json["error"]);
+    throw AuthErrors(message: json["error"]);
   }
 
   final String? authorization = response.headers["authorization"];
@@ -40,9 +41,10 @@ Future<UserResponse> createSession({
   if (authorization != null) {
     user.token = authorization.split(" ").last;
   }
-  
-  if(response.statusCode >= 500){
-    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
+
+  if (response.statusCode >= 500) {
+    const String msg =
+        'Hubo un error inesperado en el servidor contacte a su provedor.';
     throw Exception(msg);
   }
   return user;

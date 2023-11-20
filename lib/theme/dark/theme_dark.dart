@@ -18,17 +18,17 @@ final ThemeData themeDark = ThemeData(
   // tested with just a hot reload.
 
   colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.teal,
-    primary: Colors.teal,
-    surface: Colors.teal,
-    onPrimary: Colors.teal,
+    seedColor: Colors.pink,
+    primary: Colors.pink,
+    surface: Colors.pink,
+    onPrimary: Colors.pink,
   ),
 
   scaffoldBackgroundColor: const Color(0x77777777),
 
   drawerTheme: const DrawerThemeData(
     // Definir los colores deseados para el Drawer
-    backgroundColor: Colors.tealAccent,
+    backgroundColor: Colors.pinkAccent,
     // Otros atributos del tema
   ),
 
@@ -38,10 +38,10 @@ final ThemeData themeDark = ThemeData(
     // Otros atributos del DialogTheme
   ),
 
-  iconTheme: const IconThemeData(color: Colors.teal),
+  iconTheme: const IconThemeData(color: Colors.pink),
 
   inputDecorationTheme: InputDecorationTheme(
-    iconColor: Colors.teal,
+    iconColor: Colors.pink,
     fillColor: Colors.white,
     filled: true,
     contentPadding: const EdgeInsets.all(20),
@@ -61,8 +61,8 @@ final ThemeData themeDark = ThemeData(
 
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
-      iconColor: Colors.teal,
-      foregroundColor: Colors.teal,
+      iconColor: Colors.pink,
+      foregroundColor: Colors.pink,
     ),
   ),
 
@@ -70,9 +70,9 @@ final ThemeData themeDark = ThemeData(
 
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.teal,
+        foregroundColor: Colors.pink,
         shape: ContinuousRectangleBorder(
-          side: const BorderSide(color: Colors.teal, width: 1),
+          side: const BorderSide(color: Colors.pink, width: 1),
           borderRadius: BorderRadius.circular(10),
         )),
   ),

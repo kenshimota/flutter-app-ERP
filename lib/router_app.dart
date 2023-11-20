@@ -1,4 +1,5 @@
 import "dart:core";
+import 'package:flutter_app_erp/screens/products_screen.dart';
 import 'package:flutter_app_erp/screens/taxes_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -20,8 +21,18 @@ final router = GoRouter(
     GoRoute(path: "/taxes", builder: (context, state) => const TaxesScreen()),
     GoRoute(path: "/signin", builder: (context, state) => const SigninScreen()),
     GoRoute(path: "/signup", builder: (context, state) => const SignupScreen()),
-    GoRoute(path: "/warehouse", builder: (context, state) => const WarehouseScreen()),
-     GoRoute(path: "/currencies", builder: (context, state) => const CurrenciesScreen()),
+    GoRoute(
+      path: "/warehouse",
+      builder: (context, state) => const WarehouseScreen(),
+    ),
+    GoRoute(
+      path: "/currencies",
+      builder: (context, state) => const CurrenciesScreen(),
+    ),
+    GoRoute(
+      path: "/products",
+      builder: (context, state) => const ProductsScreen(),
+    )
   ],
   redirect: (context, state) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);

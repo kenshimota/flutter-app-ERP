@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/http/warehouse/update_warehouse.dart';
 import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 import 'package:provider/provider.dart';
@@ -16,22 +17,25 @@ class FormWarehouseUpdate extends StatelessWidget {
     required Map<String, dynamic> params,
   }) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    final String? token = authProvider.getToken();
 
-    debugPrint("before request");
+    try {
+      final String? token = authProvider.getToken();
 
-    await updateWarehouse(
-      token: token,
-      wareId: ware.id,
-      name: params["name"],
-      address: params["address"],
-    );
+      await updateWarehouse(
+        token: token,
+        wareId: ware.id,
+        name: params["name"],
+        address: params["address"],
+      );
 
-    if (!context.mounted) {
-      return;
+      if (!context.mounted) {
+        return;
+      }
+
+      onAfterSave!();
+    } on AuthErrors {
+      authProvider.signOut();
     }
-
-    onAfterSave!();
   }
 
   @override
