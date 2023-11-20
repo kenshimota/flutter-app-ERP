@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/widgets/form_tax.dart';
@@ -35,9 +36,11 @@ class _FormTaxCreateState extends State<FormTaxCreate> {
       }
 
       widget.onAfterSave!();
+    } on AuthErrors {
+      authProvider.signOut();
     } on FormErrors catch (e) {
       setState(() {
-       errors = e;
+        errors = e;
       });
     }
   }
@@ -46,8 +49,7 @@ class _FormTaxCreateState extends State<FormTaxCreate> {
   Widget build(BuildContext context) {
     return FormTax(
       errors: errors,
-      onRequest: (Map<String, dynamic> params) 
-      async => onSubmitRequest(
+      onRequest: (Map<String, dynamic> params) async => onSubmitRequest(
         context: context,
         params: params,
       ),

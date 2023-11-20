@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/form_signin.dart';
@@ -26,6 +27,8 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
         username: params["username"],
         password: params["password"],
       );
+    } on AuthErrors {
+      showError(context, Exception("La contraseña y usuario no coinciden"));
     } on Exception catch (e) {
       showError(context, e);
     } catch (e) {
