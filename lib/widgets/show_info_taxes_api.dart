@@ -37,16 +37,12 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
   }
 
   Future<void> onRequestApi() async {
-
-
     List<TaxesResponse> taxes = await getListTaxes(
       order: order,
       search: search,
       page: numberPage,
       token: widget.token,
     );
-
-
 
     setState(() {
       result = taxes;
@@ -100,17 +96,20 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-         ToobalTaxes(
-          onOrden: onSortOrder,
-          inputSearch: InputSearch(
-            onSearch: onSearch,)
-          ),
+          ToobalTaxes(
+              onOrden: onSortOrder,
+              inputSearch: InputSearch(
+                onSearch: onSearch,
+              )),
           Expanded(
             child: Container(
                 color: Colors.white,
                 child: LayourtTwiceBuilder(
-                  mobile: ListTileApp(
+                  mobile: ListTileTaxes(
                     listTax: result,
+                    page: numberPage,
+                    future: futureList,
+                    onForward: onForwad,
                     onAfterChange: onRequest,
                   ),
                   desktop: DataTableTaxes(
