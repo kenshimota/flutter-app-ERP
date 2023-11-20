@@ -9,7 +9,11 @@ class FormWarehouseUpdate extends StatelessWidget {
   final WarehouseResponse ware;
   final void Function()? onAfterSave;
 
-  const FormWarehouseUpdate({super.key, this.onAfterSave, required this.ware});
+  const FormWarehouseUpdate({
+    super.key, 
+    this.onAfterSave, 
+    required this.ware
+  });
 
   void onSubmitRequest({
     required BuildContext context,

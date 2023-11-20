@@ -24,10 +24,10 @@ class InputIdentityDocument extends StatelessWidget {
     final List<String? Function(String?)> listValidations = [
       Validatorless.min(
         7,
-        'El documento de identidad debe tener como minimo 7 caracteres',
+        'debe tener minimo 7 caracteres',
       ),
       Validatorless.max(10,
-          'El documento de identidad debe tener como máximo 10 caracteres.'),
+          'debe tener máximo 10 caracteres'),
     ];
 
     return InputBaseApp(

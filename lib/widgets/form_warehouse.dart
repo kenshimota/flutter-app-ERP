@@ -9,19 +9,18 @@ import 'package:flutter_app_erp/core/exception/form_errors.dart';
 
 class FormWarehouse extends StatefulWidget {
   final String? nameDefault;
-    final String? addressDefault;
+  final String? addressDefault;
   final void Function()? onClick;
-   final FormErrors? errors;
+  final FormErrors? errors;
   final Future<void> Function(Map<String, dynamic>)? onRequest;
 
-  const FormWarehouse({
-    super.key,
-    this.nameDefault,
-    this.addressDefault,
-    this.onClick,
-    this.onRequest,
-    this.errors
-  });
+  const FormWarehouse(
+      {super.key,
+      this.nameDefault,
+      this.addressDefault,
+      this.onClick,
+      this.onRequest,
+      this.errors});
 
   @override
   State<FormWarehouse> createState() => _FormWarehouseState();
@@ -29,6 +28,7 @@ class FormWarehouse extends StatefulWidget {
 
 class _FormWarehouseState extends State<FormWarehouse> {
   Future? futureCreateWarehouse;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String message = 'No se pudo crear el deposito';
 
   TextEditingController name = TextEditingController();
@@ -37,11 +37,15 @@ class _FormWarehouseState extends State<FormWarehouse> {
   @override
   initState() {
     name.text = widget.nameDefault ?? "";
-     name.text = widget.nameDefault ?? "";
+    address.text = widget.addressDefault ?? "";
     super.initState();
   }
 
   onSubmit(BuildContext context) {
+    if (!_formKey.currentState!.validate()) {
+      return null;
+    }
+
     Map<String, dynamic> params = {
       "name": name.text,
       "address": address.text,
@@ -55,20 +59,25 @@ class _FormWarehouseState extends State<FormWarehouse> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           FormControl(
-            child: InputName(controller: name, 
-            errorText: widget.errors?.getValue("name"),
-            ),
-            
-          ),
-           FormControl(
-            child: InputAddress(controller: address,
-            errorText: widget.errors?.getValue("address"),
+            child: InputName(
+              controller: name,
+              future: futureCreateWarehouse,
+              errorText: widget.errors?.getValue("name"),
+              isRequired: true,
             ),
           ),
-          
+          FormControl(
+            child: InputAddress(
+              controller: address,
+              future: futureCreateWarehouse,
+              errorText: widget.errors?.getValue("address"),
+               isRequired: true,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

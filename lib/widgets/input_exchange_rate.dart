@@ -5,26 +5,41 @@ class InputExchangeRate extends StatelessWidget {
   final String? label;
   final TextEditingController? exchangeRate;
   final String? errorText;
+ 
+  final bool? isRequired;
+  final String? placeholder;
+  final Future? future;
+  final TextEditingController? controller;
 
-  const InputExchangeRate(
-      {super.key, this.label = 'taza de cambio', this.exchangeRate, this.errorText});
+  const InputExchangeRate({
+    super.key, 
+    this.label = 'taza de cambio', 
+    this.exchangeRate, 
+    this.errorText,
+    this.isRequired,
+    this.placeholder,
+    this.future,
+    this.controller,
+  });
 
   String? validateExchangeRate(String? value) {
     if (value!.isEmpty) {
-      return 'Por favor ingresa la taza de cambio';
+      return 'Ingresa la taza de cambio';
     }
     // Verificar si el valor es un número válido
     double exchangeRate;
     try {
       exchangeRate = double.parse(value);
     } catch (e) {
-      return 'Por favor ingresa un número válido';
+      return 'Ingresa un número válido';
     }
     // Verificar si el valor está dentro del rango de porcentaje válido (0-100)
-    if (exchangeRate < 0 || exchangeRate > 100) {
-      return 'Por favor ingrese uan taza de cambio válida (entre 0 y 100)';
+    if (exchangeRate < 0) {
+      return 'Ingrese una taza de cambio válida';
     }
-    return ''; // El valor es válido
+
+
+    return null; // El valor es válido
   }
 
   @override

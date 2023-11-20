@@ -25,8 +25,8 @@ class InputName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      Validatorless.min(3, "$label debe tener al menos 3 letras"),
-      Validatorless.max(20, "$label debe maximo 20 letras"),
+      Validatorless.min(3, "Debe tener al menos 3 letras"),
+      Validatorless.max(20, "Debe maximo 20 letras"),
     ];
 
     if (isRequired == true) {

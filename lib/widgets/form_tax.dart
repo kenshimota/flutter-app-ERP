@@ -27,6 +27,7 @@ class FormTax extends StatefulWidget {
 
 class _FormTaxState extends State<FormTax> {
   Future? futureCreateTax;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String message = 'No se pudo crear el impuesto';
 
   TextEditingController name = TextEditingController();
@@ -40,6 +41,11 @@ class _FormTaxState extends State<FormTax> {
   }
 
   onSubmit(BuildContext context) {
+    if (!_formKey.currentState!.validate()) {
+      return null;
+    }
+
+
     Map<String, dynamic> params = {
       "name": name.text,
       "percentage": double.parse(percentage.text) / 100
@@ -53,16 +59,23 @@ class _FormTaxState extends State<FormTax> {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           FormControl(
-            child: InputName(controller: name,
-            errorText: widget.errors?.getValue("name"),
+            child: InputName(
+              controller: name,
+              future: futureCreateTax,
+              isRequired: true,
+              errorText: widget.errors?.getValue("name"),
             ),
           ),
           FormControl(
-            child: InputPercentage(percentage: percentage,
-            errorText: widget.errors?.getValue("percentage"),),
+            child: InputPercentage(
+              percentage: percentage,
+              future: futureCreateTax,
+              errorText: widget.errors?.getValue("percentage"),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

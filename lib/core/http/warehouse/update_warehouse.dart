@@ -8,7 +8,7 @@ import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart'
 Future<WarehouseResponse> updateWarehouse({
   required int wareId,
   required String name,
-   String? address,
+  String? address,
    required String? token,
 }) async {
   final env = dotenv.env;
