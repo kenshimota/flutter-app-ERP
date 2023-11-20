@@ -2,18 +2,17 @@ import 'dart:convert';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
+import 'package:flutter_app_erp/core/response/products/products_response.dart';
 
-Future<List<CurrenciesResponse>> getListCurrencies({
+Future<List<ProductsResponse>> getListProducts({
   required String token,
   String search = '',
   Map<String, String>? order,
   int page = 1,
-  Future? futureDelete,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/currencies?q=$search&page=$page&";
+  String path = "$hostname/products?metadata=1&q=$search&page=$page";
 
   if (order != null &&
       order.containsKey('field') &&
@@ -39,7 +38,6 @@ Future<List<CurrenciesResponse>> getListCurrencies({
   if (response.statusCode >= 500) {
     const String msg =
         'Hubo un error inesperado en el servidor contacte a su provedor.';
-
     throw Exception(msg);
   }
 
@@ -47,7 +45,7 @@ Future<List<CurrenciesResponse>> getListCurrencies({
 
   return json
       .map(
-        (e) => CurrenciesResponse.fromJson(e),
+        (e) => ProductsResponse.fromJson(e),
       )
       .toList();
 }

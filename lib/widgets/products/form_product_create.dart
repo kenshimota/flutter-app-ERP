@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_app_erp/widgets/form_warehouse.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/core/http/warehouse/create_warehouse.dart';
+import 'package:flutter_app_erp/widgets/products/form_product.dart';
+import 'package:flutter_app_erp/core/http/products/create_product.dart';
 
-class FormWarehouseCreate extends StatefulWidget {
+class FormProductCreate extends StatefulWidget {
   final void Function()? onAfterSave;
-  const FormWarehouseCreate({super.key, this.onAfterSave});
+  const FormProductCreate({super.key, this.onAfterSave});
 
   @override
-  State<FormWarehouseCreate> createState() => _FormWarehouseCreateState();
+  State<FormProductCreate> createState() => _FormProductCreateState();
 }
 
-class _FormWarehouseCreateState extends State<FormWarehouseCreate> {
+class _FormProductCreateState extends State<FormProductCreate> {
   FormErrors errors = FormErrors(map: {});
 
   void onSubmitRequest({
@@ -23,11 +23,14 @@ class _FormWarehouseCreateState extends State<FormWarehouseCreate> {
   }) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String? token = authProvider.getToken();
+
     try {
-      await createWarehouse(
+      await createProduct(
         token: token,
         name: params["name"],
-        address: params["address"],
+        code: params["code"],
+        barCode: params["bar_code"],
+        taxId: params["tax_id"],
       );
 
       if (!context.mounted) {
@@ -46,7 +49,8 @@ class _FormWarehouseCreateState extends State<FormWarehouseCreate> {
 
   @override
   Widget build(BuildContext context) {
-    return FormWarehouse(
+    return FormProduct(
+      errors: errors,
       onRequest: (Map<String, dynamic> params) async => onSubmitRequest(
         context: context,
         params: params,

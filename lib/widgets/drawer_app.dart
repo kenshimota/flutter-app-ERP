@@ -32,10 +32,10 @@ class DrawerApp extends StatelessWidget {
   const DrawerApp({super.key, required this.onClose});
 
   onSignout(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
-    authProvider.signOut();
     onClose();
 
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    authProvider.signOut();
     GoRouter.of(context).go("/login");
   }
 
@@ -67,6 +67,12 @@ class DrawerApp extends StatelessWidget {
           context: context,
           leading: const Icon(Icons.currency_exchange),
         ),
+        listItemRouter(
+          context: context,
+          title: "Productos",
+          pathname: "/products",
+          leading: const Icon(Icons.engineering),
+        )
       ],
     );
   }

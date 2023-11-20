@@ -16,7 +16,7 @@ final Map<String, TextStyle? Function(BuildContext)> _variants = {
 
 final Map<String, TextStyle? Function(BuildContext)> _colors = {
   "inherit": (BuildContext context) => const TextStyle(color: Colors.black),
-  "primary": (BuildContext context) => const TextStyle(color: Colors.teal),
+  "primary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "secondary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "white": (BuildContext context) => const TextStyle(color: Colors.white),
 };

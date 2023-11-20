@@ -9,8 +9,8 @@ Widget CircularButton({
   return InkWell(
     onTap: onPressed,
     child: Container(
-      width: 56,
-      height: 56,
+      width: 45,
+      height: 45,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Theme.of(context).colorScheme.onPrimary,

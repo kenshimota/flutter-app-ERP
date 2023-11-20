@@ -3,6 +3,7 @@ import 'package:flutter_app_erp/core/exception/form_errors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/widgets/form_currencies.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
+import "package:flutter_app_erp/core/exception/auth_errors.dart";
 import 'package:flutter_app_erp/core/http/currencies/create_currencie.dart';
 
 class FormCurrencieCreate extends StatefulWidget {
@@ -41,6 +42,8 @@ class _FormCurrencieCreateState extends State<FormCurrencieCreate> {
       setState(() {
         errors = e;
       });
+    } on AuthErrors {
+      authProvider.signOut();
     }
   }
 
@@ -48,9 +51,8 @@ class _FormCurrencieCreateState extends State<FormCurrencieCreate> {
   Widget build(BuildContext context) {
     return FormCurrencie(
       errors: errors,
-      onRequest: (Map<String, dynamic> params) 
-      async => onSubmitRequest(
-        context: context, 
+      onRequest: (Map<String, dynamic> params) async => onSubmitRequest(
+        context: context,
         params: params,
       ),
     );
