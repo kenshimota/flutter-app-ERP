@@ -8,7 +8,9 @@ class ButtonSortTaxes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  PopupButtonTaxes(onOrden: onOrden,);
+    return PopupButtonTaxes(
+      onOrden: onOrden,
+    );
   }
 }
 
@@ -33,8 +35,6 @@ class _PopupButtonTaxesState extends State<PopupButtonTaxes> {
       selectedMenu = item;
       isAccending = b;
     });
-
-    debugPrint("$b $index");
 
     String type = b ? "asc" : "desc";
 

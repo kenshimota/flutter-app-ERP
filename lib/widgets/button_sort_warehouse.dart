@@ -9,7 +9,9 @@ class ButtonSortWarehouse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  PopupButtonWarehouses(onOrden: onOrden,);
+    return PopupButtonWarehouses(
+      onOrden: onOrden,
+    );
   }
 }
 
@@ -31,21 +33,16 @@ class _PopupButtonWarehousesState extends State<PopupButtonWarehouses> {
     final list = <String>["name", "address"];
 
     setState(() {
-            selectedMenu = item;
-            isAccending = b;
+      selectedMenu = item;
+      isAccending = b;
     });
-
-
-    debugPrint(  "$b $index"  );
-
 
     String type = b ? "asc" : "desc";
 
-    if(widget.onOrden != null) {
+    if (widget.onOrden != null) {
       widget.onOrden!({'field': list[index], 'type': type});
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +50,6 @@ class _PopupButtonWarehousesState extends State<PopupButtonWarehouses> {
         icon: const Icon(Icons.sort),
         initialValue: selectedMenu,
         onSelected: onSort,
-
-
         itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
               PopupMenuItem<SampleItem>(
                 value: SampleItem.itemOne,

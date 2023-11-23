@@ -4,7 +4,6 @@ import 'package:flutter_app_erp/widgets/button_delete.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 import 'package:flutter_app_erp/widgets/dialog_edit_tax.dart';
 
-
 enum SampleItem { itemOne, itemTwo, itemThree }
 
 class PopupMenuApp extends StatelessWidget {
@@ -44,21 +43,22 @@ class _PopupMenuTaxState extends State<PopupMenuTax> {
         setState(() {
           selectedMenu = item;
         });
-        
-        if(item == SampleItem.itemOne){
-           builder = (context) => AlertDialogEditTax(tax: widget.tax, onSave: widget.onAfterChange,);
-          debugPrint('Aqui debe abrir el dialogo de editar');
-        } else if(item == SampleItem.itemTwo){
-          builder = (context) => AlertDialogDelete(taxId: widget.tax.id,  onAfterDelete: widget.onAfterChange,);
-          debugPrint('Aqui debe abrir el dialogo de eliminar');
+
+        if (item == SampleItem.itemOne) {
+          builder = (context) => AlertDialogEditTax(
+                tax: widget.tax,
+                onSave: widget.onAfterChange,
+              );
+        } else if (item == SampleItem.itemTwo) {
+          builder = (context) => AlertDialogDelete(
+                taxId: widget.tax.id,
+                onAfterDelete: widget.onAfterChange,
+              );
         }
-        
-        
-        if(builder != null){
+
+        if (builder != null) {
           showDialog(context: context, builder: builder);
         }
-
-
       },
 
       itemBuilder: (
@@ -72,12 +72,11 @@ class _PopupMenuTaxState extends State<PopupMenuTax> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-       const PopupMenuItem<SampleItem>(
-        
+        const PopupMenuItem<SampleItem>(
           value: SampleItem.itemTwo,
           child: Text(
-           'Eliminar',
-           style: TextStyle(color: Colors.white),
+            'Eliminar',
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ],

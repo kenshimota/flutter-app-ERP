@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 
 class ContainerLimit extends StatelessWidget {
   final double maxWidth;
@@ -20,8 +21,6 @@ class ContainerLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color background =
-        color ?? Theme.of(context).dialogTheme.backgroundColor ?? Colors.white;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double screenWidth =
@@ -40,12 +39,9 @@ class ContainerLimit extends StatelessWidget {
         minWidth: minWidth,
         child: FractionallySizedBox(
           widthFactor: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              color: background,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: child,
+          child: ContainerWhite(
+            radius: 20,
+            child: child as Widget,
           ),
         ),
       ),

@@ -8,7 +8,10 @@ import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:provider/provider.dart';
 
 class FormProduct extends StatefulWidget {
+  final String? nameDefault;
+  final String? codeDefault;
   final FormErrors? errors;
+  final String? barCodeDefault;
   final void Function()? onClick;
   final Future<void> Function(Map<String, dynamic>)? onRequest;
 
@@ -17,6 +20,9 @@ class FormProduct extends StatefulWidget {
     this.onClick,
     this.onRequest,
     this.errors,
+    this.nameDefault,
+    this.codeDefault,
+    this.barCodeDefault,
   });
 
   @override
@@ -25,14 +31,18 @@ class FormProduct extends StatefulWidget {
 
 class _FormProductState extends State<FormProduct> {
   Future? future;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  int taxId = 0;
   TextEditingController name = TextEditingController();
   TextEditingController code = TextEditingController();
   TextEditingController barCode = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   initState() {
     super.initState();
+    name.text = widget.nameDefault ?? "";
+    code.text = widget.codeDefault ?? "";
+    barCode.text = widget.barCodeDefault ?? "";
   }
 
   onSubmit(BuildContext context) {
@@ -44,7 +54,7 @@ class _FormProductState extends State<FormProduct> {
       "name": name.text,
       "code": code.text,
       "bar_code": barCode.text,
-      "tax_id": 1,
+      "tax_id": taxId,
     };
 
     setState(() {
@@ -71,6 +81,16 @@ class _FormProductState extends State<FormProduct> {
                           child: Column(
                             children: [
                               FormControl(
+                                child: AutocompleteTaxes(
+                                  token: token ?? "",
+                                  onSelect: (tax) => {
+                                    setState(() {
+                                      taxId = tax["id"];
+                                    })
+                                  },
+                                ),
+                              ),
+                              FormControl(
                                 child: InputName(
                                   controller: code,
                                   label: "Codigo",
@@ -91,11 +111,6 @@ class _FormProductState extends State<FormProduct> {
                                   controller: barCode,
                                   errorText:
                                       widget.errors?.getValue("bar_code"),
-                                ),
-                              ),
-                              FormControl(
-                                child: AutocompleteTaxes(
-                                  token: token ?? "",
                                 ),
                               ),
                             ],

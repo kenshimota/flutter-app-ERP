@@ -36,8 +36,6 @@ class _PopupButtonCurrenciesState extends State<PopupButtonCurrencies> {
       isAccending = b;
     });
 
-    debugPrint("$b $index");
-
     String type = b ? "asc" : "desc";
 
     if (widget.onOrden != null) {

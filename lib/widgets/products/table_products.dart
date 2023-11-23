@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/products/button_delete_product.dart';
+import 'package:flutter_app_erp/widgets/products/button_edit_product.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
@@ -83,8 +85,21 @@ class _DataTableProducts extends State<DataTableProducts> {
                 variant: "body1",
                 text: DateFormatterApp.dateTimeFormatter(product.updatedAt),
               )),
-              const DataCell(Row(
-                children: [],
+              DataCell(Row(
+                children: [
+                  ButtonEditProduct(
+                    product: product,
+                    onSave: widget.onAfterDelete,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ButtonDeleteProduct(
+                    context: context,
+                    productId: product.id,
+                    onAfterDelete: widget.onAfterDelete,
+                  ),
+                ],
               )),
             ],
           ),

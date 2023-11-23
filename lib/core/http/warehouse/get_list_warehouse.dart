@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -29,11 +28,7 @@ Future<List<WarehouseResponse>> getListWarehouse(
 
   final Uri url = Uri.parse(path);
 
-  debugPrint(url.toString());
-
   http.Response response = await http.get(url, headers: headers);
-
-  debugPrint('$response');
 
   if (response.statusCode == 401) {
     final Map<String, dynamic> json = jsonDecode(response.body);
@@ -48,8 +43,6 @@ Future<List<WarehouseResponse>> getListWarehouse(
   }
 
   final List<dynamic> json = jsonDecode(response.body);
-
-  debugPrint('$response');
 
   return json
       .map(

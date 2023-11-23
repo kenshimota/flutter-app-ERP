@@ -5,17 +5,16 @@ import 'package:flutter_app_erp/widgets/button_delete_warehouse.dart';
 
 import 'package:flutter_app_erp/widgets/dialog_edit_warehouse.dart';
 
-
 enum SampleItem { itemOne, itemTwo, itemThree }
 
 class PopupMenuWarehouse extends StatelessWidget {
   final void Function()? onAfterChange;
   final WarehouseResponse ware;
 
-  const PopupMenuWarehouse({ super.key, this.onAfterChange, required this.ware});
+  const PopupMenuWarehouse({super.key, this.onAfterChange, required this.ware});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return PopupWare(onAfterChange: onAfterChange, ware: ware);
   }
 }
@@ -24,7 +23,7 @@ class PopupWare extends StatefulWidget {
   final void Function()? onAfterChange;
   final WarehouseResponse ware;
 
-  const PopupWare({ super.key, this.onAfterChange, required this.ware});
+  const PopupWare({super.key, this.onAfterChange, required this.ware});
 
   @override
   State<PopupWare> createState() => _PopupWareState();
@@ -35,9 +34,9 @@ class _PopupWareState extends State<PopupWare> {
   Color? color;
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return PopupMenuButton<SampleItem>(
-       initialValue: selectedMenu,
+      initialValue: selectedMenu,
 
       // Callback that sets the selected popup menu item.
       onSelected: (SampleItem item) {
@@ -46,34 +45,25 @@ class _PopupWareState extends State<PopupWare> {
         setState(() {
           selectedMenu = item;
         });
-        
-        if(item == SampleItem.itemOne){
-           builder = (context) => AlertDialogEditWarehouse(ware: widget.ware, onSave: widget.onAfterChange,);
-          debugPrint('Aqui debe abrir el dialogo de editar');
-        } else if(item == SampleItem.itemTwo){
-          builder = (context) => AlertDialogDelete(wareId: widget.ware.id,  onAfterDelete: widget.onAfterChange,);
-          debugPrint('Aqui debe abrir el dialogo de eliminar');
+
+        if (item == SampleItem.itemOne) {
+          builder = (context) => AlertDialogEditWarehouse(
+                ware: widget.ware,
+                onSave: widget.onAfterChange,
+              );
+        } else if (item == SampleItem.itemTwo) {
+          builder = (context) => AlertDialogDelete(
+                wareId: widget.ware.id,
+                onAfterDelete: widget.onAfterChange,
+              );
         }
-        
-        
-        if(builder != null){
+
+        if (builder != null) {
           showDialog(context: context, builder: builder);
         }
-
-
       },
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      itemBuilder:  (
+
+      itemBuilder: (
         BuildContext context,
       ) =>
           <PopupMenuEntry<SampleItem>>[
@@ -84,12 +74,11 @@ class _PopupWareState extends State<PopupWare> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-       const PopupMenuItem<SampleItem>(
-        
+        const PopupMenuItem<SampleItem>(
           value: SampleItem.itemTwo,
           child: Text(
-           'Eliminar',
-           style: TextStyle(color: Colors.white),
+            'Eliminar',
+            style: TextStyle(color: Colors.white),
           ),
         ),
       ],

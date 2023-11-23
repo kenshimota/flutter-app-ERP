@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -20,8 +19,6 @@ Future<UserResponse> createSession({
   String body = jsonEncode({
     "user": {"username": username, "password": password}
   });
-
-  debugPrint(url.toString());
 
   http.Response response = await http.post(url, headers: headers, body: body);
 

@@ -46,8 +46,6 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     bool response =
         await deteleCurrencie(id: widget.currencieId, token: token ?? '');
 
-    debugPrint('${context.mounted}');
-
     if (!context.mounted) {
       return;
     }
@@ -60,7 +58,6 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     Navigator.pop(context);
 
     widget.onAfterDelete!();
-    debugPrint('${context.mounted}');
   }
 
   void showError(BuildContext context, String message) {

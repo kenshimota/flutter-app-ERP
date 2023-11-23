@@ -37,7 +37,7 @@ class _FormCurrencieState extends State<FormCurrencie> {
 
   TextEditingController name = TextEditingController();
   TextEditingController symbol = TextEditingController();
-   TextEditingController code = TextEditingController();
+  TextEditingController code = TextEditingController();
   TextEditingController exchangeRate = TextEditingController();
 
   @override
@@ -50,11 +50,9 @@ class _FormCurrencieState extends State<FormCurrencie> {
   }
 
   onSubmit(BuildContext context) {
-     if (!_formKey.currentState!.validate()) {
+    if (!_formKey.currentState!.validate()) {
       return null;
     }
-
-
 
     Map<String, dynamic> params = {
       "name": name.text,
@@ -65,7 +63,6 @@ class _FormCurrencieState extends State<FormCurrencie> {
 
     setState(() {
       futureCreateCurrencie = widget.onRequest!(params);
-      debugPrint('$futureCreateCurrencie');
     });
   }
 
@@ -91,7 +88,7 @@ class _FormCurrencieState extends State<FormCurrencie> {
               errorText: widget.errors?.getValue("symbol"),
             ),
           ),
-           FormControl(
+          FormControl(
             child: InputName(
               controller: code,
               future: futureCreateCurrencie,

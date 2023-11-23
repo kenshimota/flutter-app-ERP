@@ -1,39 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/http/warehouse/delete_warehouse.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app_erp/core/http/products/delete_product.dart';
 
 // ignore: non_constant_identifier_names
-Widget ButtonDeleteWarehouse(
-    {required int wareId,
+Widget ButtonDeleteProduct(
+    {required int productId,
     required BuildContext context,
     void Function()? onAfterDelete}) {
   return IconButton(
     onPressed: () => showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (BuildContext context) => AlertDialogDelete(
-              wareId: wareId,
+        builder: (BuildContext context) => AlertDialogDeleteProduct(
+              productId: productId,
               onAfterDelete: onAfterDelete,
             )),
     icon: const Icon(Icons.delete),
   );
 }
 
-class AlertDialogDelete extends StatefulWidget {
-  final int wareId;
+class AlertDialogDeleteProduct extends StatefulWidget {
+  final int productId;
   final void Function()? onAfterDelete;
 
-  const AlertDialogDelete(
-      {super.key, required this.wareId, this.onAfterDelete});
+  const AlertDialogDeleteProduct(
+      {super.key, required this.productId, this.onAfterDelete});
 
   @override
   // ignore: library_private_types_in_public_api
-  _AlertDialogDelete createState() => _AlertDialogDelete();
+  _AlertDialogDeleteProduct createState() => _AlertDialogDeleteProduct();
 }
 
-class _AlertDialogDelete extends State<AlertDialogDelete> {
+class _AlertDialogDeleteProduct extends State<AlertDialogDeleteProduct> {
   Future? _futureDelete;
   String message = 'No se pudo eliminar';
 
@@ -43,7 +43,7 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     final String? token = authProvider.getToken();
 
     bool response =
-        await deteleWarehouse(id: widget.wareId, token: token ?? '');
+        await deleteProduct(id: widget.productId, token: token ?? '');
 
     if (!context.mounted) {
       return;
