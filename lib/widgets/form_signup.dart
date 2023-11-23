@@ -261,7 +261,6 @@ class _GridColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayourtTwiceBuilder(
-      log: "_G",
       mobile: Column(children: [child]),
       desktop: child,
     );

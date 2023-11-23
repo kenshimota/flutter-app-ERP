@@ -1,5 +1,7 @@
 import "dart:core";
+import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/screens/products_screen.dart';
+import 'package:flutter_app_erp/screens/reset_password_screen.dart';
 import 'package:flutter_app_erp/screens/taxes_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +15,7 @@ import 'package:flutter_app_erp/providers/auth_provider.dart';
 final Set<String> routesWithoutSignin = <String>{
   "/signin",
   "/signup",
+  "/reset_password"
 };
 
 final router = GoRouter(
@@ -32,6 +35,10 @@ final router = GoRouter(
     GoRoute(
       path: "/products",
       builder: (context, state) => const ProductsScreen(),
+    ),
+    GoRoute(
+      path: "/reset_password",
+      builder: (context, state) => const ResetPasswordScreen(),
     )
   ],
   redirect: (context, state) {

@@ -81,7 +81,7 @@ class DrawerApp extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final user = authProvider.getCurrentUser();
     final String fullName =
-        user == null ? "Sin nombre" : "${user!.firstName} ${user.lastName}";
+        user == null ? "Sin nombre" : "${user.firstName} ${user.lastName}";
     final String email = user == null ? "Sin email" : user.email;
     final String username = user == null ? "Sin usuario" : user.username;
 
