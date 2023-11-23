@@ -153,11 +153,6 @@ class DrawerApp extends StatelessWidget {
               ],
             ),
           ),
-
-          /*SizedBox(
-            height: 100,
-            child: ,
-          )*/
         ],
       ),
     );

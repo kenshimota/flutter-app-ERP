@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/products/get_list_products.dart';
 import 'package:flutter_app_erp/core/response/products/products_response.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:flutter_app_erp/widgets/products/button_new_product.dart';
+import 'package:flutter_app_erp/widgets/products/listitem_product.dart';
 import 'package:flutter_app_erp/widgets/products/table_products.dart';
 import 'package:flutter_app_erp/widgets/products/toolbar_products.dart';
 
@@ -102,10 +104,16 @@ class _ShowInfoProductsState extends State<ShowInfoProducts> {
             ),
           ),
           Expanded(
-            child: Container(
-              color: Colors.white,
+            child: ContainerWhite(
               child: LayourtTwiceBuilder(
-                mobile: DataTableProducts(
+                mobile: ListTileProducts(
+                  future: futureList,
+                  products: result,
+                  page: numberPage,
+                  onAfterChange: onRequestApi,
+                  onForward: onForwad,
+                ),
+                desktop: DataTableProducts(
                   future: futureList,
                   list: result,
                   onOrden: onSortOrder,

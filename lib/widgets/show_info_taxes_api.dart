@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/taxes/get_list_taxes.dart';
 import 'package:flutter_app_erp/widgets/button_new_tax.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
@@ -102,29 +103,26 @@ class _ShowInfotaxesState extends State<ShowInfoTaxes> {
                 onSearch: onSearch,
               )),
           Expanded(
-            child: Container(
-                color: Colors.white,
-                child: LayourtTwiceBuilder(
-                  mobile: ListTileTaxes(
-                    listTax: result,
-                    page: numberPage,
-                    future: futureList,
-                    onForward: onForwad,
-                    onAfterChange: onRequest,
-                  ),
-                  desktop: DataTableTaxes(
-                    future: futureList,
-                    list: result,
-                    onOrden: onSortOrder,
-                    onBack: onBack,
-                    onForwad: onForwad,
-                    numberPage: numberPage,
-                    onAfterDelete: onRequest,
-                  ),
-                )
-
-                /*, */
+            child: ContainerWhite(
+              child: LayourtTwiceBuilder(
+                mobile: ListTileTaxes(
+                  listTax: result,
+                  page: numberPage,
+                  future: futureList,
+                  onForward: onForwad,
+                  onAfterChange: onRequest,
                 ),
+                desktop: DataTableTaxes(
+                  future: futureList,
+                  list: result,
+                  onOrden: onSortOrder,
+                  onBack: onBack,
+                  onForwad: onForwad,
+                  numberPage: numberPage,
+                  onAfterDelete: onRequest,
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),

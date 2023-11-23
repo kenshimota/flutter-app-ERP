@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:flutter_app_erp/widgets/list_currencie.dart';
@@ -98,8 +99,7 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
                   onSearch: onSearch,
                 )),
             Expanded(
-              child: Container(
-                color: Colors.white,
+              child: ContainerWhite(
                 child: LayourtTwiceBuilder(
                   mobile: ListTileApp(
                     listcurrencie: result,
