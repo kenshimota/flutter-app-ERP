@@ -21,8 +21,6 @@ class ContainerLimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color background =
-        color ?? Theme.of(context).dialogTheme.backgroundColor ?? Colors.white;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double screenWidth =

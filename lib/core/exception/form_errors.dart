@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class FormErrors {
   final Map<String, dynamic> map;
 
@@ -12,5 +14,10 @@ class FormErrors {
     }
 
     return messages.join(", ");
+  }
+
+  @override
+  String toString() {
+    return jsonEncode(map);
   }
 }

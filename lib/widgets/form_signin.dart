@@ -86,6 +86,14 @@ class _FormSigninState extends State<FormSignin> {
           const FormControl(
             child: Column(
               children: [
+                Row(children: [
+                  Expanded(
+                    child: Center(
+                      child: _TextAboutToGoToReset(),
+                    ),
+                  ),
+                ]),
+                SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -99,6 +107,30 @@ class _FormSigninState extends State<FormSignin> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _TextAboutToGoToReset extends StatelessWidget {
+  const _TextAboutToGoToReset({super.key});
+
+  onPressed(BuildContext context) {
+    context.go("/reset_password");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color? color = Theme.of(context).colorScheme.surface;
+
+    return RichText(
+      text: TextSpan(
+        recognizer: TapGestureRecognizer()..onTap = () => onPressed(context),
+        text: '¿Has olvidado tu contraseña?',
+        style: TextStyle(
+          color: color,
+          fontSize: 18,
+        ),
       ),
     );
   }
