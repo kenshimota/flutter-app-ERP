@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 
 class ContainerLimit extends StatelessWidget {
   final double maxWidth;
@@ -40,12 +41,9 @@ class ContainerLimit extends StatelessWidget {
         minWidth: minWidth,
         child: FractionallySizedBox(
           widthFactor: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              color: background,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: child,
+          child: ContainerWhite(
+            radius: 20,
+            child: child as Widget,
           ),
         ),
       ),

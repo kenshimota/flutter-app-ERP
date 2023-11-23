@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/warehouse/get_list_warehouse.dart';
 import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 import 'package:flutter_app_erp/widgets/button_new_warehouse.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/list_warehouse_mobile.dart';
 import 'package:flutter_app_erp/widgets/table_warehouse.dart';
 import 'package:flutter_app_erp/widgets/toobal_warehouse.dart';
@@ -99,24 +100,23 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
             ),
           ),
           Expanded(
-            child: Container(
-                color: Colors.white,
-                child: LayourtTwiceBuilder(
-                  mobile: ListTileWarehouse(
-                    listWare: result,
-                    onAfterChange: onRequest,
-                  ),
-                  desktop: DataTableWarehouse(
-                    list: result,
-                    future: futureList,
-                    onOrden: onSortOrder,
-                    onBack: onBack,
-                    onForwad: onForwad,
-                    numberPage: numberPage,
-                    onAfterDelete: onRequest,
-                  ),
-                ) /*  */
+            child: ContainerWhite(
+              child: LayourtTwiceBuilder(
+                mobile: ListTileWarehouse(
+                  listWare: result,
+                  onAfterChange: onRequest,
                 ),
+                desktop: DataTableWarehouse(
+                  list: result,
+                  future: futureList,
+                  onOrden: onSortOrder,
+                  onBack: onBack,
+                  onForwad: onForwad,
+                  numberPage: numberPage,
+                  onAfterDelete: onRequest,
+                ),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),
