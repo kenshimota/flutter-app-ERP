@@ -46,7 +46,6 @@ Future<CurrenciesResponse> updateCurrencie({
   if (response.statusCode == 422) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     final Map<String, dynamic> map = json["errors"] ?? {};
-    debugPrint('$json');
     throw FormErrors(map: map);
   }
 

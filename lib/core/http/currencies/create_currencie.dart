@@ -32,7 +32,7 @@ Future<CurrenciesResponse> createCurrencies({
 
   http.Response response = await http.post(url, headers: headers, body: body);
 
-   if (response.statusCode == 404) {
+  if (response.statusCode == 404) {
     throw Exception("Hay ocurrido un error en la red, revise su conexión");
   }
 
@@ -40,17 +40,16 @@ Future<CurrenciesResponse> createCurrencies({
     final Map<String, dynamic> json = jsonDecode(response.body);
     throw Exception(json["error"]);
   }
-  
+
   if (response.statusCode == 422) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     final Map<String, dynamic> map = json["errors"] ?? {};
-    debugPrint('$map');
     throw FormErrors(map: map);
   }
 
-
-  if(response.statusCode >= 500){
-    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
+  if (response.statusCode >= 500) {
+    const String msg =
+        'Hubo un error inesperado en el servidor contacte a su provedor.';
     throw Exception(msg);
   }
 

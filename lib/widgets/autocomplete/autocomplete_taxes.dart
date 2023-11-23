@@ -5,10 +5,12 @@ import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 class AutocompleteTaxes extends StatefulWidget {
   final String token;
+  final Function(Map<String, dynamic>)? onSelect;
 
   const AutocompleteTaxes({
     super.key,
     required this.token,
+    this.onSelect,
   });
 
   @override
@@ -17,6 +19,7 @@ class AutocompleteTaxes extends StatefulWidget {
 
 class AutocompleteTaxesState extends State<AutocompleteTaxes> {
   Future? future;
+  int? selected;
   List<TaxesResponse> result = <TaxesResponse>[];
   TextEditingController controlador = TextEditingController();
 
@@ -29,6 +32,10 @@ class AutocompleteTaxesState extends State<AutocompleteTaxes> {
 
     final List<Map<String, dynamic>> options =
         taxes.map((e) => ({"name": e.name, "id": e.id})).toList();
+
+    setState(() {
+      selected = null;
+    });
 
     return options;
   }
@@ -49,18 +56,19 @@ class AutocompleteTaxesState extends State<AutocompleteTaxes> {
         );
       },
       onSuggestionSelected: (itemData) {
+        widget.onSelect!(itemData);
+
         setState(() {
+          selected = itemData["id"];
           controlador.text = itemData['name'];
         });
       },
       validator: (value) {
-        if (value!.isEmpty) {
+        if (selected == null) {
           return 'Por favor, selecciona un elemento';
         }
+
         return null;
-      },
-      onSaved: (value) {
-        // Puedes guardar el valor seleccionado aquí si es necesario
       },
     );
   }

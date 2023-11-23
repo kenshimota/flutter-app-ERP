@@ -21,8 +21,6 @@ Future<UserResponse> createSession({
     "user": {"username": username, "password": password}
   });
 
-  debugPrint(url.toString());
-
   http.Response response = await http.post(url, headers: headers, body: body);
 
   if (response.statusCode == 404) {

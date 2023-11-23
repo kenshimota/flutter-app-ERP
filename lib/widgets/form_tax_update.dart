@@ -21,8 +21,6 @@ class FormTaxUpdate extends StatelessWidget {
     try {
       final String? token = authProvider.getToken();
 
-      debugPrint("before request");
-
       await updateTax(
         token: token,
         taxId: tax.id,
