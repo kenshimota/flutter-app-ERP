@@ -5,6 +5,7 @@ import 'package:flutter_app_erp/widgets/button_edit_tax.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class DataTableTaxes extends StatefulWidget {
   final int numberPage;
@@ -52,13 +53,18 @@ class _DataTableTaxesState extends State<DataTableTaxes> {
         .map(
           (tax) => DataRow(
             cells: <DataCell>[
-              DataCell(Text(tax.name)),
-              DataCell(Text(NumberFormatterApp.percentageFormat(tax.percentage))),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(tax.createdAt),
+              DataCell(TypographyApp(text: tax.name, variant: "body1")),
+              DataCell(TypographyApp(
+                text: NumberFormatterApp.percentageFormat(tax.percentage),
+                variant: "body1",
               )),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(tax.updatedAt),
+              DataCell(TypographyApp(
+                variant: "body1",
+                text: DateFormatterApp.dateTimeFormatter(tax.createdAt),
+              )),
+              DataCell(TypographyApp(
+                variant: "body1",
+                text: DateFormatterApp.dateTimeFormatter(tax.updatedAt),
               )),
               DataCell(Row(
                 children: [
@@ -94,45 +100,42 @@ class _DataTableTaxesState extends State<DataTableTaxes> {
       columns: [
         DataColumn(
           label: const Expanded(
-            child: Text(
-              'Nombre',
-              style: TextStyle(fontStyle: FontStyle.italic),
+            child: TypographyApp(
+              text: 'Nombre',
+              variant: "subtitle2",
             ),
           ),
           onSort: onSort,
         ),
         DataColumn(
           label: const Expanded(
-            child: Text(
-              'Impuestos',
-              style: TextStyle(fontStyle: FontStyle.italic),
+            child: TypographyApp(text: 'Impuestos', variant: "subtitle2"),
+          ),
+          onSort: onSort,
+        ),
+        DataColumn(
+          label: const Expanded(
+            child: TypographyApp(
+              variant: "subtitle2",
+              text: 'Fecha de Creación',
             ),
           ),
           onSort: onSort,
         ),
         DataColumn(
           label: const Expanded(
-            child: Text(
-              'fecha de creado',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-          onSort: onSort,
-        ),
-        DataColumn(
-          label: const Expanded(
-            child: Text(
-              'Fecha de actualizacion',
-              style: TextStyle(fontStyle: FontStyle.italic),
+            child: TypographyApp(
+              variant: "subtitle2",
+              text: 'Fecha de actualizacion',
             ),
           ),
           onSort: onSort,
         ),
         const DataColumn(
           label: Expanded(
-            child: Text(
-              'Acciones',
-              style: TextStyle(fontStyle: FontStyle.italic),
+            child: TypographyApp(
+              variant: "subtitle2",
+              text: 'Acciones',
             ),
           ),
         ),

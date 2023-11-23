@@ -5,6 +5,7 @@ import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/button_edit_currencie.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class DataTableCurrencies extends StatefulWidget {
   final int numberPage;
@@ -57,19 +58,34 @@ class _DataTableCurrencies extends State<DataTableCurrencies> {
   Widget build(BuildContext context) {
     final List<DataRow> rows = widget.list
         .map((currencie) => DataRow(cells: <DataCell>[
-              DataCell(Text(currencie.name)),
-              DataCell(Text(currencie.symbol)),
-              DataCell(Text(currencie.code)),
-              DataCell(Text(NumberFormatterApp.format(currencie.exchangeRate))),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(currencie.createdAt),
+              DataCell(TypographyApp(
+                text: currencie.name,
+                variant: "body1",
               )),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(currencie.updatedAt),
+              DataCell(TypographyApp(
+                text: currencie.symbol,
+                variant: "body1",
+              )),
+              DataCell(TypographyApp(text: currencie.code)),
+              DataCell(
+                TypographyApp(
+                  text: NumberFormatterApp.format(
+                    currencie.exchangeRate,
+                  ),
+                  variant: "body1",
+                ),
+              ),
+              DataCell(TypographyApp(
+                variant: "body1",
+                text: DateFormatterApp.dateTimeFormatter(currencie.createdAt),
+              )),
+              DataCell(TypographyApp(
+                variant: "body1",
+                text: DateFormatterApp.dateTimeFormatter(currencie.updatedAt),
               )),
               DataCell(Row(
                 children: [
-                   ButtonEditCurrencie(
+                  ButtonEditCurrencie(
                     currencie: currencie,
                     onSave: widget.onAfterDelete,
                   ),
@@ -78,7 +94,7 @@ class _DataTableCurrencies extends State<DataTableCurrencies> {
                     height: 8,
                   ),
                   ButtonDeleteCurrencie(
-                    currencieId: currencie.id, 
+                    currencieId: currencie.id,
                     context: context,
                     onAfterDelete: widget.onAfterDelete,
                   )
@@ -98,58 +114,58 @@ class _DataTableCurrencies extends State<DataTableCurrencies> {
         columns: [
           DataColumn(
             label: const Expanded(
-              child: Text(
-                'Nombre',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              child: TypographyApp(
+                variant: "subtitle2",
+                text: 'Nombre',
               ),
             ),
             onSort: onSort,
           ),
           DataColumn(
               label: const Expanded(
-                child: Text(
-                  'Simbolo',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Simbolo',
                 ),
               ),
               onSort: onSort),
           DataColumn(
               label: const Expanded(
-                child: Text(
-                  'Codigo',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Codigo',
                 ),
               ),
               onSort: onSort),
           DataColumn(
               label: const Expanded(
-                child: Text(
-                  'Taza de cambio',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Taza de cambio',
                 ),
               ),
               onSort: onSort),
           DataColumn(
               label: const Expanded(
-                child: Text(
-                  'Fecha de creado',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Fecha de creado',
                 ),
               ),
               onSort: onSort),
           DataColumn(
               label: const Expanded(
-                child: Text(
-                  'Fecha de actualizado',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Fecha de actualizado',
                 ),
               ),
               onSort: onSort),
           const DataColumn(
             label: Expanded(
-              child: Text(
-                'Acciones',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              child: TypographyApp(
+                variant: "subtitle2",
+                text: 'Acciones',
               ),
             ),
           ),

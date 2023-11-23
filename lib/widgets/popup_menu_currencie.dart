@@ -53,20 +53,17 @@ class _PopupCurrencieState extends State<PopupCurrencie> {
                 currencie: widget.currencie,
                 onSave: widget.onAfterChange,
               );
-          debugPrint('Aqui debe abrir el dialogo de editar');
         } else if (item == SampleItem.itemTwo) {
           builder = (context) => AlertDialogDelete(
                 currencieId: widget.currencie.id,
                 onAfterDelete: widget.onAfterChange,
               );
-          debugPrint('Aqui debe abrir el dialogo de eliminar');
         }
 
         if (builder != null) {
           showDialog(context: context, builder: builder);
         }
       },
-      
       itemBuilder: (
         BuildContext context,
       ) =>

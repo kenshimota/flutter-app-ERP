@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/response/response_base.dart';
 import 'package:flutter_app_erp/widgets/list_view_app.dart';
 import 'package:flutter_app_erp/widgets/popup_menu_button_tax.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
-import 'package:flutter_app_erp/widgets/list_view_scrolling_infinite.dart';
 import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
 
 class ListTileTax extends StatelessWidget {

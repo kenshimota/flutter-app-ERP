@@ -4,6 +4,7 @@ import 'package:flutter_app_erp/widgets/button_edit_warehouse.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/widgets/button_delete_warehouse.dart';
 import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class DataTableWarehouse extends StatefulWidget {
   final int numberPage;
@@ -12,7 +13,7 @@ class DataTableWarehouse extends StatefulWidget {
   final void Function()? onBack;
   final Future? future;
   final Function(Map<String, String>)? onOrden;
-  final  void Function()? onAfterDelete;
+  final void Function()? onAfterDelete;
   const DataTableWarehouse({
     super.key,
     required this.list,
@@ -32,8 +33,7 @@ class _DataTableWarehouse extends State<DataTableWarehouse> {
   int? sortColumnIndex;
   bool sortAscending = true;
 
-
-   onSort(int n, bool b) {
+  onSort(int n, bool b) {
     final list = <String>["name", "address", "created_at", "updated_at"];
 
     setState(() {
@@ -45,18 +45,21 @@ class _DataTableWarehouse extends State<DataTableWarehouse> {
     widget.onOrden!({'field': list[n], 'type': type});
   }
 
-
   @override
   Widget build(BuildContext context) {
     final List<DataRow> rows = widget.list
         .map((ware) => DataRow(cells: <DataCell>[
-              DataCell(Text(ware.name)),
-              DataCell(Text(ware.address)),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(ware.createdAt),
+              DataCell(TypographyApp(
+                text: ware.name,
+                variant: "body1",
               )),
-              DataCell(Text(
-                DateFormatterApp.dateTimeFormatter(ware.updatedAt),
+              DataCell(TypographyApp(text: ware.address, variant: "body1")),
+              DataCell(TypographyApp(
+                text: DateFormatterApp.dateTimeFormatter(ware.createdAt),
+              )),
+              DataCell(TypographyApp(
+                variant: "body1",
+                text: DateFormatterApp.dateTimeFormatter(ware.updatedAt),
               )),
               DataCell(Row(
                 children: [
@@ -87,49 +90,45 @@ class _DataTableWarehouse extends State<DataTableWarehouse> {
         horizontalMargin: 16,
         sortColumnIndex: sortColumnIndex,
         sortAscending: sortAscending,
-        
-        columns:  [
-           DataColumn(
+        columns: [
+          DataColumn(
             label: const Expanded(
-              child: Text(
-                'Nombre',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              child: TypographyApp(
+                variant: "subtitle2",
+                text: 'Nombre',
               ),
             ),
             onSort: onSort,
           ),
           DataColumn(
-            label: const Expanded(
-              child: Text(
-                'Direccion',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              label: const Expanded(
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Direccion',
+                ),
               ),
-            ),
-            onSort: onSort
-          ),
+              onSort: onSort),
           DataColumn(
-            label: const Expanded(
-              child: Text(
-                'Fecha de creado',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              label: const Expanded(
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Fecha de creado',
+                ),
               ),
-            ),
-            onSort: onSort
-          ),
+              onSort: onSort),
           DataColumn(
-            label: const Expanded(
-              child: Text(
-                'Fecha de actualizado',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              label: const Expanded(
+                child: TypographyApp(
+                  variant: "subtitle2",
+                  text: 'Fecha de actualizado',
+                ),
               ),
-            ),
-            onSort: onSort
-          ),
+              onSort: onSort),
           const DataColumn(
             label: Expanded(
-              child: Text(
-                'Acciones',
-                style: TextStyle(fontStyle: FontStyle.italic),
+              child: TypographyApp(
+                variant: "subtitle2",
+                text: 'Acciones',
               ),
             ),
           ),

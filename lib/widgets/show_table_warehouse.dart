@@ -40,8 +40,6 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
       page: numberPage,
     );
 
-    debugPrint('$warehouses');
-
     setState(() {
       result = warehouses;
     });
