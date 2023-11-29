@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_app_erp/core/exception/form_errors.dart';
-import 'package:flutter_app_erp/core/http/reset_password/update_password_forgot.dart';
-import 'package:flutter_app_erp/core/response/users/user_response.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/input_password.dart';
-import 'package:flutter_app_erp/widgets/reset_password/input_code_password.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
+import 'package:flutter_app_erp/widgets/input_password.dart';
+import 'package:flutter_app_erp/core/exception/form_errors.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_app_erp/widgets/reset_password/input_code_password.dart';
+import 'package:flutter_app_erp/core/http/reset_password/update_password_forgot.dart';
 
 class FormUpdatePassword extends StatefulWidget {
   final String email;
@@ -103,7 +100,7 @@ class _FormUpdatePassword extends State<FormUpdatePassword> {
               const FormControl(
                 child: TypographyApp(
                   text: "Recuperar Contraseña",
-                  variant: "h4",
+                  variant: "h5",
                   color: "primary",
                 ),
               ),

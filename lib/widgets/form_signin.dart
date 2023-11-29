@@ -54,7 +54,7 @@ class _FormSigninState extends State<FormSignin> {
                     child: Center(
                   child: TypographyApp(
                     text: "Iniciar Sesión",
-                    variant: "h4",
+                    variant: "h5",
                     color: "primary",
                   ),
                 ))
