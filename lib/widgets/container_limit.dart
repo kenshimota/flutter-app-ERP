@@ -23,11 +23,14 @@ class ContainerLimit extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    double screenWidth =
-        maxWidth == double.infinity || maxWidth <= width ? maxWidth : width;
-    double screenHeight = maxHeight == double.infinity || maxHeight <= height
-        ? maxHeight
-        : height;
+    double screenWidth = maxWidth == double.infinity || maxWidth <= width - 20
+        ? maxWidth
+        : width - 20;
+    double screenHeight = maxHeight;
+
+    if (maxHeight >= height - 20) {
+      screenHeight = height - 20;
+    }
 
     return LimitedBox(
       maxWidth: screenWidth,
@@ -39,9 +42,11 @@ class ContainerLimit extends StatelessWidget {
         minWidth: minWidth,
         child: FractionallySizedBox(
           widthFactor: 1,
-          child: ContainerWhite(
-            radius: 20,
-            child: child as Widget,
+          child: SingleChildScrollView(
+            child: ContainerWhite(
+              radius: 20,
+              child: child as Widget,
+            ),
           ),
         ),
       ),

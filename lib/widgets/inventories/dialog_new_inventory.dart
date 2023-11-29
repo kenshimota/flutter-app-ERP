@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/alert_dialog_app.dart';
-import 'package:flutter_app_erp/widgets/products/form_product_update.dart';
-import 'package:flutter_app_erp/core/response/products/products_response.dart';
+import 'package:flutter_app_erp/widgets/inventories/form_inventory_create.dart';
 
-class AlertDialogEditProduct extends StatefulWidget {
+class AlertDialogNewInventory extends StatefulWidget {
   final void Function()? onSave;
-  final ProductsResponse product;
 
-  const AlertDialogEditProduct({
+  const AlertDialogNewInventory({
     super.key,
     this.onSave,
-    required this.product,
   });
 
   @override
-  _AlertDialogEditProduct createState() => _AlertDialogEditProduct();
+  _AlertDialogNewInventory createState() => _AlertDialogNewInventory();
 }
 
-class _AlertDialogEditProduct extends State<AlertDialogEditProduct> {
+class _AlertDialogNewInventory extends State<AlertDialogNewInventory> {
   void onAfterSave(context) {
     if (context.mounted == false) {
       return;
@@ -33,16 +30,12 @@ class _AlertDialogEditProduct extends State<AlertDialogEditProduct> {
     return AlertDialogApp(
       maxHeight: 460,
       title: const TypographyApp(
-        text: 'Editar Producto',
+        text: 'Nuevo Inventario',
         variant: "h5",
       ),
       content: [
         Expanded(
-          child: FormProductUpdate(
-            id: widget.product.id,
-            nameDefault: widget.product.name,
-            codeDefault: widget.product.code,
-            barCodeDefault: widget.product.barCode,
+          child: FormInventoryCreate(
             onAfterSave: () => onAfterSave(context),
           ),
         ),

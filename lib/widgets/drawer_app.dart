@@ -72,6 +72,12 @@ class DrawerApp extends StatelessWidget {
           title: "Productos",
           pathname: "/products",
           leading: const Icon(Icons.engineering),
+        ),
+        listItemRouter(
+          context: context,
+          title: "Inventario",
+          pathname: "/inventories",
+          leading: const Icon(Icons.inventory),
         )
       ],
     );

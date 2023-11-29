@@ -31,7 +31,7 @@ class _AlertDialogNewProduct extends State<AlertDialogNewProduct> {
       maxHeight: 460,
       title: const TypographyApp(
         text: 'Nuevo Producto',
-        variant: "h4",
+        variant: "h5",
       ),
       content: [
         Expanded(
