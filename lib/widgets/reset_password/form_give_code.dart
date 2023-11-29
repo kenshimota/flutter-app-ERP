@@ -83,7 +83,7 @@ class _FormGiveCodePassword extends State<FormGiveCodePassword> {
               const FormControl(
                 child: TypographyApp(
                   text: "Recuperar Contraseña",
-                  variant: "h4",
+                  variant: "h5",
                   color: "primary",
                 ),
               ),

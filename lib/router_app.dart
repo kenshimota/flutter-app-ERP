@@ -1,16 +1,16 @@
 import "dart:core";
-import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/screens/products_screen.dart';
-import 'package:flutter_app_erp/screens/reset_password_screen.dart';
-import 'package:flutter_app_erp/screens/taxes_screen.dart';
+import 'package:flutter_app_erp/screens/inventories_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/screens/home_screen.dart';
+import 'package:flutter_app_erp/screens/taxes_screen.dart';
 import 'package:flutter_app_erp/screens/signin_screen.dart';
 import 'package:flutter_app_erp/screens/signup_screen.dart';
+import 'package:flutter_app_erp/screens/products_screen.dart';
+import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/screens/warehouse_screen.dart';
 import 'package:flutter_app_erp/screens/currencies_screen.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
+import 'package:flutter_app_erp/screens/reset_password_screen.dart';
 
 final Set<String> routesWithoutSignin = <String>{
   "/signin",
@@ -39,7 +39,11 @@ final router = GoRouter(
     GoRoute(
       path: "/reset_password",
       builder: (context, state) => const ResetPasswordScreen(),
-    )
+    ),
+    GoRoute(
+      path: "/inventories",
+      builder: (context, state) => const InventoriesScreen(),
+    ),
   ],
   redirect: (context, state) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
