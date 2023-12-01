@@ -1,10 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/%20formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/%20formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/inventories/inventories_response.dart';
 import 'package:flutter_app_erp/widgets/inventories/popup_menu_inventory.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/list_tile_app.dart';
 import 'package:flutter_app_erp/widgets/list_view_app.dart';
+
+class ColumnCell extends StatelessWidget {
+  final String subtitle;
+  final String content;
+
+  const ColumnCell({
+    super.key,
+    required this.subtitle,
+    required this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          fit: FlexFit.tight,
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: TypographyApp(
+              text: subtitle,
+              variant: "subtitle2",
+            ),
+          ),
+        ),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: OverflowBox(
+              maxWidth: null,
+              child: TypographyApp(
+                text: content,
+                variant: "body1",
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class ListTileInventory extends StatelessWidget {
   final InventoryResponse inventory;
@@ -16,20 +59,123 @@ class ListTileInventory extends StatelessWidget {
     this.onAfterChange,
   });
 
+  Widget buildContent(BuildContext context) {
+    String productName =
+        "(${inventory.product?.code}) ${inventory.product?.name}";
+
+    return SizedBox(
+      height: 100,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Producto:",
+                          content: productName,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Deposito:",
+                          content: inventory.warehouse!.name,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Reservado:",
+                          content:
+                              NumberFormatterApp.amount(inventory.reserved),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Existencia:",
+                          content: NumberFormatterApp.amount(
+                            inventory.stock,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Creación:",
+                          content: DateFormatterApp.dateTimeFormatter(
+                            inventory.createdAt,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Existencia:",
+                          content: DateFormatterApp.dateTimeFormatter(
+                            inventory.updatedAt,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: ColumnCell(
+                          subtitle: "Observaciones: ",
+                          content: inventory.observations ?? "",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    String productName =
+        "(${inventory.product?.code}) ${inventory.product?.name}";
+
     return ListTileApp(
       leading: const CircleAvatar(
         child: Icon(Icons.inventory),
       ),
       title: TypographyApp(
-        text: "(${inventory.product?.code}) ${inventory.product?.name}",
+        text: productName,
         variant: "subtitle1",
       ),
       trailing: PopupMenuInventory(
         inventory: inventory,
         onAfterChange: onAfterChange,
       ),
+      content: buildContent(context),
       subtitle: Row(
         children: [
           TypographyApp(
