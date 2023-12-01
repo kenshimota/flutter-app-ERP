@@ -14,7 +14,7 @@ class PaddingTileApp extends StatelessWidget {
   }
 }
 
-class ListTileApp extends StatelessWidget {
+class ListTileApp extends StatefulWidget {
   final Widget? leading;
   final Widget title;
   final Widget? subtitle;
@@ -30,39 +30,86 @@ class ListTileApp extends StatelessWidget {
     this.content,
   });
 
-  buildTitle(BuildContext context) {
-    final List<Widget> children = [title];
+  State<ListTileApp> createState() => _ListTileApp();
+}
 
-    if (subtitle != null) {
-      children.add(subtitle as Widget);
+class _ListTileApp extends State<ListTileApp> {
+  bool _isCollapsed = false;
+
+  buildTitle(BuildContext context) {
+    final List<Widget> children = [widget.title];
+
+    if (widget.subtitle != null) {
+      children.add(widget.subtitle as Widget);
     }
 
-    return Row(children: [
+    final Widget baseWidget = Row(children: [
       Expanded(
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, children: children),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children,
+        ),
       )
     ]);
+
+    if (widget.content == null) {
+      return baseWidget;
+    }
+
+    return GestureDetector(
+      onTap: () => {
+        setState(
+          () {
+            _isCollapsed = !_isCollapsed;
+          },
+        )
+      },
+      child: baseWidget,
+    );
+  }
+
+  buildContent(BuildContext context) {
+    return ClipRect(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 2000),
+        height: _isCollapsed ? null : 0, // Set initial height to 0
+        child: widget.content,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> children = [];
 
-    if (leading != null) {
-      children.add(PaddingTileApp(child: leading as Widget));
+    if (widget.leading != null) {
+      children.add(PaddingTileApp(child: widget.leading as Widget));
     }
 
     children.add(Expanded(
       child: PaddingTileApp(child: buildTitle(context)),
     ));
 
-    if (trailing != null) {
-      children.add(PaddingTileApp(child: trailing as Widget));
+    if (widget.trailing != null) {
+      children.add(PaddingTileApp(child: widget.trailing as Widget));
+    }
+
+    final Widget baseWidget = Row(
+      children: children,
+    );
+
+    if (widget.content == null) {
+      return baseWidget;
     }
 
     return Row(
-      children: children,
+      children: [
+        Expanded(
+          child: Column(
+            children: [baseWidget, buildContent(context)],
+          ),
+        )
+      ],
     );
   }
 }
