@@ -20,6 +20,7 @@ class ListTileApp extends StatefulWidget {
   final Widget? subtitle;
   final Widget? trailing;
   final Widget? content;
+  final double? heightContent;
 
   const ListTileApp({
     super.key,
@@ -28,6 +29,7 @@ class ListTileApp extends StatefulWidget {
     this.subtitle,
     this.trailing,
     this.content,
+    this.heightContent,
   });
 
   State<ListTileApp> createState() => _ListTileApp();
@@ -71,8 +73,9 @@ class _ListTileApp extends State<ListTileApp> {
   buildContent(BuildContext context) {
     return ClipRect(
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 2000),
-        height: _isCollapsed ? null : 0, // Set initial height to 0
+        duration: const Duration(milliseconds: 500),
+        height:
+            _isCollapsed ? widget.heightContent : 0, // Set initial height to 0
         child: widget.content,
       ),
     );

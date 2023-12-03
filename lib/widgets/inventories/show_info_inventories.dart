@@ -9,7 +9,6 @@ import 'package:flutter_app_erp/widgets/inventories/listitem_inventories.dart';
 import 'package:flutter_app_erp/widgets/inventories/table_inventories.dart';
 import 'package:flutter_app_erp/widgets/inventories/toolbar_inventories.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
-import 'package:flutter_app_erp/widgets/products/toolbar_products.dart';
 
 class ShowInfoInventories extends StatefulWidget {
   final String token;

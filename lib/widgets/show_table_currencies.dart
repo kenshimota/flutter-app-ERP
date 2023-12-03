@@ -101,7 +101,10 @@ class _ShowTableCurrencies extends State<ShowTableCurrencies> {
             Expanded(
               child: ContainerWhite(
                 child: LayourtTwiceBuilder(
-                  mobile: ListTileApp(
+                  mobile: ListTileCurrencies(
+                    page: numberPage,
+                    future: futureList,
+                    onForward: onForwad,
                     listcurrencie: result,
                     onAfterChange: onRequest,
                   ),
