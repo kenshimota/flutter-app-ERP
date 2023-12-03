@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/warehouse/delete_warehouse.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:provider/provider.dart';
 
 // ignore: non_constant_identifier_names
@@ -35,28 +36,34 @@ class AlertDialogDelete extends StatefulWidget {
 
 class _AlertDialogDelete extends State<AlertDialogDelete> {
   Future? _futureDelete;
-  String message = 'No se pudo eliminar';
+  String message = '';
 
 // este funcion espera una respuest
   Future<void> onDeleteRequest(BuildContext context) async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String? token = authProvider.getToken();
 
-    bool response =
-        await deteleWarehouse(id: widget.wareId, token: token ?? '');
+    setState(() {
+      message = '';
+    });
 
-    if (!context.mounted) {
-      return;
+    try {
+      await deteleWarehouse(id: widget.wareId, token: token ?? '');
+
+      if (!context.mounted) {
+        return;
+      }
+
+      Navigator.pop(context);
+
+      widget.onAfterDelete!();
+    } on String catch (e) {
+
+      debugPrint('$e');
+      setState(() {
+        message = e;
+      });
     }
-
-    if (response == false) {
-      showError(context, message);
-      return;
-    }
-
-    Navigator.pop(context);
-
-    widget.onAfterDelete!();
   }
 
   void showError(BuildContext context, String message) {
@@ -74,12 +81,20 @@ class _AlertDialogDelete extends State<AlertDialogDelete> {
     });
   }
 
+  Widget buildContent() {
+    if (message.isEmpty) {
+      return const Text(
+          'Esta seguro que deseas eliminar este elemento de la tabla?');
+    }
+
+    return TypographyApp(text: message, variant: "subtitle2", color: "error");
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Eliminar'),
-      content: const Text(
-          'Esta seguro que deseas eliminar este elemento de la tabla?'),
+      content: buildContent(),
       actions: [
         ButtonBar(
           children: [

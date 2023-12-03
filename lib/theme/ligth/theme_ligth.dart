@@ -21,6 +21,7 @@ final ThemeData themeLight = ThemeData(
     seedColor: Colors.pink,
     surface: Colors.pink,
     onPrimary: Colors.pink,
+    error: Colors.red,
   ),
 
   scaffoldBackgroundColor: const Color(0xFFdddddd),

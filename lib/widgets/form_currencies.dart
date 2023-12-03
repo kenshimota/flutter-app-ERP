@@ -33,12 +33,11 @@ class FormCurrencie extends StatefulWidget {
 class _FormCurrencieState extends State<FormCurrencie> {
   Future? futureCreateCurrencie;
   String message = 'No se pudo crear la moneda';
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   TextEditingController name = TextEditingController();
   TextEditingController symbol = TextEditingController();
   TextEditingController code = TextEditingController();
   TextEditingController exchangeRate = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   initState() {
@@ -102,7 +101,7 @@ class _FormCurrencieState extends State<FormCurrencie> {
               exchangeRate: exchangeRate,
               future: futureCreateCurrencie,
               isRequired: true,
-              errorText: widget.errors?.getValue("exachangeRate"),
+              errorText: widget.errors?.getValue("exchange_rate"),
             ),
           ),
           Row(

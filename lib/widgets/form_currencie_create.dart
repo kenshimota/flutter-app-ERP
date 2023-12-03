@@ -38,12 +38,12 @@ class _FormCurrencieCreateState extends State<FormCurrencieCreate> {
       }
 
       widget.onAfterSave!();
+    } on AuthErrors {
+      authProvider.signOut();
     } on FormErrors catch (e) {
       setState(() {
         errors = e;
       });
-    } on AuthErrors {
-      authProvider.signOut();
     }
   }
 

@@ -9,7 +9,7 @@ class InputExchangeRate extends StatelessWidget {
   final bool? isRequired;
   final String? placeholder;
   final Future? future;
-  final TextEditingController? controller;
+  
 
   const InputExchangeRate({
     super.key, 
@@ -19,7 +19,6 @@ class InputExchangeRate extends StatelessWidget {
     this.isRequired,
     this.placeholder,
     this.future,
-    this.controller,
   });
 
   String? validateExchangeRate(String? value) {
@@ -35,7 +34,7 @@ class InputExchangeRate extends StatelessWidget {
     }
     // Verificar si el valor está dentro del rango de porcentaje válido (0-100)
     if (exchangeRate < 0) {
-      return 'Ingrese una taza de cambio válida';
+      return 'Dato invalido';
     }
 
 

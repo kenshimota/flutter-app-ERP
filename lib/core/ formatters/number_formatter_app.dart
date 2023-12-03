@@ -19,7 +19,7 @@ class NumberFormatterApp {
     }
 
     percentage = percentage;
-    final f = NumberFormat("###.00#%", "en_US");
+    final f = NumberFormat("###0.00#%", "en_US");
 
     return f.format(percentage);
   }

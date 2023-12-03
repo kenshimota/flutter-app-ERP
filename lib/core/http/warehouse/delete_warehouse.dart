@@ -1,8 +1,9 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<bool> deteleWarehouse({ required int id, required String token }) async {
+Future<bool> deteleWarehouse({required int id, required String token}) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
   final Uri url = Uri.parse("$hostname/warehouses/$id");
@@ -14,9 +15,17 @@ Future<bool> deteleWarehouse({ required int id, required String token }) async {
 
   http.Response response = await http.delete(url, headers: headers);
 
-  if(response.statusCode >= 500){
-    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
-  
+  String jsonString = response.body;
+  Map<String, dynamic> mapa = json.decode(jsonString);
+
+  if (response.statusCode == 422) {
+    throw mapa["error"] ?? "";
+  }
+
+  if (response.statusCode >= 500) {
+    const String msg =
+        'Hubo un error inesperado en el servidor contacte a su provedor.';
+
     throw Exception(msg);
   }
 

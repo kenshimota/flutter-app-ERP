@@ -30,7 +30,6 @@ Future<CurrenciesResponse> createCurrencies({
   });
 
   http.Response response = await http.post(url, headers: headers, body: body);
-
   if (response.statusCode == 404) {
     throw Exception("Hay ocurrido un error en la red, revise su conexión");
   }

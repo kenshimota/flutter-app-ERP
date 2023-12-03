@@ -27,11 +27,10 @@ class FormTax extends StatefulWidget {
 
 class _FormTaxState extends State<FormTax> {
   Future? futureCreateTax;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String message = 'No se pudo crear el impuesto';
-
   TextEditingController name = TextEditingController();
   TextEditingController percentage = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   initState() {
@@ -48,7 +47,7 @@ class _FormTaxState extends State<FormTax> {
 
     Map<String, dynamic> params = {
       "name": name.text,
-      "percentage": double.parse(percentage.text) / 100
+      "percentage": double.parse(percentage.text)  / 100
     };
 
     setState(() {
