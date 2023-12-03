@@ -103,6 +103,9 @@ class _ShowTableWarehouse extends State<ShowTableWarehouse> {
             child: ContainerWhite(
               child: LayourtTwiceBuilder(
                 mobile: ListTileWarehouse(
+                  page: numberPage,
+                  onForward: onForwad,
+                  future: futureList,
                   listWare: result,
                   onAfterChange: onRequest,
                 ),

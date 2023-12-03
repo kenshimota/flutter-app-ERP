@@ -8,7 +8,7 @@ class NumberFormatterApp {
   }
 
   static format(double amount) {
-    final f = NumberFormat("###.00#", "en_US");
+    final f = NumberFormat("#,##0.##", "en_US");
 
     return f.format(amount);
   }
