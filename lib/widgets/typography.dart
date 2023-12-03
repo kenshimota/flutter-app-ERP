@@ -45,6 +45,10 @@ class TypographyApp extends StatelessWidget {
       style = getColor!(context);
     }
 
-    return Text(text ?? "", style: style);
+    return Text(
+      text ?? "",
+      style: style,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'package:flutter_app_erp/core/response/response_base.dart';
 
-class CurrenciesResponse {
+class CurrenciesResponse implements ResponseBase {
   final int id;
   final String name;
   final String symbol;

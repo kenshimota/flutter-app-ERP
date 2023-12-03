@@ -1,13 +1,14 @@
 import 'dart:convert';
+import 'package:flutter_app_erp/core/response/response_base.dart';
 
-class WarehouseResponse {
+class WarehouseResponse implements ResponseBase {
   final int id;
   final String name;
   final String address;
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  const WarehouseResponse ({
+  const WarehouseResponse({
     required this.id,
     required this.name,
     required this.address,
@@ -15,8 +16,8 @@ class WarehouseResponse {
     required this.updatedAt,
   });
 
-  factory WarehouseResponse .fromJson(Map<String, dynamic> json) {
-    return WarehouseResponse (
+  factory WarehouseResponse.fromJson(Map<String, dynamic> json) {
+    return WarehouseResponse(
       id: json['id'],
       name: json['name'],
       address: json['address'],
