@@ -74,8 +74,10 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
                   ),
                 ),
               ),
-              ShowListProductsPricesCards(
-                list: result,
+              Expanded(
+                child: ShowListProductsPricesCards(
+                  list: result,
+                ),
               ),
             ],
           ),

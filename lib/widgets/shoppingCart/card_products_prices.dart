@@ -9,12 +9,9 @@ import 'package:flutter_app_erp/widgets/shoppingCart/modelo_card_product_price.d
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class CardProductsPrices extends StatefulWidget {
-final String token;
+  final String token;
 
-  const CardProductsPrices({
-    super.key,
-  required this.token
-  });
+  const CardProductsPrices({super.key, required this.token});
 
   @override
   _CardProductsPrices createState() => _CardProductsPrices();
@@ -30,16 +27,15 @@ class _CardProductsPrices extends State<CardProductsPrices> {
   }
 
   Future<void> onRequestApi() async {
-    final List<ProductsPricesResponse> productPrice = await getListProductsPricesResponse(
+    final List<ProductsPricesResponse> productPrice =
+        await getListProductsPricesResponse(
       token: widget.token,
     );
 
     setState(() {
       result = productPrice;
     });
-
   }
-
 
   Future<void> onRequest() async {
     setState(() {
@@ -47,17 +43,17 @@ class _CardProductsPrices extends State<CardProductsPrices> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-    
-
-    if(result.isEmpty) {
-      return Container(width: 100, height: 100,);
+    if (result.isEmpty) {
+      return const SizedBox(
+        width: 100,
+        height: 100,
+      );
     }
 
     final ProductsPricesResponse productItem = result.elementAt(0);
 
-    return  ShowCardItem( productPrice: productItem );
+    return ShowCardItem(productPrice: productItem);
   }
 }
