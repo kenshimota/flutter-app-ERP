@@ -7,7 +7,7 @@ class UserResponse {
   final int identityDocument;
   final DateTime createdAt;
   final DateTime updatedAt;
-  String token;
+  String? token;
 
   UserResponse({
     required this.id,
@@ -18,7 +18,7 @@ class UserResponse {
     required this.identityDocument,
     required this.createdAt,
     required this.updatedAt,
-    required this.token,
+    this.token,
   });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {

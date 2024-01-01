@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
+import 'package:flutter_app_erp/core/response/orders/orders_response.dart'; 
 
-Future<List<TaxesResponse>> getListTaxes({
+Future<List<OrdersResponse>> getListOrders({
   required String token,
   String search = '',
   Map<String, String>? order,
@@ -12,23 +12,22 @@ Future<List<TaxesResponse>> getListTaxes({
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/taxes?q=$search&page=$page&";
+  String path = "$hostname/orders?metadata=1&q=$search&page=$page&";
 
-  if (order != null &&
-      order.containsKey('field') &&
-      order.containsKey('type')) {
-    path =
-        "$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}";
+  if(order != null &&
+    order.containsKey('field') &&
+    order.containsKey('type')) {
+    path = '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
   }
 
-  final Map<String, String> headers = {
+  final Map<String, String> hearders = {
     'content-Type': 'application/json',
     "Authorization": "Bearer $token",
   };
 
   final Uri url = Uri.parse(path);
 
-  http.Response response = await http.get(url, headers: headers);
+  http.Response response = await http.get(url, headers: hearders);
 
   if (response.statusCode == 401) {
     final Map<String, dynamic> json = jsonDecode(response.body);
@@ -46,7 +45,9 @@ Future<List<TaxesResponse>> getListTaxes({
 
   return json
       .map(
-        (e) => TaxesResponse.fromJson(e),
+        (e) => OrdersResponse.fromJson(e),
       )
       .toList();
+
+
 }
