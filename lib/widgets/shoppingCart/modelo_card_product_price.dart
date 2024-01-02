@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/add_product_to_orden_button.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/modelo_card_product_price.dart';
 
 
 class ShowCardItem extends StatelessWidget {
   final ProductsPricesResponse productPrice;
+  final void Function()? onAdd;
 
   const ShowCardItem({
     super.key,
     required this.productPrice,
+    this.onAdd,
   });
 
   @override
@@ -22,7 +25,7 @@ class ShowCardItem extends StatelessWidget {
         margin: const EdgeInsets.all(15),
         elevation: 10,
         child: SizedBox(
-            height: 400,
+            height: 500,
             width: 280,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
@@ -58,18 +61,8 @@ class ShowCardItem extends StatelessWidget {
                           height: 30,
                         ),
                        
-                        FormControl(
-                          child: ElevatedButtonFuture(
-                              onPressed: () => (),
-                              style:ElevatedButton.styleFrom(
-                                minimumSize: const Size.fromHeight(50),
-                              ),
-                              child: const Text('Añadir al carrito',
-                                style: TextStyle(
-                                  color:Color.fromARGB(255, 255, 255, 255),
-                                ),
-                              ),
-                          ),
+                       const FormControl(
+                          child: AddProductToOrdenButton()
                         ),
                       ],
                     ),
