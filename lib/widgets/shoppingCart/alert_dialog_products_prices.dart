@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/widgets/shoppingCart/card_products_prices.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/show_prducts_prices.dart';
-import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
+
 
 class AlertDialogProductsPrices extends StatefulWidget {
   const AlertDialogProductsPrices({
@@ -21,6 +20,10 @@ class _AlertDialogProductsPrices extends State<AlertDialogProductsPrices> {
     final String? token = authProvider.getToken();
 
     return Dialog.fullscreen(
+        child: MultiProvider(
+      providers: [
+        
+      ],
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -31,6 +34,6 @@ class _AlertDialogProductsPrices extends State<AlertDialogProductsPrices> {
           //CardProductsPrices(token: token ?? ""),
         ],
       ),
-    );
+    ));
   }
 }
