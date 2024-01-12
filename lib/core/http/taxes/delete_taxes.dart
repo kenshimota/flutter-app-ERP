@@ -1,12 +1,8 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
-Future<bool> deleteTax({ required int id, required String token  }) async {
-
-   final env = dotenv.env;
+Future<bool> deleteTax({required int id, required String token}) async {
+  final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
   final Uri url = Uri.parse("$hostname/taxes/$id");
 
@@ -17,14 +13,12 @@ Future<bool> deleteTax({ required int id, required String token  }) async {
 
   http.Response response = await http.delete(url, headers: headers);
 
-  if(response.statusCode >= 500){
-    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
-  
+  if (response.statusCode >= 500) {
+    const String msg =
+        'Hubo un error inesperado en el servidor contacte a su provedor.';
+
     throw Exception(msg);
   }
 
-
-
   return 204 == response.statusCode;
 }
-

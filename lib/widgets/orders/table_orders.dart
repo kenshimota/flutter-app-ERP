@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/%20formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
-import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/orders/button_delete_orders.dart';
-import 'package:flutter_app_erp/widgets/shoppingCart/Button_shopping_cart.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/button_shopping_cart.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class DataTableOrders extends StatefulWidget {
@@ -104,7 +104,11 @@ class _DataTableOrdersState extends State<DataTableOrders> {
               DataCell(
                 Row(
                   children: [
-                    ButtonShoppingCart(context: context),
+                    buttonShoppingCart(
+                      context: context,
+                      currencyId: order.currencyId,
+                      orderId: order.id,
+                    ),
                     const SizedBox(
                       width: 8,
                       height: 8,

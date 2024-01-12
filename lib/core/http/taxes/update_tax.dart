@@ -1,9 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
 
 Future<TaxesResponse> updateTax({
@@ -21,19 +20,15 @@ Future<TaxesResponse> updateTax({
     "Authorization": "Bearer $token",
   };
 
-
   String body = jsonEncode({
-   
     "tax": {
       "name": name,
       "percentage": percentage,
     }
-    
-  });  
+  });
 
   http.Response response = await http.patch(url, headers: headers, body: body);
 
-   
   if (response.statusCode == 404) {
     throw Exception("Hay ocurrido un error en la red, revise su conexión");
   }

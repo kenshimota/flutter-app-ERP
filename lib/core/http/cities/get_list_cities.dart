@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/response/cities/cities_response.dart';
 
 Future<List<CitiesResponse>> getListCities({
@@ -14,10 +13,11 @@ Future<List<CitiesResponse>> getListCities({
   final String hostname = env['HOSTNAME_API'] ?? '';
   String path = "$hostname/cities?q=$search";
 
-  if(order != null &&
-    order.containsKey('field') &&
-    order.containsKey('type')) {
-    path = '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
+  if (order != null &&
+      order.containsKey('field') &&
+      order.containsKey('type')) {
+    path =
+        '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
   }
 
   final Map<String, String> hearders = {

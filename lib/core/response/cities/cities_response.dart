@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/response_base.dart';
 
-class CitiesResponse implements ResponseBase{
+class CitiesResponse implements ResponseBase {
   final int id;
   final String name;
   final DateTime createdAt;
@@ -15,17 +14,15 @@ class CitiesResponse implements ResponseBase{
     required this.updatedAt,
   });
 
-  factory CitiesResponse.fromJson(Map<String, dynamic> json){
+  factory CitiesResponse.fromJson(Map<String, dynamic> json) {
     return CitiesResponse(
-      id: json['id'], 
-      name: json['name'], 
-      createdAt: DateTime.parse(json['created_at']), 
-      updatedAt: DateTime.parse(json['updated_at'])
-    );
+        id: json['id'],
+        name: json['name'],
+        createdAt: DateTime.parse(json['created_at']),
+        updatedAt: DateTime.parse(json['updated_at']));
   }
 
-
-   @override
+  @override
   String toString() {
     final Map<String, dynamic> map = {
       "id": id,

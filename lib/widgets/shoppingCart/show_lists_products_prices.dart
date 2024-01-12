@@ -18,24 +18,28 @@ class ShowListProductsPricesCards extends StatefulWidget {
 
 class _ShowListProductsPricesCards extends State<ShowListProductsPricesCards> {
   List<Widget> buildContent({required double width}) {
-    double space = 300;
+    double space = 310;
     int maxRow = width ~/ space;
     final List<Row> rows = [];
     List<Widget> children = [];
-
-    debugPrint("width: $width, maxRow: $maxRow");
 
     for (final ProductsPricesResponse productPrice in widget.list) {
       children.add(ShowCardItem(productPrice: productPrice));
 
       if (children.length == maxRow) {
-        rows.add(Row(children: children));
+        rows.add(Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: children,
+        ));
         children = [];
       }
     }
 
     if (children.isNotEmpty) {
-      rows.add(Row(children: children));
+      rows.add(Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: children,
+      ));
       children = [];
     }
 
@@ -54,7 +58,7 @@ class _ShowListProductsPricesCards extends State<ShowListProductsPricesCards> {
             Expanded(
               child: Column(
                 children:
-                    buildContent(width: width > 600 ? width - 400 : width),
+                    buildContent(width: width >= 900 ? width - 400 : width),
               ),
             ),
           ],

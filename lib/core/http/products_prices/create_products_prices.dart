@@ -1,5 +1,4 @@
-import  'dart:convert';
-import 'package:flutter/widgets.dart';
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
@@ -45,8 +44,6 @@ Future<ProductsPricesResponse> createProductPrice({
     final Map<String, dynamic> map = json["errors"] ?? {};
     throw FormErrors(map: map);
   }
-
-
 
   final Map<String, dynamic> json = jsonDecode(response.body);
   return ProductsPricesResponse.fromJson(json);

@@ -1,6 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<bool> deleteOrders({
   required String token,
@@ -17,8 +16,9 @@ Future<bool> deleteOrders({
 
   http.Response response = await http.delete(url, headers: headers);
 
-  if(response.statusCode >= 500){
-    const String msg = 'Hubo un error inesperado en el servidor contacte a su provedor.';
+  if (response.statusCode >= 500) {
+    const String msg =
+        'Hubo un error inesperado en el servidor contacte a su provedor.';
     throw Exception(msg);
   }
 

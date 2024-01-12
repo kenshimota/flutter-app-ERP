@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/%20formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/column_cell.dart';
 import 'package:flutter_app_erp/widgets/list_tile_app.dart';
 
 import 'package:flutter_app_erp/widgets/list_view_app.dart';
 import 'package:flutter_app_erp/widgets/popup_menu_button_tax.dart';
 import 'package:flutter_app_erp/core/response/taxes/taxes_response.dart';
-import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/slice_column.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 

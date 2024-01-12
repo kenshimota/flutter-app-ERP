@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/%20formatters/date_formatter_app.dart';
-import 'package:flutter_app_erp/core/%20formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/column_cell.dart';
 import 'package:flutter_app_erp/widgets/orders/popup_menu_order.dart';
 import 'package:flutter_app_erp/widgets/slice_column.dart';
@@ -20,10 +20,16 @@ class ListTileContentOrders extends StatelessWidget {
         height: 100,
         child: SliceColumn(
           children: [
-            ColumnCell(subtitle: "Codigo:", content: NumberFormatterApp.filled(order.number),),
+            ColumnCell(
+              subtitle: "Codigo:",
+              content: NumberFormatterApp.filled(order.number),
+            ),
             ColumnCell(subtitle: "Subtotal:", content: "${order.subtotal}"),
-            ColumnCell(subtitle: "Nombre:", content: "${order.customer!.name} ${order.customer!.lastName}"),
-            ColumnCell(subtitle: "Monto de impuesto:", content: "${order.taxAmount}"),
+            ColumnCell(
+                subtitle: "Nombre:",
+                content: "${order.customer!.name} ${order.customer!.lastName}"),
+            ColumnCell(
+                subtitle: "Monto de impuesto:", content: "${order.taxAmount}"),
             ColumnCell(
               subtitle: "Total:",
               content: NumberFormatterApp.format(order.total),
@@ -33,9 +39,8 @@ class ListTileContentOrders extends StatelessWidget {
               content: "${order.currency!.code} (${order.currency!.symbol})",
             ),
             ColumnCell(
-              subtitle: "Usuario",
-              content: "${order.user!.firstName} ${order.user!.lastName}"
-            ),
+                subtitle: "Usuario",
+                content: "${order.user!.firstName} ${order.user!.lastName}"),
             ColumnCell(
               subtitle: "Cantidad de productos",
               content: NumberFormatterApp.amount(order.productsCount),
@@ -44,7 +49,7 @@ class ListTileContentOrders extends StatelessWidget {
               subtitle: "Fecha de creacion",
               content: DateFormatterApp.dateTimeFormatter(order.createdAt),
             ),
-             ColumnCell(
+            ColumnCell(
               subtitle: "Fecha de actualizacion",
               content: DateFormatterApp.dateTimeFormatter(order.updatedAt),
             ),
@@ -52,7 +57,6 @@ class ListTileContentOrders extends StatelessWidget {
         ));
   }
 }
-
 
 class ListTileOrder extends StatelessWidget {
   final OrdersResponse order;
@@ -81,7 +85,7 @@ class ListTileOrder extends StatelessWidget {
 }
 
 class ListTileOrders extends StatelessWidget {
-    final int page;
+  final int page;
   final Future? future;
   final void Function()? onForward;
   final List<OrdersResponse> orders;

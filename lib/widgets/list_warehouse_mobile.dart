@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/%20formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 import 'package:flutter_app_erp/widgets/column_cell.dart';
 import 'package:flutter_app_erp/widgets/list_tile_app.dart';

@@ -3,8 +3,11 @@ import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/add_quantity_of_product.dart';
 
 class AddProductToOrdenButton extends StatefulWidget {
+  final int productId;
+
   const AddProductToOrdenButton({
     super.key,
+    required this.productId,
   });
 
   @override
@@ -13,6 +16,13 @@ class AddProductToOrdenButton extends StatefulWidget {
 
 class _AddProductToOrdenButton extends State<AddProductToOrdenButton> {
   bool showButton = true;
+
+  onClose() {
+    setState(() {
+      showButton = true;
+    });
+  }
+
   onAdd() {
     setState(() {
       showButton = false;
@@ -21,16 +31,17 @@ class _AddProductToOrdenButton extends State<AddProductToOrdenButton> {
 
   @override
   Widget build(BuildContext context) {
-
-    if(showButton == false){
-      return AddQuantityProducts();
+    if (showButton == false) {
+      return AddQuantityProducts(
+        onClose: onClose,
+        productId: widget.productId,
+      );
     }
-
 
     return ElevatedButtonFuture(
       onPressed: () => onAdd(),
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size.fromHeight(50),
+        minimumSize: const Size.fromHeight(40),
       ),
       child: const Text(
         'Añadir al carrito',

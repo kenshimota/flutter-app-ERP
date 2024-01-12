@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/%20formatters/date_formatter_app.dart';
-import 'package:flutter_app_erp/core/%20formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/inventories/inventories_response.dart';
 import 'package:flutter_app_erp/widgets/column_cell.dart';
 import 'package:flutter_app_erp/widgets/inventories/popup_menu_inventory.dart';

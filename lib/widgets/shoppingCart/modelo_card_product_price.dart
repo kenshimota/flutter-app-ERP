@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
-import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/add_product_to_orden_button.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
-import 'package:flutter_app_erp/widgets/shoppingCart/modelo_card_product_price.dart';
-
 
 class ShowCardItem extends StatelessWidget {
-  final ProductsPricesResponse productPrice;
   final void Function()? onAdd;
+  final ProductsPricesResponse productPrice;
 
   const ShowCardItem({
     super.key,
@@ -25,7 +23,7 @@ class ShowCardItem extends StatelessWidget {
         margin: const EdgeInsets.all(15),
         elevation: 10,
         child: SizedBox(
-            height: 500,
+            height: 370,
             width: 280,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30),
@@ -35,36 +33,40 @@ class ShowCardItem extends StatelessWidget {
                     image: NetworkImage(
                         'https://img.freepik.com/foto-gratis/manos-solamente-mecanico-sosteniendo-neumatico-taller-reparacion-reemplazo-neumaticos-invierno-verano_146671-16784.jpg?size=626&ext=jpg&ga=GA1.1.1687694167.1703548800&semt=sph'),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                       
-                      children: [
-                        const SizedBox(
-                          height: 30,
-                        ),
-                         TypographyApp(
-                            text: productPrice.product!.name,
-                            variant: "h4",
-                            color: "black",
+                  Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                TypographyApp(
+                                  text: productPrice.product!.name,
+                                  variant: "h5",
+                                  color: "black",
+                                ),
+                              ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              FormControl(
+                                child: TypographyApp(
+                                  text:
+                                      "${NumberFormatterApp.format(productPrice.price)}${productPrice.currency!.symbol} (${productPrice.currency!.code})",
+                                  variant: "subtitle1",
+                                  color: "black",
+                                ),
+                              ),
+                            ],
                           ),
-                        FormControl(
-                          child: TypographyApp(
-                            text:
-                                "${productPrice.currency!.code} ${productPrice.currency!.symbol} ${productPrice.price}",
-                            variant: "h4",
-                            color: "black",
+                          FormControl(
+                            child: AddProductToOrdenButton(
+                              productId: productPrice.productId,
+                            ),
                           ),
-                        ),
-
-                        const SizedBox(
-                          height: 30,
-                        ),
-                       
-                       const FormControl(
-                          child: AddProductToOrdenButton()
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],

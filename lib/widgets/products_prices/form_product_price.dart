@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
-import 'package:flutter_app_erp/core/http/products_prices/create_products_prices.dart';
-import 'package:flutter_app_erp/providers/auth_provider.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/autocomplete/autocomplete_currencies.dart';
 import 'package:flutter_app_erp/widgets/autocomplete/autocomplete_products.dart';
 import 'package:flutter_app_erp/widgets/input_exchange_rate.dart';
-import 'package:provider/provider.dart';
 
 class FormProductPrice extends StatefulWidget {
-   final int? currencyIdDefault;
+  final int? currencyIdDefault;
   final int? productDefault;
   final double? priceDefault;
   final String token;
@@ -34,21 +30,19 @@ class FormProductPrice extends StatefulWidget {
 class _FormProductPrice extends State<FormProductPrice> {
   int? currencyId;
   int? productId;
-    TextEditingController currency = TextEditingController();
+  TextEditingController currency = TextEditingController();
   TextEditingController product = TextEditingController();
   TextEditingController price = TextEditingController();
   Future? future;
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  
-
 
   onSubmit() {
     if (!_formkey.currentState!.validate()) {
       return null;
     }
 
-     Map<String, dynamic> params = {
+    Map<String, dynamic> params = {
       "currency_id": currencyId,
       "product_id": productId,
       "price": double.parse(price.text),
@@ -82,35 +76,34 @@ class _FormProductPrice extends State<FormProductPrice> {
           Expanded(
               child: Column(
             children: [
-                FormControl(
-                  child: AutocompleteCurrencies(
-                    token: widget.token,
-                    onSelect: onSelect,
-                  ),
+              FormControl(
+                child: AutocompleteCurrencies(
+                  token: widget.token,
+                  onSelect: onSelect,
                 ),
-                FormControl(
-                    child: AutocompleteProducts(
-                      token: widget.token,
-                      onSelect: onSelectProduct,
-                    ),
+              ),
+              FormControl(
+                child: AutocompleteProducts(
+                  token: widget.token,
+                  onSelect: onSelectProduct,
                 ),
-                FormControl(
+              ),
+              FormControl(
                   child: InputExchangeRate(
-                    label: 'Precio',
-                    isRequired: true,
-                    future: future,
-                    exchangeRate: price,
-                  )
-                ),
-                FormControl(
-                  child: ElevatedButtonFuture(
-                    onPressed: () => onSubmit(),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
-                    ),
-                    child: const Text('Crear Producto'),
+                label: 'Precio',
+                isRequired: true,
+                future: future,
+                exchangeRate: price,
+              )),
+              FormControl(
+                child: ElevatedButtonFuture(
+                  onPressed: () => onSubmit(),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(50),
                   ),
+                  child: const Text('Crear Producto'),
                 ),
+              ),
             ],
           )),
         ],

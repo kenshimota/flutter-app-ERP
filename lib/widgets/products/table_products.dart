@@ -3,8 +3,8 @@ import 'package:flutter_app_erp/widgets/products/button_delete_product.dart';
 import 'package:flutter_app_erp/widgets/products/button_edit_product.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
-import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
-import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/products/products_response.dart';
 
 class DataTableProducts extends StatefulWidget {

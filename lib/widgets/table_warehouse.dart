@@ -3,7 +3,7 @@ import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart'
 import 'package:flutter_app_erp/widgets/button_edit_warehouse.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/widgets/button_delete_warehouse.dart';
-import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class DataTableWarehouse extends StatefulWidget {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/response/response_base.dart';
 
 class StatesResponse implements ResponseBase {
@@ -15,7 +14,7 @@ class StatesResponse implements ResponseBase {
     required this.updatedAt,
   });
 
-  factory StatesResponse.fromJson(Map<String, dynamic> json){
+  factory StatesResponse.fromJson(Map<String, dynamic> json) {
     return StatesResponse(
       id: json['id'],
       name: json['name'],

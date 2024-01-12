@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/widgets/products/dialog_edit_product.dart';
 import 'package:flutter_app_erp/widgets/products_prices/dialog_edit_product_price.dart';
 import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
-
 
 class ButtonEditProductPrice extends StatelessWidget {
   final void Function()? onSave;
@@ -14,7 +12,6 @@ class ButtonEditProductPrice extends StatelessWidget {
     required this.productPrice,
   });
 
-
   onNewProductPrice(BuildContext context) {
     showDialog(
       context: context,
@@ -25,16 +22,14 @@ class ButtonEditProductPrice extends StatelessWidget {
     );
   }
 
-
   @override
-  Widget build(BuildContext context){
-    return  IconButton(
+  Widget build(BuildContext context) {
+    return IconButton(
       icon: const Icon(Icons.edit),
       onPressed: () => onNewProductPrice(context),
     );
   }
 }
-
 
 class TextButtonEditProductPrice extends StatelessWidget {
   final void Function()? onSave;
@@ -48,7 +43,7 @@ class TextButtonEditProductPrice extends StatelessWidget {
     required this.productPrice,
   });
 
-onNewProductPrice(BuildContext context) {
+  onNewProductPrice(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialogEditProductPrice(

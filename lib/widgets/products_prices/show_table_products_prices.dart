@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/response/products/products_response.dart';
-import 'package:flutter_app_erp/core/http/products_prices/get_list_product_prices.dart';
-import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
-import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
-import 'package:flutter_app_erp/widgets/products_prices/button_new_product_price.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/products_prices/table_products_prices.dart';
 import 'package:flutter_app_erp/widgets/products_prices/toobal_products_prices.dart';
+import 'package:flutter_app_erp/widgets/products_prices/button_new_product_price.dart';
+import 'package:flutter_app_erp/core/http/products_prices/get_list_product_prices.dart';
+import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
 
 class ShowTableProductsPrices extends StatefulWidget {
   final String token;
@@ -115,7 +114,7 @@ class _ShowTableProductsPrices extends State<ShowTableProductsPrices> {
             ),
           ),
           Padding(
-            padding:  const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
@@ -12,7 +11,7 @@ Future<CustomersResponse> createCustomer({
   required String lastName,
   required int identityDocument,
   required String address,
-  required int stateId, 
+  required int stateId,
   required int cityId,
 }) async {
   final env = dotenv.env;
@@ -36,9 +35,8 @@ Future<CustomersResponse> createCustomer({
   });
 
   http.Response response = await http.post(url, headers: hearders, body: body);
-  
 
-   if (response.statusCode == 404) {
+  if (response.statusCode == 404) {
     throw Exception("Hay ocurrido un error en la red, revise su conexión");
   }
 

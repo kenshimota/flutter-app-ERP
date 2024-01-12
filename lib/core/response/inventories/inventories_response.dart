@@ -1,8 +1,6 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_app_erp/core/response/products/products_response.dart';
 import 'package:flutter_app_erp/core/response/response_base.dart';
+import 'package:flutter_app_erp/core/response/products/products_response.dart';
 import 'package:flutter_app_erp/core/response/warehouse/warehouse_response.dart';
 
 class InventoryResponse implements ResponseBase {

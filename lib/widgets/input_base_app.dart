@@ -9,6 +9,7 @@ class InputBaseApp extends StatelessWidget {
   final String? errorText;
   final bool obscureText;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
@@ -25,6 +26,7 @@ class InputBaseApp extends StatelessWidget {
     this.validator,
     this.inputFormatters,
     this.suffixIcon,
+    this.prefixIcon,
   });
 
   void dispose() {
@@ -43,7 +45,8 @@ class InputBaseApp extends StatelessWidget {
           labelText: label,
           errorText: errorText,
           hintText: placeholder,
-                      suffixIcon: suffixIcon,
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
         ),
         validator: validator,
       );
@@ -65,6 +68,7 @@ class InputBaseApp extends StatelessWidget {
             errorText: errorText,
             hintText: placeholder,
             suffixIcon: suffixIcon,
+            prefixIcon: prefixIcon,
           ),
           validator: validator,
         );

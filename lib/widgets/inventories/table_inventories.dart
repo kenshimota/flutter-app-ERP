@@ -4,8 +4,8 @@ import 'package:flutter_app_erp/widgets/inventories/button_delete_inventory.dart
 import 'package:flutter_app_erp/widgets/inventories/button_edit_inventory.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
-import 'package:flutter_app_erp/core/ formatters/date_formatter_app.dart';
-import 'package:flutter_app_erp/core/ formatters/number_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
+import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 
 class DataTableInventories extends StatefulWidget {
   final int numberPage;
