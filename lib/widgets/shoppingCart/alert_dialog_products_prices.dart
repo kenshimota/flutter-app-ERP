@@ -20,10 +20,10 @@ class _AlertDialogProductsPrices extends State<AlertDialogProductsPrices> {
     final String? token = authProvider.getToken();
 
     return Dialog.fullscreen(
-        child: MultiProvider(
+      /*  child: MultiProvider(
       providers: [
         
-      ],
+      ],*/
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,6 +34,6 @@ class _AlertDialogProductsPrices extends State<AlertDialogProductsPrices> {
           //CardProductsPrices(token: token ?? ""),
         ],
       ),
-    ));
+    );
   }
 }

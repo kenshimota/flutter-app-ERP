@@ -33,7 +33,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
 
   Future<void> onRequestApi() async {
     final List<ProductsPricesResponse> productsPrices =
-        await getListProductsPricesResponse(
+        await getListProductsPrices(
       token: widget.token,
       search: search,
       page: numberPage,

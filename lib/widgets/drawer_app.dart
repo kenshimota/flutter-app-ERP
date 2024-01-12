@@ -84,6 +84,12 @@ class DrawerApp extends StatelessWidget {
           title: "Pedido",
           pathname: "/orders",
           leading: const Icon(Icons.shop),
+        ),
+         listItemRouter(
+          context: context,
+          title: "Productos Precios",
+          pathname: "/products_prices",
+          leading: const Icon(Icons.price_change),
         )
       ],
     );

@@ -31,7 +31,11 @@ class AutocompleteProductsState extends State<AutocompleteProducts> {
     );
 
     final List<Map<String, dynamic>> options = products
-        .map((e) => ({"name": "${e.code} - ${e.name}", "id": e.id}))
+        .map((e) => ({
+          "id": e.id,
+          "name": e.name, 
+          "code": e.code,  
+        }))
         .toList();
 
     setState(() {
@@ -53,7 +57,7 @@ class AutocompleteProductsState extends State<AutocompleteProducts> {
       suggestionsCallback: onRequestApi,
       itemBuilder: (context, itemData) {
         return ListTile(
-          title: Text(itemData['name']),
+          title: Text("${itemData['name']} ${itemData['code']}"),
         );
       },
       onSuggestionSelected: (itemData) {

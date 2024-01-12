@@ -23,12 +23,13 @@ class _CardProductsPrices extends State<CardProductsPrices> {
 
   @override
   void initState() {
+    super.initState();
     onRequest();
   }
 
   Future<void> onRequestApi() async {
     final List<ProductsPricesResponse> productPrice =
-        await getListProductsPricesResponse(
+        await getListProductsPrices(
       token: widget.token,
     );
 
