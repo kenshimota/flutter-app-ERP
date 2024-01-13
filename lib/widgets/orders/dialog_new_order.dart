@@ -32,7 +32,6 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
     });
   }
 
-
   Widget buildContent(BuildContext context) {
     if (isFound == null) {
       return FormOrdersSearch(
@@ -51,7 +50,7 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
 
     return FormCustomer(
       token: widget.token,
-      onSave: getCustomer, 
+      onSave: getCustomer,
     );
   }
 
@@ -62,14 +61,14 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
       return const TypographyApp(text: "Crear pedido", variant: "h4");
     }
     return const TypographyApp(
-      text: "Crear cliente", 
+      text: "Crear cliente",
       variant: "h4",
     );
   }
 
   double buildHeight() {
     if (isFound == null) {
-      return 320;
+      return 340;
     }
 
     if (isFound == true) {
@@ -88,7 +87,9 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
   Widget build(BuildContext context) {
     return AlertDialogApp(
       maxHeight: buildHeight(),
-      title: Center(child: buildTitle(context),), 
+      title: Center(
+        child: buildTitle(context),
+      ),
       content: [
         Expanded(
           child: buildContent(context),

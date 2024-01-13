@@ -8,6 +8,7 @@ class InputIdentityDocument extends StatelessWidget {
   final String? label;
   final Future? future;
   final String? errorText;
+  final Widget? prefixIcon;
   final TextEditingController? controller;
 
   const InputIdentityDocument({
@@ -17,21 +18,21 @@ class InputIdentityDocument extends StatelessWidget {
     this.enabled = true,
     this.errorText,
     this.future,
+    this.prefixIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     final List<String? Function(String?)> listValidations = [
-      Validatorless.min(
-        7,
-        'debe tener minimo 7 caracteres',
-      ),
-      Validatorless.max(10,
-          'debe tener máximo 10 caracteres'),
+      Validatorless.min(7, 'debe tener minimo 7 caracteres'),
+      Validatorless.required("Es requerido"),
+      Validatorless.max(10, 'debe tener máximo 10 caracteres'),
+      Validatorless.number("El valor ingresado no es numerico"),
     ];
 
     return InputBaseApp(
       enabled: enabled,
+      prefixIcon: prefixIcon,
       inputFormatters: [
         NumberTextInputFormatter(
           decimalDigits: 2,
