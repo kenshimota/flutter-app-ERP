@@ -6,15 +6,26 @@ import 'package:flutter_app_erp/core/response/orders_items/orders_items_response
 
 Future<List<OrdersItemsResponse>> getListOrdersItemsResponse({
   required String token,
+  int page = 1,
+  int? orderId,
+  bool metadata = false,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/orders_items?metadata=1";
+  String path = "$hostname/orders_items?page=$page";
 
-   final Map<String, String> headers = {
+  final Map<String, String> headers = {
     'content-Type': 'application/json',
     "Authorization": "Bearer $token",
   };
+
+  if (orderId != null) {
+    path = "$path&order_id=$orderId";
+  }
+
+  if (metadata) {
+    path = "$path&metadata=1";
+  }
 
   final Uri url = Uri.parse(path);
 

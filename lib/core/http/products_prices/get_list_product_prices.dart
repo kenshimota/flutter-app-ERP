@@ -10,6 +10,8 @@ Future<List<ProductsPricesResponse>> getListProductsPrices({
   String search = '',
   int page = 1,
   int? currencyId,
+  int? takeOffOrderId,
+  bool onlyAvailable = false,
   Map<String, dynamic>? order,
   bool metadata = false,
 }) async {
@@ -33,8 +35,16 @@ Future<List<ProductsPricesResponse>> getListProductsPrices({
     path = "$path&metadata=1";
   }
 
+  if (onlyAvailable) {
+    path = "$path&available=1";
+  }
+
   if (currencyId != null) {
     path = "$path&currency_id=$currencyId";
+  }
+
+  if (takeOffOrderId != null) {
+    path = "$path&filter_order_id=${takeOffOrderId}";
   }
 
   debugPrint(path);

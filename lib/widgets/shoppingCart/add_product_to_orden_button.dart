@@ -4,10 +4,12 @@ import 'package:flutter_app_erp/widgets/shoppingCart/add_quantity_of_product.dar
 
 class AddProductToOrdenButton extends StatefulWidget {
   final int productId;
+  final Function()? onAdded;
 
   const AddProductToOrdenButton({
     super.key,
     required this.productId,
+    this.onAdded,
   });
 
   @override
@@ -23,6 +25,11 @@ class _AddProductToOrdenButton extends State<AddProductToOrdenButton> {
     });
   }
 
+  onAdded() {
+    onClose();
+    widget.onAdded!();
+  }
+
   onAdd() {
     setState(() {
       showButton = false;
@@ -34,6 +41,7 @@ class _AddProductToOrdenButton extends State<AddProductToOrdenButton> {
     if (showButton == false) {
       return AddQuantityProducts(
         onClose: onClose,
+        onAdded: onAdded,
         productId: widget.productId,
       );
     }

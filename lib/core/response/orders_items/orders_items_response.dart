@@ -12,7 +12,7 @@ class OrdersItemsResponse implements ResponseBase {
   final ProductsResponse? product;
   final OrdersResponse? order;
   final CurrenciesResponse? currency;
-  final double priceWithutTax;
+  final double priceWithoutTax;
   final double price;
   final int quantity;
   final double subtotal;
@@ -30,7 +30,7 @@ class OrdersItemsResponse implements ResponseBase {
     required this.product,
     required this.order,
     required this.currency,
-    required this.priceWithutTax,
+    required this.priceWithoutTax,
     required this.price,
     required this.quantity,
     required this.subtotal,
@@ -55,7 +55,7 @@ class OrdersItemsResponse implements ResponseBase {
       currency: json["currency"] == null
           ? null
           : CurrenciesResponse.fromJson(json["currency"]),
-      priceWithutTax: double.parse(json['price_without_tax']),
+      priceWithoutTax: double.parse(json['price_without_tax']),
       price: double.parse(json['price']),
       quantity: json['quantity'],
       subtotal: double.parse(json['subtotal']),

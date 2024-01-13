@@ -4,6 +4,7 @@ import 'package:flutter_app_erp/core/response/products_prices/products_prices_re
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/container_order_data.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/toobal_shopping_cart.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/show_lists_products_prices.dart';
 
@@ -27,6 +28,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
   int numberPage = 1;
   Future? futureList;
   Map<String, String>? order;
+  bool showShop = false;
 
   List<ProductsPricesResponse> result = <ProductsPricesResponse>[];
 
@@ -45,6 +47,8 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
       search: search,
       metadata: true,
       page: numberPage,
+      onlyAvailable: true,
+      takeOffOrderId: widget.orderId,
       currencyId: widget.currencyId,
     );
 
@@ -82,6 +86,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
         Expanded(
           child: ShowListProductsPricesCards(
             list: result,
+            onAdded: onRequest,
           ),
         ),
       ],
@@ -96,7 +101,10 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
         ),
         Container(
           width: 400,
-          color: Colors.red,
+          color: const Color(0xf1f1f1f1),
+          child: ContainerOrderData(
+            onAfterSave: onRequest,
+          ),
         ),
       ],
     );
@@ -123,8 +131,10 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 color: Colors.white,
-                icon: const Icon(Icons.shopping_cart),
-                onPressed: () => Navigator.pop(context),
+                icon: Icon(showShop ? Icons.shopping_cart : Icons.shop_2),
+                onPressed: () => setState(() {
+                  showShop = !showShop;
+                }),
               )),
         ],
       ),
@@ -135,14 +145,19 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
     return Row(
       children: [
         Expanded(
-            child: Column(
-          children: [
-            buildNavbar(context: context),
-            Expanded(
-              child: buildListPrices(context: context),
-            )
-          ],
-        ))
+          child: Column(
+            children: [
+              buildNavbar(context: context),
+              Expanded(
+                child: showShop
+                    ? ContainerOrderData(
+                        onAfterSave: onRequest,
+                      )
+                    : buildListPrices(context: context),
+              )
+            ],
+          ),
+        )
       ],
     );
   }

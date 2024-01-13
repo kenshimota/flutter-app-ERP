@@ -6,13 +6,13 @@ import 'package:flutter_app_erp/widgets/shoppingCart/add_product_to_orden_button
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class ShowCardItem extends StatelessWidget {
-  final void Function()? onAdd;
+  final void Function()? onAdded;
   final ProductsPricesResponse productPrice;
 
   const ShowCardItem({
     super.key,
     required this.productPrice,
-    this.onAdd,
+    this.onAdded,
   });
 
   @override
@@ -62,6 +62,7 @@ class ShowCardItem extends StatelessWidget {
                           ),
                           FormControl(
                             child: AddProductToOrdenButton(
+                              onAdded: onAdded,
                               productId: productPrice.productId,
                             ),
                           ),

@@ -5,10 +5,12 @@ import 'package:flutter_app_erp/widgets/shoppingCart/modelo_card_product_price.d
 
 class ShowListProductsPricesCards extends StatefulWidget {
   final List<ProductsPricesResponse> list;
+  final Function()? onAdded;
 
   const ShowListProductsPricesCards({
     super.key,
     required this.list,
+    this.onAdded,
   });
 
   @override
@@ -24,7 +26,10 @@ class _ShowListProductsPricesCards extends State<ShowListProductsPricesCards> {
     List<Widget> children = [];
 
     for (final ProductsPricesResponse productPrice in widget.list) {
-      children.add(ShowCardItem(productPrice: productPrice));
+      children.add(ShowCardItem(
+        productPrice: productPrice,
+        onAdded: widget.onAdded,
+      ));
 
       if (children.length == maxRow) {
         rows.add(Row(

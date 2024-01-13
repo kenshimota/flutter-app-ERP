@@ -19,7 +19,8 @@ final Map<String, TextStyle? Function(BuildContext)> _colors = {
   "primary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "secondary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "white": (BuildContext context) => const TextStyle(color: Colors.white),
-  "error": (BuildContext context) => TextStyle(color: Theme.of(context).colorScheme.error),
+  "error": (BuildContext context) =>
+      TextStyle(color: Theme.of(context).colorScheme.error),
 };
 
 class TypographyApp extends StatelessWidget {

@@ -4,16 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/providers/cartProvider.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
-import 'package:flutter_app_erp/core/http/ordens_items/create_order_item.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/input_quantity_of_product.dart';
 
 class AddQuantityProducts extends StatefulWidget {
   final int productId;
+  final Function()? onAdded;
   final Function()? onClose;
 
   const AddQuantityProducts({
     super.key,
     this.onClose,
+    this.onAdded,
     required this.productId,
   });
 
@@ -33,14 +34,13 @@ class _AddQuantityProducts extends State<AddQuantityProducts> {
     final String token = authProvider.getToken() as String;
 
     try {
-      await createOrdersItems(
+      await cartProvider.addItem(
         token: token,
         productId: widget.productId,
-        orderId: cartProvider.orderId,
         quantity: int.parse(quantity.text),
       );
 
-      widget.onClose!();
+      widget.onAdded!();
     } on FormErrors catch (e) {
       setState(() {
         errors = e;
@@ -48,8 +48,6 @@ class _AddQuantityProducts extends State<AddQuantityProducts> {
     } catch (e) {
       debugPrint("$e");
     }
-
-    debugPrint("ocurrio");
   }
 
   onSubmit({required BuildContext context}) {
