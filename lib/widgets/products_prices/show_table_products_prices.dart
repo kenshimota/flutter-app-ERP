@@ -41,6 +41,7 @@ class _ShowTableProductsPrices extends State<ShowTableProductsPrices> {
       order: order,
       page: numberPage,
       search: search,
+      metadata: true,
     );
 
     setState(() {

@@ -58,12 +58,11 @@ class _TableProductsPrices extends State<TableProductsPrices> {
         .map((productPrice) => DataRow(cells: <DataCell>[
               DataCell(TypographyApp(
                   text:
-                      "${productPrice.currency!.code} (${productPrice.currency!.symbol})"
-                          .trim(),
+                      "${productPrice.currency?.code}, (${productPrice.currency?.symbol})",
                   variant: "body1")),
               DataCell(TypographyApp(
                 text:
-                    "${productPrice.product!.code} (${productPrice.product!.name})",
+                    "${productPrice.product?.code} (${productPrice.product?.name})",
                 variant: "body1",
               )),
               DataCell(TypographyApp(

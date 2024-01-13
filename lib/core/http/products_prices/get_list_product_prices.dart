@@ -43,6 +43,8 @@ Future<List<ProductsPricesResponse>> getListProductsPrices({
 
   http.Response response = await http.get(url, headers: headers);
 
+
+  debugPrint("${response.statusCode}");
   if (response.statusCode == 401) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     throw AuthErrors(message: json["error"]);
