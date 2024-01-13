@@ -59,9 +59,7 @@ class ListTileProductPrice extends StatelessWidget {
       leading: const CircleAvatar(
         child: Icon(Icons.production_quantity_limits),
       ),
-      title: TypographyApp(
-        text: "${productPrice.product!.name}",
-      ),
+      title: TypographyApp(text: "${productPrice.product!.name}", variant: "subtitle1",),
       heightContent: 100,
       content: ListTileContentProductsPrices(
         productPrice: productPrice,
@@ -103,7 +101,7 @@ class ListTileProductsPrices extends StatelessWidget {
       future: future,
       onNext: onForward,
       listItems: productPrice,
-      buildItems: (context, item) => buildItem(context, item),
+      buildItems: (context, product) => buildItem(context, product,),
     );
   }
 }
