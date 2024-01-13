@@ -6,14 +6,13 @@ import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 
-Future<OrdersResponse> createOrders({
+Future<OrdersResponse> createInvoice({
   required String token,
-  required int customerId,
-  required int currencyId,
+  required int orderId,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
-  final Uri url = Uri.parse("$hostname/orders");
+  final Uri url = Uri.parse("$hostname/invoices");
 
   final Map<String, String> hearders = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -21,9 +20,8 @@ Future<OrdersResponse> createOrders({
   };
 
   String body = jsonEncode({
-    "order": {
-      "customer_id": customerId,
-      "currency_id": currencyId,
+    "invoice": {
+      "order_id": orderId,
     }
   });
 

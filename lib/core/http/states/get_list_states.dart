@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_app_erp/core/response/states/response_states.dart'; 
+import 'package:flutter_app_erp/core/response/states/response_states.dart';
 
 Future<List<StatesResponse>> getListStates({
   required String token,
@@ -13,21 +13,18 @@ Future<List<StatesResponse>> getListStates({
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
   String path = "$hostname/states?q=$search";
-  
 
-  if(order != null &&
-    order.containsKey('field') &&
-    order.containsKey('type')) {
-    path = '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
+  if (order != null &&
+      order.containsKey('field') &&
+      order.containsKey('type')) {
+    path =
+        '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
   }
 
   final Map<String, String> hearders = {
     'content-Type': 'application/json',
     "Authorization": "Bearer $token",
   };
-
-  debugPrint(  env.toString() );
-  debugPrint('${path}');
 
   final Uri url = Uri.parse(path);
 
@@ -52,5 +49,4 @@ Future<List<StatesResponse>> getListStates({
         (e) => StatesResponse.fromJson(e),
       )
       .toList();
-
 }

@@ -3,6 +3,7 @@ import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/providers/cartProvider.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/button_create_invoice.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/list_order_items.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:provider/provider.dart';
@@ -124,6 +125,14 @@ class ContainerOrderData extends StatelessWidget {
                 child: buildFooter(order),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ButtonCreateInvoice(
+                onSave: onAfterInvoice,
+                orderId: cartProvider.orderId,
+                disabled: cartProvider.articles.isEmpty,
+              ),
+            )
           ],
         ))
       ],

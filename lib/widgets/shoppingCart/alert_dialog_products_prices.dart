@@ -7,11 +7,13 @@ import 'package:flutter_app_erp/widgets/shoppingCart/show_prducts_prices.dart';
 class AlertDialogProductsPrices extends StatefulWidget {
   final int orderId;
   final int currencyId;
+  final Function()? onSave;
 
   const AlertDialogProductsPrices({
     super.key,
     required this.orderId,
     required this.currencyId,
+    this.onSave,
   });
 
   @override
@@ -41,6 +43,7 @@ class _AlertDialogProductsPrices extends State<AlertDialogProductsPrices> {
                 token: token ?? '',
                 currencyId: widget.currencyId,
                 orderId: widget.orderId,
+                onSave: widget.onSave,
               ),
             ),
             //CardProductsPrices(token: token ?? ""),

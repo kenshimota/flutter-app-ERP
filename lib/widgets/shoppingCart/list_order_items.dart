@@ -32,6 +32,8 @@ class ListTileItem extends StatelessWidget {
     final String symbol = item.currency!.symbol;
     final quantityStr = NumberFormatterApp.amount(item.quantity);
     final amountStr = NumberFormatterApp.format(item.priceWithoutTax);
+    final subtotalStr = NumberFormatterApp.format(item.subtotal);
+    final taxAmountStr = NumberFormatterApp.format(item.taxAmount);
     final totalStr = NumberFormatterApp.format(item.total);
 
     return ListTileApp(
@@ -39,12 +41,38 @@ class ListTileItem extends StatelessWidget {
         child: Icon(Icons.shopping_bag),
       ),
       title: TypographyApp(text: item.product!.name, variant: "subtitle1"),
-      subtitle: Row(children: [
-        TypographyApp(
-            text: "$quantityStr x $amountStr $symbol".trim(), variant: "body1"),
-        Expanded(child: Container()),
-        TypographyApp(text: "$totalStr $symbol".trim(), variant: "body1")
-      ]),
+      subtitle: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          TypographyApp(
+            text: "$quantityStr x $amountStr $symbol".trim(),
+            variant: "body1",
+          ),
+          Expanded(child: Container()),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TypographyApp(
+                    text: "Subtotal: $subtotalStr $symbol".trim(),
+                    variant: "subtitle2",
+                  ),
+                  TypographyApp(
+                    text: "Impuesto: $taxAmountStr $symbol".trim(),
+                    variant: "subtitle2",
+                  ),
+                  TypographyApp(
+                    text: "Total: $totalStr $symbol".trim(),
+                    variant: "subtitle2",
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
+      ),
       trailing: IconButton(
         icon: const Icon(Icons.delete),
         onPressed: () => onDelete(context: context),

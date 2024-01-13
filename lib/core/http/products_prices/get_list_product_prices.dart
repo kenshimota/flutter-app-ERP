@@ -47,14 +47,10 @@ Future<List<ProductsPricesResponse>> getListProductsPrices({
     path = "$path&filter_order_id=${takeOffOrderId}";
   }
 
-  debugPrint(path);
-
   final Uri url = Uri.parse(path);
 
   http.Response response = await http.get(url, headers: headers);
 
-
-  debugPrint("${response.statusCode}");
   if (response.statusCode == 401) {
     final Map<String, dynamic> json = jsonDecode(response.body);
     throw AuthErrors(message: json["error"]);

@@ -5,6 +5,7 @@ Widget buttonShoppingCart({
   required int orderId,
   required int currencyId,
   required BuildContext context,
+  Function()? onSave,
 }) {
   return IconButton(
     onPressed: () => showDialog(
@@ -12,6 +13,7 @@ Widget buttonShoppingCart({
       builder: (BuildContext context) => AlertDialogProductsPrices(
         currencyId: currencyId,
         orderId: orderId,
+        onSave: onSave,
       ),
     ),
     icon: const Icon(Icons.shopping_cart),

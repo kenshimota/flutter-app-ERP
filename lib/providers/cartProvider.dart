@@ -35,11 +35,10 @@ class CartProvider extends ChangeNotifier {
 
   Future<void> getItems({required String token}) async {
     int page = 1;
-    bool first = false;
 
     List<OrdersItemsResponse> list = [];
 
-    while (!first || list.length == 20) {
+    while (list.length == 20 * (page - 1)) {
       list = await getListOrdersItemsResponse(
         token: token,
         page: page,
@@ -51,7 +50,7 @@ class CartProvider extends ChangeNotifier {
         articles.add(item);
       }
 
-      first = true;
+      page += 1;
     }
   }
 

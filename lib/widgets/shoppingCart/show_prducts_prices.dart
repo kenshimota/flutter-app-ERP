@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/products_prices/get_list_product_prices.dart';
+import 'package:flutter_app_erp/core/response/orders_items/orders_items_response.dart';
 import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
@@ -12,11 +13,14 @@ class ShowProductsPrices extends StatefulWidget {
   final int orderId;
   final String token;
   final int currencyId;
+  final Function()? onSave;
+
   const ShowProductsPrices({
     super.key,
     required this.token,
     required this.currencyId,
     required this.orderId,
+    this.onSave,
   });
 
   @override
@@ -53,7 +57,9 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
     );
 
     setState(() {
-      result = productsPrices;
+      final int count = (numberPage - 1) * 20;
+      final List<ProductsPricesResponse> auxList = result.sublist(0, count);
+      result = auxList + productsPrices;
     });
   }
 
@@ -63,13 +69,39 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
     });
   }
 
+  onNext() {
+    setState(() {
+      numberPage = numberPage + 1;
+    });
+
+    onRequest();
+  }
+
   onSearch(String s) {
     setState(() {
       search = s;
       numberPage = 1;
+      result = [];
     });
 
     onRequest();
+  }
+
+  onAddedCart() {
+    setState(() {
+      numberPage = 1;
+    });
+
+    onRequest();
+  }
+
+  onClose(context) {
+    Navigator.pop(context);
+  }
+
+  onAfterInvoice() {
+    onClose(context);
+    widget.onSave!();
   }
 
   buildListPrices({required BuildContext context}) {
@@ -86,7 +118,9 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
         Expanded(
           child: ShowListProductsPricesCards(
             list: result,
-            onAdded: onRequest,
+            future: futureList,
+            onAdded: onAddedCart,
+            onNext: onNext,
           ),
         ),
       ],
@@ -104,6 +138,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
           color: const Color(0xf1f1f1f1),
           child: ContainerOrderData(
             onAfterSave: onRequest,
+            onAfterInvoice: onAfterInvoice,
           ),
         ),
       ],
@@ -121,7 +156,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
             child: IconButton(
               color: Colors.white,
               icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => onClose(context),
             ),
           ),
           Expanded(
@@ -152,6 +187,7 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
                 child: showShop
                     ? ContainerOrderData(
                         onAfterSave: onRequest,
+                        onAfterInvoice: onAfterInvoice,
                       )
                     : buildListPrices(context: context),
               )

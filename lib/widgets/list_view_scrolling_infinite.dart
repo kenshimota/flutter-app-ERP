@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class ListViewScrollingInfinite extends StatefulWidget {
   final List<Widget>? children;
   final void Function()? onNext;
+  final bool countChildren;
 
   const ListViewScrollingInfinite({
     super.key,
     this.onNext,
     this.children,
+    this.countChildren = true,
   });
 
   @override
@@ -30,7 +32,8 @@ class _ListViewScrollingInfinite extends State<ListViewScrollingInfinite> {
     double maxScrollExtent = _scrollController.position.maxScrollExtent;
     bool outOfRange = _scrollController.position.outOfRange;
 
-    if (auxChildren.isEmpty || auxChildren.length % 20 != 0) {
+    if (auxChildren.isEmpty ||
+        (widget.countChildren && auxChildren.length % 20 != 0)) {
       return;
     }
 

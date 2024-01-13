@@ -16,11 +16,11 @@ class OrdersResponse implements ResponseBase {
   final int productsCount;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final int orderStatusId;
   final CustomersResponse? customer;
   final CurrenciesResponse? currency;
   final UserResponse? user;
   Map<String, dynamic> attributes;
-
 
   OrdersResponse({
     required this.id,
@@ -36,33 +36,38 @@ class OrdersResponse implements ResponseBase {
     this.customer,
     this.currency,
     this.user,
+    required this.orderStatusId,
     required this.attributes,
     required this.userId,
   });
 
-  factory OrdersResponse.fromJson(Map<String, dynamic> json){
+  factory OrdersResponse.fromJson(Map<String, dynamic> json) {
     return OrdersResponse(
       id: json['id'],
       customerId: json['customer_id'],
       attributes: json,
-      user: json["user"] == null ? null : UserResponse.fromJson(json["user"]), 
+      user: json["user"] == null ? null : UserResponse.fromJson(json["user"]),
       userId: json["user_id"],
       currencyId: json['currency_id'],
       number: json["number"],
-      subtotal: double.parse( json["subtotal"] ),
-      total: double.parse( json["total"] ),
+      subtotal: double.parse(json["subtotal"]),
+      total: double.parse(json["total"]),
       productsCount: json["products_count"],
-      taxAmount: double.parse( json["tax_amount"] ),
-      createdAt: DateTime.parse(json['created_at']), 
+      taxAmount: double.parse(json["tax_amount"]),
+      createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
-      customer: json["customer"] != null ? CustomersResponse.fromJson(json["customer"]) : null,
-      currency: json["currency"] != null ? CurrenciesResponse.fromJson(json["currency"]) : null,
+      orderStatusId: json["orders_status_id"],
+      customer: json["customer"] != null
+          ? CustomersResponse.fromJson(json["customer"])
+          : null,
+      currency: json["currency"] != null
+          ? CurrenciesResponse.fromJson(json["currency"])
+          : null,
     );
   }
 
-   @override
+  @override
   String toString() {
     return jsonEncode(json);
   }
 }
-

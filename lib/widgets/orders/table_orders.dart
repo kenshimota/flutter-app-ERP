@@ -4,6 +4,7 @@ import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/orders/button_delete_orders.dart';
+import 'package:flutter_app_erp/widgets/orders/button_print_invoice.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/button_shopping_cart.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
@@ -59,6 +60,33 @@ class _DataTableOrdersState extends State<DataTableOrders> {
     widget.onOrden!({'field': list[n], 'type': type});
   }
 
+  List<Widget> buildActions({
+    required BuildContext context,
+    required OrdersResponse order,
+  }) {
+    if (order.orderStatusId == 1) {
+      return [
+        buttonShoppingCart(
+          context: context,
+          currencyId: order.currencyId,
+          orderId: order.id,
+          onSave: widget.onAfterDelete,
+        ),
+        const SizedBox(
+          width: 8,
+          height: 8,
+        ),
+        DeleteButtonOrders(
+          orderId: order.id,
+          context: context,
+          onAfterDelete: widget.onAfterDelete,
+        ),
+      ];
+    }
+
+    return [ButtonPrintInvoice(orderId: order.id)];
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<DataRow> rows = widget.list
@@ -103,22 +131,7 @@ class _DataTableOrdersState extends State<DataTableOrders> {
                   variant: "body1")),
               DataCell(
                 Row(
-                  children: [
-                    buttonShoppingCart(
-                      context: context,
-                      currencyId: order.currencyId,
-                      orderId: order.id,
-                    ),
-                    const SizedBox(
-                      width: 8,
-                      height: 8,
-                    ),
-                    DeleteButtonOrders(
-                      orderId: order.id,
-                      context: context,
-                      onAfterDelete: widget.onAfterDelete,
-                    ),
-                  ],
+                  children: buildActions(context: context, order: order),
                 ),
               ),
             ]))
