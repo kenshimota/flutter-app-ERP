@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/container_white.dart';
+import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/products_prices/list_tile_products_prices.dart';
 import 'package:flutter_app_erp/widgets/products_prices/table_products_prices.dart';
 import 'package:flutter_app_erp/widgets/products_prices/toobal_products_prices.dart';
 import 'package:flutter_app_erp/widgets/products_prices/button_new_product_price.dart';
@@ -104,14 +106,22 @@ class _ShowTableProductsPrices extends State<ShowTableProductsPrices> {
           ),
           Expanded(
             child: ContainerWhite(
-              child: TableProductsPrices(
+              child: LayourtTwiceBuilder(
+                mobile: ListTileProductsPrices(
+                  productPrice: result,
+                   page: numberPage,
+                  future: futureList,
+                  onForward: onForwad,
+                  onAfterChange: onRequest,
+                ),
+                desktop: TableProductsPrices(
                 list: result,
                 onOrden: onSortOrder,
                 onBack: onBack,
                 onForwad: onForwad,
                 numberPage: numberPage,
                 onAfterDelete: onRequest,
-              ),
+              ),),
             ),
           ),
           Padding(
