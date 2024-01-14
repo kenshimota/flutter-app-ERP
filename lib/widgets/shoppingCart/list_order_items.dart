@@ -90,10 +90,15 @@ class ListOrderItems extends StatelessWidget {
     required BuildContext context,
     required OrdersItemsResponse item,
   }) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
+    final Color background = currentBrightness == Brightness.dark
+        ? Color.fromARGB(255, 34, 34, 34)
+        : Colors.white;
+
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Container(
-        color: Colors.white,
+        color: background,
         child: Row(
           children: [
             Expanded(

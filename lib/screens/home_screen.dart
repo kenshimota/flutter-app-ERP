@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_app_erp/widgets/scaffold_app.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ScaffoldApp(
       title: "Inicio",
-      body: Text("Inicio home"),
+      body: TypographyApp(text: "Inicio home"),
     );
   }
 }

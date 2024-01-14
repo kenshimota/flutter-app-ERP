@@ -92,6 +92,7 @@ class _DataTableOrdersState extends State<DataTableOrders> {
     final List<DataRow> rows = widget.list
         .map((order) => DataRow(cells: <DataCell>[
               DataCell(TypographyApp(
+                color: "inherit",
                 text: NumberFormatterApp.filled(order.number),
                 variant: "body",
               )),

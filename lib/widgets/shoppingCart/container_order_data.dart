@@ -71,7 +71,7 @@ class ContainerOrderData extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(right: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -102,6 +102,9 @@ class ContainerOrderData extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final OrdersResponse? order = cartProvider.order;
+    final Brightness currentBrightness = Theme.of(context).brightness;
+    final Color background =
+        currentBrightness == Brightness.dark ? Color(0x10101010) : Colors.white;
 
     return Row(
       children: [
@@ -111,19 +114,19 @@ class ContainerOrderData extends StatelessWidget {
             buildTitle(),
             Expanded(
               child: Container(
-                color: const Color(0xf1f1f1f1),
+                color: background,
                 child: ListOrderItems(
                   onAfterSave: onAfterSave,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 120,
-                color: Colors.white,
-                child: buildFooter(order),
-              ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 80,
+              color: background,
+              child: buildFooter(order),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class InputSearch extends StatefulWidget {
   final Function(String)? onSearch;
-  const InputSearch({ super. key, this.onSearch});
+  const InputSearch({super.key, this.onSearch});
   @override
   _InputSearchState createState() => _InputSearchState();
 }
@@ -26,19 +26,24 @@ class _InputSearchState extends State<InputSearch> {
 
     _debounceTimer = Timer(const Duration(seconds: 1), () {
       // Aquí puedes realizar alguna acción después de que el usuario termine de escribir
-     widget.onSearch!(newText);
+      widget.onSearch!(newText);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final Color? fillColor = Theme.of(context).inputDecorationTheme.fillColor;
+
     return TextField(
       controller: _textEditingController,
       onChanged: _onTextChanged,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         hintText: 'Escribe algo...',
-        prefixIcon: IconButton(onPressed: null, icon: Icon(Icons.search),),
-        fillColor: Colors.white,
+        prefixIcon: const IconButton(
+          onPressed: null,
+          icon: Icon(Icons.search),
+        ),
+        fillColor: fillColor,
         filled: true,
       ),
     );

@@ -145,12 +145,17 @@ class _TextAboutToGoToSignup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
     Color? color = Theme.of(context).colorScheme.surface;
 
     return RichText(
       text: TextSpan(
         text: '¿No tienes una cuenta? ',
-        style: const TextStyle(color: Colors.black, fontSize: 18),
+        style: TextStyle(
+            color: currentBrightness == Brightness.dark
+                ? const Color(0xf9f9f9f9)
+                : Colors.black,
+            fontSize: 18),
         children: [
           TextSpan(
             recognizer: TapGestureRecognizer()

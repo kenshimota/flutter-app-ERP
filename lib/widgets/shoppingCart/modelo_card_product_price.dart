@@ -17,8 +17,11 @@ class ShowCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color background =
+        Theme.of(context).dialogTheme.backgroundColor ?? Colors.white;
+
     return Card(
-        color: Colors.white,
+        color: background,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         margin: const EdgeInsets.all(15),
         elevation: 10,

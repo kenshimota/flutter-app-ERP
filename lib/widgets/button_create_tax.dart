@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
+import 'package:flutter_app_erp/widgets/typography.dart';
 
 class ButtonCreateTax extends StatelessWidget {
   final Icon icon;
@@ -24,7 +25,7 @@ class ButtonCreateTax extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          const Text('Guardar'),
+          const TypographyApp(text: 'Guardar'),
         ],
       ),
     );

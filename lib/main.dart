@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: router,
         title: 'Flutter Demo',
-        theme: themeLight,
-        darkTheme: themeDark,
+        theme: themeLight(),
+        darkTheme: themeDark(),
       ),
 
       // home:   // const MyHomePage(title: 'Flutter Demo Home Page'),

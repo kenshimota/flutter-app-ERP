@@ -128,6 +128,10 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
   }
 
   Widget buildDesktop({required BuildContext context}) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
+    final Color background =
+        currentBrightness == Brightness.dark ? Colors.grey : Color(0xdddddddd);
+
     return Row(
       children: [
         Expanded(
@@ -135,10 +139,13 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
         ),
         Container(
           width: 400,
-          color: const Color(0xf1f1f1f1),
-          child: ContainerOrderData(
-            onAfterSave: onRequest,
-            onAfterInvoice: onAfterInvoice,
+          color: background,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: ContainerOrderData(
+              onAfterSave: onRequest,
+              onAfterInvoice: onAfterInvoice,
+            ),
           ),
         ),
       ],
@@ -177,6 +184,11 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
   }
 
   Widget buildMobile({required BuildContext context}) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
+    final Color background = currentBrightness == Brightness.dark
+        ? Color.fromARGB(194, 13, 13, 13)
+        : const Color(0xdddddddd);
+
     return Row(
       children: [
         Expanded(
@@ -184,12 +196,15 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
             children: [
               buildNavbar(context: context),
               Expanded(
-                child: showShop
-                    ? ContainerOrderData(
-                        onAfterSave: onRequest,
-                        onAfterInvoice: onAfterInvoice,
-                      )
-                    : buildListPrices(context: context),
+                child: Container(
+                  color: background,
+                  child: showShop
+                      ? ContainerOrderData(
+                          onAfterSave: onRequest,
+                          onAfterInvoice: onAfterInvoice,
+                        )
+                      : buildListPrices(context: context),
+                ),
               )
             ],
           ),
@@ -200,9 +215,16 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
 
   @override
   Widget build(BuildContext context) {
-    return LayourtTwiceBuilder(
-      mobile: buildMobile(context: context),
-      desktop: buildDesktop(context: context),
+    final Brightness currentBrightness = Theme.of(context).brightness;
+    final Color background =
+        currentBrightness == Brightness.dark ? Colors.grey : Colors.white;
+
+    return Container(
+      color: background,
+      child: LayourtTwiceBuilder(
+        mobile: buildMobile(context: context),
+        desktop: buildDesktop(context: context),
+      ),
     );
   }
 }

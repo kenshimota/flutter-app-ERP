@@ -15,7 +15,15 @@ final Map<String, TextStyle? Function(BuildContext)> _variants = {
 };
 
 final Map<String, TextStyle? Function(BuildContext)> _colors = {
-  "inherit": (BuildContext context) => const TextStyle(color: Colors.black),
+  "inherit": (BuildContext context) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
+
+    if (currentBrightness == Brightness.dark) {
+      return const TextStyle(color: Color(0xf9f9f9f9));
+    }
+
+    return const TextStyle(color: Colors.black);
+  },
   "primary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "secondary": (BuildContext context) => const TextStyle(color: Colors.pink),
   "white": (BuildContext context) => const TextStyle(color: Colors.white),
