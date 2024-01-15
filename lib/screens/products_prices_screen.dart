@@ -15,7 +15,7 @@ class ProductsPricesScreen extends StatelessWidget {
     final String? token = authProvider.getToken();
     
     return  ScaffoldApp(
-      title: "Productos precios",
+      title: "Precios",
       body: ShowTableProductsPrices(token: token ?? '' ),
     );
   }

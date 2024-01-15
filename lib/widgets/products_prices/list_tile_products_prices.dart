@@ -55,13 +55,17 @@ class ListTileProductPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String productWithPrice = "(${productPrice.product!.code}) ${productPrice.product!.name}";
     return ListTileApp(
       leading: const CircleAvatar(
         child: Icon(Icons.production_quantity_limits),
       ),
-      title: TypographyApp(text: "${productPrice.product!.name}", variant: "subtitle1",),
-      heightContent: 100,
-      content: ListTileContentProductsPrices(
+      title: TypographyApp(
+        text: productWithPrice, 
+        variant: "subtitle1",
+      ),
+        heightContent: 100,
+        content: ListTileContentProductsPrices(
         productPrice: productPrice,
       ),
     );

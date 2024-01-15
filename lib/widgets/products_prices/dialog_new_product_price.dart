@@ -26,7 +26,7 @@ class _AlertDialogNewProductPrice extends State<AlertDialogNewProductPrice> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const TypographyApp(
-        text: 'Crear Producto con precio',
+        text: 'Crear Precio',
         variant: "h2",
       ),
       actions: [
