@@ -13,7 +13,7 @@ class InventoriesScreen extends StatelessWidget {
     final String? token = authProvider.getToken();
 
     return ScaffoldApp(
-      title: "Inventorio",
+      title: "Inventario",
       body: ShowInfoInventories(token: token ?? ''),
     );
   }

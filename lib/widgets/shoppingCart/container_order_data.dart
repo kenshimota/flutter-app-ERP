@@ -5,6 +5,7 @@ import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/providers/cartProvider.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/button_create_invoice.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/list_order_items.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/print_invoice_from_order.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:provider/provider.dart';
 
@@ -44,6 +45,11 @@ class ContainerOrderData extends StatelessWidget {
   final Function()? onAfterInvoice;
 
   const ContainerOrderData({super.key, this.onAfterInvoice, this.onAfterSave});
+
+  Future<void> onSaveInvoice(CartProvider cart) async {
+    await printInvoiceFromOrder(order: cart.order as OrdersResponse, articles: cart.articles);
+    onAfterInvoice!();
+  }
 
   Widget buildTitle() {
     return const Row(
@@ -131,7 +137,7 @@ class ContainerOrderData extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ButtonCreateInvoice(
-                onSave: onAfterInvoice,
+                onSave: () => onSaveInvoice(cartProvider),
                 orderId: cartProvider.orderId,
                 disabled: cartProvider.articles.isEmpty,
               ),

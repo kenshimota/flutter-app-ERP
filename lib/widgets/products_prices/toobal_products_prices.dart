@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/products_prices/button_sort_products_prices.dart';
+
 
 
 
@@ -19,9 +21,10 @@ class ToobalProductPrice extends StatelessWidget {
     return SizedBox(
       height: 70,
       child: LayourtTwiceBuilder(
-        mobile: const Row(
+        mobile:  Row(
           children: [
-            Text('este en construccion')
+            Expanded(child: inputSearch,),
+            ButtonSortProductsPrices(onOrden: onOrden,)
           ],
         ),
         desktop: Row(

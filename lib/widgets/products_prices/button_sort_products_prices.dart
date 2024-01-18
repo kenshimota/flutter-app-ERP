@@ -6,41 +6,37 @@ enum SampleItem {
   itemThree,
   itemFour,
   itemFive,
-  itemSix,
-  itemSeven,
-  itemEight,
-  itemNine,
-  itemTen
 }
 
-class ButtonSortOrders extends StatelessWidget {
+class ButtonSortProductsPrices extends StatelessWidget {
   final Function(Map<String, String>)? onOrden;
-  const ButtonSortOrders({
+  const ButtonSortProductsPrices({
     super.key,
     this.onOrden,
   });
 
   @override
   Widget build(BuildContext context) {
-    return PopupButtoOrders(
+    return PopupButtonProductsPrices(
       onOrden: onOrden,
     );
   }
 }
 
-class PopupButtoOrders extends StatefulWidget {
+class PopupButtonProductsPrices extends StatefulWidget {
   final Function(Map<String, String>)? onOrden;
 
-  const PopupButtoOrders({
+  const PopupButtonProductsPrices({
     super.key,
     this.onOrden,
   });
 
   @override
-  State<PopupButtoOrders> createState() => _PopupButtoOrdersState();
+  State<PopupButtonProductsPrices> createState() =>
+      _PopupButtonProductsPricesState();
 }
 
-class _PopupButtoOrdersState extends State<PopupButtoOrders> {
+class _PopupButtonProductsPricesState extends State<PopupButtonProductsPrices> {
   SampleItem? selectedMenu;
   bool isAccending = false;
 
@@ -48,14 +44,9 @@ class _PopupButtoOrdersState extends State<PopupButtoOrders> {
     final b = !isAccending;
     final index = item.index;
     final list = <String>[
-      "number",
-      "customer_id",
-      "subtotal",
-      "tax_amount",
-      "total",
       "currency_id",
-      "user_id",
-      "product_count",
+      "product_id",
+      "price",
       "created_at",
       "updated_at",
     ];
@@ -81,86 +72,48 @@ class _PopupButtoOrdersState extends State<PopupButtoOrders> {
         itemBuilder: (BuildContext context) => <PopupMenuEntry<SampleItem>>[
               PopupMenuItem<SampleItem>(
                   value: SampleItem.itemOne,
-                  child: _SortOrdersName(
-                      text: 'N°',
+                  child: _SortProductsPricesName(
+                      text: 'Moneda',
                       isAccending: selectedMenu == SampleItem.itemOne
                           ? isAccending
                           : null)),
               PopupMenuItem<SampleItem>(
                   value: SampleItem.itemTwo,
-                  child: _SortOrdersName(
-                      text: 'Cliente',
+                  child: _SortProductsPricesName(
+                      text: 'Producto',
                       isAccending: selectedMenu == SampleItem.itemTwo
                           ? isAccending
                           : null)),
               PopupMenuItem<SampleItem>(
                   value: SampleItem.itemThree,
-                  child: _SortOrdersName(
-                      text: 'Subtotal',
+                  child: _SortProductsPricesName(
+                      text: 'Precio',
                       isAccending: selectedMenu == SampleItem.itemThree
                           ? isAccending
                           : null)),
               PopupMenuItem<SampleItem>(
                   value: SampleItem.itemFour,
-                  child: _SortOrdersName(
-                      text: 'Monto de impuesto',
+                  child: _SortProductsPricesName(
+                      text: 'Fecha de creado',
                       isAccending: selectedMenu == SampleItem.itemFour
                           ? isAccending
                           : null)),
               PopupMenuItem<SampleItem>(
                   value: SampleItem.itemFive,
-                  child: _SortOrdersName(
-                      text: 'Total',
+                  child: _SortProductsPricesName(
+                      text: 'Fechas de actualizado',
                       isAccending: selectedMenu == SampleItem.itemFive
                           ? isAccending
                           : null)),
-              PopupMenuItem<SampleItem>(
-                  value: SampleItem.itemSix,
-                  child: _SortOrdersName(
-                      text: 'Moneda',
-                      isAccending: selectedMenu == SampleItem.itemSix
-                          ? isAccending
-                          : null)),
-              PopupMenuItem<SampleItem>(
-                  value: SampleItem.itemSeven,
-                  child: _SortOrdersName(
-                      text: 'Usuario',
-                      isAccending: selectedMenu == SampleItem.itemSeven
-                          ? isAccending
-                          : null)),
-              PopupMenuItem<SampleItem>(
-                value: SampleItem.itemEight,
-                child: _SortOrdersName(
-                    text: 'Cantidad de productos',
-                    isAccending: selectedMenu == SampleItem.itemEight
-                        ? isAccending
-                        : null),
-              ),
-              PopupMenuItem<SampleItem>(
-                value: SampleItem.itemNine,
-                child: _SortOrdersName(
-                    text: 'Fecha de creacion',
-                    isAccending: selectedMenu == SampleItem.itemNine
-                        ? isAccending
-                        : null),
-              ),
-              PopupMenuItem<SampleItem>(
-                value: SampleItem.itemTen,
-                child: _SortOrdersName(
-                    text: 'Fecha de actualizacion',
-                    isAccending: selectedMenu == SampleItem.itemTen
-                        ? isAccending
-                        : null),
-              ),
             ]);
   }
 }
 
-class _SortOrdersName extends StatelessWidget {
+class _SortProductsPricesName extends StatelessWidget {
   final bool? isAccending;
   final String text;
 
-  const _SortOrdersName(
+  const _SortProductsPricesName(
       {super.key, required this.text, required this.isAccending});
 
   @override

@@ -3,6 +3,7 @@ import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/column_cell.dart';
 import 'package:flutter_app_erp/widgets/orders/popup_menu_order.dart';
+import 'package:flutter_app_erp/widgets/shoppingCart/print_invoice_from_order.dart';
 import 'package:flutter_app_erp/widgets/slice_column.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/list_tile_app.dart';
@@ -11,58 +12,55 @@ import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 
 class ListTileContentOrders extends StatelessWidget {
   final OrdersResponse order;
+  final void Function()? onAfterChange;
 
-  const ListTileContentOrders({super.key, required this.order});
+  const ListTileContentOrders({
+    super.key,
+    required this.order,
+    this.onAfterChange,
+  });
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildContent(BuildContext context) {
     return SizedBox(
         height: 100,
         child: SliceColumn(
           children: [
             ColumnCell(
-              subtitle: "Codigo:",
+              subtitle: "N°:",
               content: NumberFormatterApp.filled(order.number),
             ),
-            ColumnCell(subtitle: "Subtotal:", content: "${order.subtotal}"),
+            ColumnCell(subtitle: "Subtotal:", content: NumberFormatterApp.format(order.subtotal)),
             ColumnCell(
-                subtitle: "Nombre:",
+                subtitle: "Cliente:",
                 content: "${order.customer!.name} ${order.customer!.lastName}"),
             ColumnCell(
-                subtitle: "Monto de impuesto:", content: "${order.taxAmount}"),
+                subtitle: "Impuesto:", content: "${order.taxAmount}"),
             ColumnCell(
               subtitle: "Total:",
               content: NumberFormatterApp.format(order.total),
             ),
             ColumnCell(
-              subtitle: "Moneda",
+              subtitle: "Moneda:",
               content: "${order.currency!.code} (${order.currency!.symbol})",
             ),
             ColumnCell(
-                subtitle: "Usuario",
+                subtitle: "Usuario:",
                 content: "${order.user!.firstName} ${order.user!.lastName}"),
             ColumnCell(
-              subtitle: "Cantidad de productos",
+              subtitle: "Cantidad de productos:",
               content: NumberFormatterApp.amount(order.productsCount),
             ),
             ColumnCell(
-              subtitle: "Fecha de creacion",
+              subtitle: "Creación:",
               content: DateFormatterApp.dateTimeFormatter(order.createdAt),
             ),
             ColumnCell(
-              subtitle: "Fecha de actualizacion",
+              subtitle: "Actualización:",
               content: DateFormatterApp.dateTimeFormatter(order.updatedAt),
             ),
           ],
         ));
   }
-}
-
-class ListTileOrder extends StatelessWidget {
-  final OrdersResponse order;
-  final void Function()? onAfterChange;
-
-  const ListTileOrder({super.key, required this.order, this.onAfterChange});
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +68,46 @@ class ListTileOrder extends StatelessWidget {
       leading: const CircleAvatar(
         child: Icon(Icons.production_quantity_limits),
       ),
-      title: TypographyApp(text: order.number.toString(), variant: "subtitle1"),
-      subtitle: TypographyApp(text: order.customer!.name, variant: "body1"),
+      title: TypographyApp(
+          text: NumberFormatterApp.filled(order.number), 
+          variant: "subtitle1"
+      ),
       trailing: PopupMenuOrder(
         order: order,
         onAfterChange: onAfterChange,
       ),
+      /*subtitle: */
+
       heightContent: 150,
-      content: ListTileContentOrders(
+      content: buildContent(context),
+      subtitle: Row(children: [
+        TypographyApp(
+            text: "${order.customer!.name} ${order.customer!.lastName}",
+            variant: "body1"),
+        Expanded(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const TypographyApp(
+                    text: "total",
+                    variant: "subtitle3",
+                  ),
+                  const SizedBox(
+                    width: 2,
+                  ),
+                  TypographyApp(
+                    text: "${NumberFormatterApp.format(order.total)} ${order.currency!.symbol}"),
+                ],
+              )
+            ],
+          ),
+        ),
+      ]),
+      /*content: ListTileContentOrders(
         order: order,
-      ),
+      ), */
     );
   }
 }
@@ -103,7 +131,7 @@ class ListTileOrders extends StatelessWidget {
   Widget buildItem(BuildContext context, OrdersResponse order) {
     return Column(
       children: [
-        ListTileOrder(order: order, onAfterChange: onAfterChange),
+        ListTileContentOrders(order: order, onAfterChange: onAfterChange),
         const Divider(height: 1)
       ],
     );
