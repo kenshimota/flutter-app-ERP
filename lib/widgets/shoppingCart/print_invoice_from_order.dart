@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
@@ -9,7 +10,7 @@ import 'package:pdf/widgets.dart';
 import 'package:flutter_app_erp/core/pdf/print_document.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/core/response/orders_items/orders_items_response.dart';
-import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 Widget summaryOrderDataItem({
   required String label,
@@ -211,66 +212,76 @@ Widget buildHeaderItem({required String label, required String content}) {
   ]);
 }
 
-Widget buildHeader({
+Future<Widget> buildHeader({
   required OrdersResponse order,
   required CustomersResponse customer,
   required UserResponse user,
-}) {
-  var image;
-  return Row(children: [
-    Expanded(
-        child: Column(children: [
-        pw.Center(child: ),
-      buildHeaderItem(
-        label: "N°",
-        content: NumberFormatterApp.filled(order.number),
-      ),
-      buildHeaderItem(
-        label: "Cliente", content: "${customer.name} ${customer.lastName}"),
-      buildHeaderItem(
-        label: "Empleado", content: "${user.firstName} ${user.lastName}"),
-      buildHeaderItem(
-        label: "Fecha",
-        content: DateFormatterApp.dateTimeFormatter(order.updatedAt),
-      ),
-      buildHeaderItem(
-        label: "Telefono",
-        content: "02832355870",
-      ),
-      buildHeaderItem(
-        label: "R.I.F",
-        content: "J-29888209-3",
-      ),
-      buildHeaderItem(
-        label: "Direccion",
-        content: "Carretera salida a pariaguan locales 1 y 2 sector la Charneca la botella.",
-      ),
-    ]))
-  ]);
+}) async {
+  final img = await rootBundle.load('assets/img/ruedi_goma.jpeg');
+  final imageBytes = img.buffer.asUint8List();
+  final Image imageLogo = Image(MemoryImage(imageBytes));
+
+  return Row(
+    children: [
+      Expanded(
+        child: Column(
+          children: [
+            Center(child: imageLogo),
+            buildHeaderItem(
+              label: "N°",
+              content: NumberFormatterApp.filled(order.number),
+            ),
+            buildHeaderItem(
+                label: "Cliente",
+                content: "${customer.name} ${customer.lastName}"),
+            buildHeaderItem(
+                label: "Empleado",
+                content: "${user.firstName} ${user.lastName}"),
+            buildHeaderItem(
+              label: "Fecha",
+              content: DateFormatterApp.dateTimeFormatter(order.updatedAt),
+            ),
+            buildHeaderItem(
+              label: "Telefono",
+              content: "02832355870",
+            ),
+            buildHeaderItem(
+              label: "R.I.F",
+              content: "J-29888209-3",
+            ),
+            buildHeaderItem(
+              label: "Direccion",
+              content:
+                  "Carretera salida a pariaguan locales 1 y 2 sector la Charneca la botella.",
+            ),
+          ],
+        ),
+      )
+    ],
+  );
 }
 
 Future<void> printInvoiceFromOrder({
   required OrdersResponse order,
   required List<OrdersItemsResponse> articles,
-}) {
+}) async {
+  final UserResponse user = order.user as UserResponse;
+  final CustomersResponse customer = order.customer as CustomersResponse;
+  final CurrenciesResponse currency = order.currency as CurrenciesResponse;
+
+  Widget header =
+      await buildHeader(order: order, customer: customer, user: user);
+
   return printDocument(
     build: (Context context) {
-      final UserResponse user = order.user as UserResponse;
-      final CustomersResponse customer = order.customer as CustomersResponse;
-      final CurrenciesResponse currency = order.currency as CurrenciesResponse;
-
       return Row(
         children: [
           Expanded(
             child: Column(
               children: [
                 Container(
-                  height: 150,
-                  child: buildHeader(
-                    order: order,
-                    customer: customer,
-                    user: user,
-                  ),
+                  height: 250,
+                  child: header,
                 ),
                 Expanded(
                   child: Container(
