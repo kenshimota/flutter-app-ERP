@@ -9,6 +9,7 @@ import 'package:pdf/widgets.dart';
 import 'package:flutter_app_erp/core/pdf/print_document.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/core/response/orders_items/orders_items_response.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 Widget summaryOrderDataItem({
   required String label,
@@ -203,7 +204,7 @@ Widget buildContent(
 }
 
 Widget buildHeaderItem({required String label, required String content}) {
-  return Row(children: [
+  return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Text("$label:", style: TextStyle(fontWeight: FontWeight.bold)),
     SizedBox(width: 5),
     Expanded(child: Text(content))
@@ -215,20 +216,34 @@ Widget buildHeader({
   required CustomersResponse customer,
   required UserResponse user,
 }) {
+  var image;
   return Row(children: [
     Expanded(
         child: Column(children: [
+        pw.Center(child: ),
       buildHeaderItem(
         label: "N°",
         content: NumberFormatterApp.filled(order.number),
       ),
       buildHeaderItem(
-          label: "Cliente", content: "${customer.name} ${customer.lastName}"),
+        label: "Cliente", content: "${customer.name} ${customer.lastName}"),
       buildHeaderItem(
-          label: "Empleado", content: "${user.firstName} ${user.lastName}"),
+        label: "Empleado", content: "${user.firstName} ${user.lastName}"),
       buildHeaderItem(
         label: "Fecha",
         content: DateFormatterApp.dateTimeFormatter(order.updatedAt),
+      ),
+      buildHeaderItem(
+        label: "Telefono",
+        content: "02832355870",
+      ),
+      buildHeaderItem(
+        label: "R.I.F",
+        content: "J-29888209-3",
+      ),
+      buildHeaderItem(
+        label: "Direccion",
+        content: "Carretera salida a pariaguan locales 1 y 2 sector la Charneca la botella.",
       ),
     ]))
   ]);
@@ -250,7 +265,7 @@ Future<void> printInvoiceFromOrder({
             child: Column(
               children: [
                 Container(
-                  height: 100,
+                  height: 150,
                   child: buildHeader(
                     order: order,
                     customer: customer,

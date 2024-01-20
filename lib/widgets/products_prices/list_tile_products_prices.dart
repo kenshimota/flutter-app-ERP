@@ -6,20 +6,22 @@ import 'package:flutter_app_erp/widgets/list_tile_app.dart';
 import 'package:flutter_app_erp/widgets/list_view_app.dart';
 
 import 'package:flutter_app_erp/core/response/products_prices/products_prices_response.dart';
+import 'package:flutter_app_erp/widgets/products_prices/popup_menu_products_prices.dart';
 
 import 'package:flutter_app_erp/widgets/slice_column.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class ListTileContentProductsPrices extends StatelessWidget {
   final ProductsPricesResponse productPrice;
+  final void Function()? onAfterChange;
 
   const ListTileContentProductsPrices({
     super.key,
     required this.productPrice,
+    this.onAfterChange,
   });
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildContent(BuildContext context) {
     return SizedBox(
       height: 70,
       child: SliceColumn(
@@ -41,32 +43,39 @@ class ListTileContentProductsPrices extends StatelessWidget {
       ),
     );
   }
-}
-
-class ListTileProductPrice extends StatelessWidget {
-  final ProductsPricesResponse productPrice;
-  final void Function()? onAfterChange;
-
-  const ListTileProductPrice({
-    super.key,
-    required this.productPrice,
-    this.onAfterChange,
-  });
 
   @override
   Widget build(BuildContext context) {
-    String productWithPrice = "(${productPrice.product!.code}) ${productPrice.product!.name}";
+    String productWithPrice =
+        "(${productPrice.product!.code}) ${productPrice.product!.name}";
     return ListTileApp(
       leading: const CircleAvatar(
         child: Icon(Icons.production_quantity_limits),
       ),
       title: TypographyApp(
-        text: productWithPrice, 
+        text: productWithPrice,
         variant: "subtitle1",
       ),
-        heightContent: 100,
-        content: ListTileContentProductsPrices(
+      trailing: PopupMenuProductsPrices(
         productPrice: productPrice,
+        onAfterChange: onAfterChange,
+      ),
+      heightContent: 100,
+      content: buildContent(context),
+      subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const TypographyApp(
+            text: "Precio",
+            variant: "subtitle3",
+          ),
+          const SizedBox(
+            width: 2,
+          ),
+          TypographyApp(
+            text: "${productPrice.currency!.code} ${productPrice.price}",
+          ),
+        ],
       ),
     );
   }
@@ -91,7 +100,7 @@ class ListTileProductsPrices extends StatelessWidget {
   Widget buildItem(BuildContext context, ProductsPricesResponse productPrice) {
     return Column(
       children: [
-        ListTileProductPrice(
+        ListTileContentProductsPrices(
             productPrice: productPrice, onAfterChange: onAfterChange),
         const Divider(height: 1)
       ],
@@ -105,7 +114,10 @@ class ListTileProductsPrices extends StatelessWidget {
       future: future,
       onNext: onForward,
       listItems: productPrice,
-      buildItems: (context, product) => buildItem(context, product,),
+      buildItems: (context, product) => buildItem(
+        context,
+        product,
+      ),
     );
   }
 }
