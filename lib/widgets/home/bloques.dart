@@ -8,9 +8,13 @@ class Bloques extends StatelessWidget {
   final int amount;
   final String title;
   final Icon icon;
+  final double width;
+  final double height;
 
   const Bloques({
     super.key,
+    required this.width,
+    required this.height,
     required this.amount,
     required this.title,
     required this.icon,
@@ -19,10 +23,10 @@ class Bloques extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      height: 150,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
-        color: Colors.pink,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius:
             BorderRadius.circular(10), // Radio de los bordes redondeados
       ),

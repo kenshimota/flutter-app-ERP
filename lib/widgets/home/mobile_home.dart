@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
-class MobileHome extends StatelessWidget{
+class MobileHome extends StatelessWidget {
   final List<Widget> inventarios;
   const MobileHome({
     super.key,
@@ -10,7 +10,7 @@ class MobileHome extends StatelessWidget{
   });
 
   @override
-  Widget build(BuildContext buildContext){
+  Widget build(BuildContext buildContext) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -22,11 +22,15 @@ class MobileHome extends StatelessWidget{
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 10,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: inventarios,
+        Expanded(
+          child: SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: inventarios,
+            ),
+          ),
         ),
       ],
     );

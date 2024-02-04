@@ -24,8 +24,8 @@ final Map<String, TextStyle? Function(BuildContext)> _colors = {
 
     return const TextStyle(color: Colors.black);
   },
-  "primary": (BuildContext context) => const TextStyle(color: Colors.pink),
-  "secondary": (BuildContext context) => const TextStyle(color: Colors.pink),
+  "primary": (BuildContext context) => TextStyle(color:  Theme.of(context).colorScheme.primary ),
+  "secondary": (BuildContext context) => TextStyle(color: Theme.of(context).colorScheme.primary ),
   "white": (BuildContext context) => const TextStyle(color: Colors.white),
   "error": (BuildContext context) =>
       TextStyle(color: Theme.of(context).colorScheme.error),

@@ -25,7 +25,9 @@ class ButtonCreateTax extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          const TypographyApp(text: 'Guardar'),
+          const TypographyApp(
+            text: 'Guardar',
+            color: "white",),
         ],
       ),
     );

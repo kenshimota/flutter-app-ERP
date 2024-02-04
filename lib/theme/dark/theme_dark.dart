@@ -18,28 +18,29 @@ ThemeData themeDark() => ThemeData(
       // tested with just a hot reload.
 
       colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.pink,
-        primary: Colors.pink,
-        surface: Colors.pink,
-        onPrimary: Colors.pink,
+        seedColor: Color.fromARGB(255, 224, 20, 5),
+        primary: Color.fromARGB(255, 224, 20, 5),
+        surface: Color.fromARGB(255, 224, 20, 5),
+        onPrimary: Color.fromARGB(255, 224, 20, 5),
         brightness: Brightness.dark,
       ),
 
-      scaffoldBackgroundColor: Color(0x66666666),
+      scaffoldBackgroundColor: Color(0x33333333),
 
       drawerTheme: const DrawerThemeData(
+        // shadowColor: ,
         // Definir los colores deseados para el Drawer
-        backgroundColor: Color(0x55555555),
+        backgroundColor:Colors.black,
         // Otros atributos del tema
       ),
 
       dialogTheme: const DialogTheme(
         // Personaliza los atributos del Dialog
-        backgroundColor: Color(0x55555555),
+        backgroundColor: Colors.black,
         // Otros atributos del DialogTheme
       ),
 
-      iconTheme: const IconThemeData(color: Colors.pink),
+      iconTheme: const IconThemeData(color: Color.fromARGB(255, 224, 20, 5)),
 
       inputDecorationTheme: InputDecorationTheme(
         iconColor: Color(0x44444444),
@@ -62,18 +63,18 @@ ThemeData themeDark() => ThemeData(
 
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          iconColor: Colors.pink,
-          foregroundColor: Colors.pink,
+          iconColor: Color.fromARGB(255, 224, 20, 5),
+          foregroundColor: Color.fromARGB(255, 224, 20, 5),
         ),
       ),
 
-      dialogBackgroundColor: Color(0x55555555),
+      dialogBackgroundColor: Color(0x22222222),
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.pink,
+            foregroundColor: Color.fromARGB(255, 224, 20, 5),
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Colors.pink, width: 1),
+              side: const BorderSide(color: Color.fromARGB(255, 224, 20, 5), width: 1),
               borderRadius: BorderRadius.circular(10),
             )),
       ),

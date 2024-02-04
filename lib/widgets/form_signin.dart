@@ -38,18 +38,15 @@ class _FormSigninState extends State<FormSignin> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const FormControl(
+           FormControl(
             child: Column(children: [
               Row(children: [
                 Expanded(
                     child: Center(
-                  child: Icon(
-                    Icons.person,
-                    size: 80.0,
-                  ),
+                  child: Image.asset("assets/img/icon-red.png")
                 ))
               ]),
-              Row(children: [
+              const Row(children: [
                 Expanded(
                     child: Center(
                   child: TypographyApp(

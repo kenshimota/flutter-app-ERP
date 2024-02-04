@@ -17,15 +17,16 @@ ThemeData themeLight() => ThemeData(
       // This works for code too, not just values: Most code changes can be
       // tested with just a hot reload.
 
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.pink,
-        surface: Colors.pink,
-        onPrimary: Colors.pink,
-        error: Colors.red,
+
+      colorScheme:  ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 224, 20, 5),
+        surface: const Color.fromARGB(255, 224, 20, 5),
+        onPrimary: const Color.fromARGB(255, 224, 20, 5),
+        error: const Color.fromARGB(255, 224, 20, 5),
         brightness: Brightness.light,
       ),
 
-      scaffoldBackgroundColor: const Color(0xFFdddddd),
+      scaffoldBackgroundColor: const Color(0xDDDDDDDD),
 
       drawerTheme: const DrawerThemeData(
         backgroundColor: Colors.white,
@@ -35,10 +36,10 @@ ThemeData themeLight() => ThemeData(
         backgroundColor: Colors.white,
       ),
 
-      iconTheme: const IconThemeData(color: Colors.pink),
+      iconTheme: const IconThemeData(color: Color.fromARGB(255, 224, 20, 5),),
 
       inputDecorationTheme: InputDecorationTheme(
-        iconColor: Colors.pink,
+        iconColor: const Color.fromARGB(255, 224, 20, 5),
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.all(20),
         border: OutlineInputBorder(
@@ -57,8 +58,8 @@ ThemeData themeLight() => ThemeData(
 
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          iconColor: Colors.pink,
-          foregroundColor: Colors.pink,
+          iconColor: const Color.fromARGB(255, 224, 20, 5),
+          foregroundColor:const Color.fromARGB(255, 224, 20, 5),
         ),
       ),
 
@@ -66,9 +67,9 @@ ThemeData themeLight() => ThemeData(
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-            foregroundColor: Colors.pink,
+            foregroundColor: const Color.fromARGB(255, 224, 20, 5),
             shape: ContinuousRectangleBorder(
-              side: const BorderSide(color: Colors.pink, width: 1),
+              side: const BorderSide(color: Color.fromARGB(255, 224, 20, 5), width: 1),
               borderRadius: BorderRadius.circular(10),
             )),
       ),

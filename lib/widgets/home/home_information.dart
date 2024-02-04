@@ -54,6 +54,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
         children: [
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.supervised_user_circle_sharp,
                 size: 40,
@@ -65,6 +67,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.warning,
                 size: 40,
@@ -76,6 +80,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.check,
                 size: 40,
@@ -91,6 +97,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
         children: [
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.monetization_on,
                 size: 40,
@@ -102,6 +110,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.monetization_on,
                 size: 40,
@@ -113,12 +123,14 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.shopping_cart,
                 size: 40,
                 color: Colors.white,
               ),
-              title: "Total de \npedidos hoy",
+              title: "Total de pedidos hoy",
               amount: dashboard!.totalOrdersToday,
             ),
           ),
@@ -128,28 +140,34 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
         children: [
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.shopping_bag,
                 size: 40,
                 color: Colors.white,
               ),
-              title: "Total de productos \n comprados hoy",
+              title: "Productos comprados\nhoy",
               amount: dashboard!.totalProductsBoughtToday,
             ),
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.shopping_bag,
                 size: 40,
                 color: Colors.white,
               ),
-              title: "Total de productos \n comprados en el mes",
+              title: "Productos comprados\nen el mes",
               amount: dashboard!.totalProductsBoughtMonth,
             ),
           ),
           FormControl(
             child: Bloques(
+              width: 180,
+              height: 150,
               icon: const Icon(
                 Icons.shopping_cart,
                 size: 40,
@@ -182,122 +200,142 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
     return [
       Column(
         children: [
-          FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.supervised_user_circle_sharp,
-                size: 40,
-                color: Colors.white,
+          Row(
+            children: [
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.supervised_user_circle_sharp,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de usuarios",
+                  amount: dashboard!.totalUsers,
+                ),
               ),
-              title: "Total de usuarios",
-              amount: dashboard!.totalUsers,
-            ),
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.warning,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Productos Sin\n Existencia",
+                  amount: dashboard!.totalProductsWithoutStock,
+                ),
+              ),
+            ],
           ),
-          FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.warning,
-                size: 40,
-                color: Colors.white,
+          Row(
+            children: [
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.check,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Productos en\n Existencia",
+                  amount: dashboard!.totalProductsWithStock,
+                ),
               ),
-              title: "Productos Sin\n Existencia",
-              amount: dashboard!.totalProductsWithoutStock,
-            ),
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.monetization_on,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de factura\n de hoy",
+                  amount: dashboard!.totalInvoicesToday,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-
-      Column(
-        children: [
-           FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.check,
-                size: 40,
-                color: Colors.white,
+          Row(
+            children: [
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.monetization_on,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de factura \n del mes",
+                  amount: dashboard!.totalInvoicesMonth,
+                ),
               ),
-              title: "Productos en\n Existencia",
-              amount: dashboard!.totalProductsWithStock,
-            ),
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de \npedidos hoy",
+                  amount: dashboard!.totalOrdersToday,
+                ),
+              ),
+            ],
           ),
-           FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.monetization_on,
-                size: 40,
-                color: Colors.white,
+          Row(
+            children: [
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.shopping_bag,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de productos \n comprados hoy",
+                  amount: dashboard!.totalProductsBoughtToday,
+                ),
               ),
-              title: "Total de factura\n de hoy",
-              amount: dashboard!.totalInvoicesToday,
-            ),
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.shopping_bag,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de productos \n comprados en el mes",
+                  amount: dashboard!.totalProductsBoughtMonth,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      Column(
-        children: [
-            FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.monetization_on,
-                size: 40,
-                color: Colors.white,
+          Row(
+            children: [
+              FormControl(
+                child: Bloques(
+                  width: 130,
+                  height: 150,
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  title: "Total de pedidos \nen el mes",
+                  amount: dashboard!.totalOrdersMonth,
+                ),
               ),
-              title: "Total de factura \n del mes",
-              amount: dashboard!.totalInvoicesMonth,
-            ),
-          ),
-          FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.shopping_cart,
-                size: 40,
-                color: Colors.white,
-              ),
-              title: "Total de \npedidos hoy",
-              amount: dashboard!.totalOrdersToday,
-            ),
-          ),
-        ],
-      ),
-      Column(
-        children: [
-           FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.shopping_bag,
-                size: 40,
-                color: Colors.white,
-              ),
-              title: "Total de productos \n comprados hoy",
-              amount: dashboard!.totalProductsBoughtToday,
-            ),
-          ),
-          FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.shopping_bag,
-                size: 40,
-                color: Colors.white,
-              ),
-              title: "Total de productos \n comprados en el mes",
-              amount: dashboard!.totalProductsBoughtMonth,
-            ),
-          ),
-        ],
-      ),
-
-      Column(
-        children: [
-           FormControl(
-            child: Bloques(
-              icon: const Icon(
-                Icons.shopping_cart,
-                size: 40,
-                color: Colors.white,
-              ),
-              title: "Total de pedidos \nen el mes",
-              amount: dashboard!.totalOrdersMonth,
-            ),
+            ],
           ),
         ],
       ),
@@ -310,12 +348,12 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
       padding: const EdgeInsets.all(10),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Expanded(
-          child: ContainerWhite(
-            child: LayourtTwiceBuilder(
-              mobile: MobileHome(inventarios: buildListMobile(), ),
-              desktop: DesktopHome(
-                inventarios: buildList(),
-              ),
+          child: LayourtTwiceBuilder(
+            mobile: MobileHome(
+              inventarios: buildListMobile(),
+            ),
+            desktop: DesktopHome(
+              inventarios: buildList(),
             ),
           ),
         ),

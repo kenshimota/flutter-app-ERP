@@ -109,11 +109,8 @@ class DrawerApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.account_circle,
-                size: 80,
-                color: Colors.white,
-              ),
+              Image.asset("assets/img/icon-white.png"),
+  
               TypographyApp(
                 text: fullName,
                 color: "white",
@@ -139,6 +136,7 @@ class DrawerApp extends StatelessWidget {
     Color color = Theme.of(context).colorScheme.primary;
 
     return Drawer(
+     
       child: Row(
         children: [
           Expanded(

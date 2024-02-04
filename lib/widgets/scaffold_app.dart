@@ -37,6 +37,12 @@ class _ScaffoldApp extends State<ScaffoldApp> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
+        leading: IconButton(
+      icon: const Icon(Icons.menu, color: Colors.white),
+      onPressed: () {
+        _scaffoldKey.currentState!.openDrawer();
+      },
+    ),
         title: TypographyApp(
           text: widget.title ?? 'Drawer Demo',
           variant: "h3",
@@ -44,6 +50,7 @@ class _ScaffoldApp extends State<ScaffoldApp> {
         ),
       ),
       body: widget.body,
+      
       drawer: DrawerApp(
         onClose: _closeDrawer,
       ),
