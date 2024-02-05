@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
@@ -10,8 +11,9 @@ class MobileHome extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext buildContext) {
-    return Column(
+  Widget build(BuildContext context) {
+    return ContainerWhite(
+          child:Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const FormControl(
@@ -24,7 +26,7 @@ class MobileHome extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Expanded(
+          Expanded(
           child: SingleChildScrollView(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +34,8 @@ class MobileHome extends StatelessWidget {
             ),
           ),
         ),
+       
       ],
-    );
+    ));
   }
 }

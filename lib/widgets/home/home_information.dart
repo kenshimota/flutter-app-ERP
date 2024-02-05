@@ -6,6 +6,7 @@ import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/form_control.dart';
 import 'package:flutter_app_erp/widgets/home/bloques.dart';
 import 'package:flutter_app_erp/widgets/home/desktop_home.dart';
+import 'package:flutter_app_erp/widgets/home/loading_home_data.dart';
 import 'package:flutter_app_erp/widgets/home/mobile_home.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
@@ -347,16 +348,11 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Expanded(
-          child: LayourtTwiceBuilder(
-            mobile: MobileHome(
-              inventarios: buildListMobile(),
-            ),
-            desktop: DesktopHome(
-              inventarios: buildList(),
-            ),
-          ),
-        ),
+       LoadingHomeData(
+        future: futureObjet,
+        buildList: buildList(),
+        buildListMobile: buildListMobile(),
+       ),
       ]),
     );
   }
