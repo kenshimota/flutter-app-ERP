@@ -13,8 +13,10 @@ class DesktopHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ContainerLimit(
-      maxWidth: 1200,
-      minHeight: 700,
+      minWidth: 300,
+      maxWidth: 1024,
+      minHeight: 400,
+      maxHeight: 700,
       child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
@@ -39,7 +41,6 @@ class DesktopHome extends StatelessWidget {
                 width: 30,
               ),
               Column(
-               
                 children: [
                   const FormControl(
                     child: TypographyApp(
@@ -52,7 +53,6 @@ class DesktopHome extends StatelessWidget {
                     height: 30,
                   ),
                   Row(
-                    
                     children: inventarios,
                   ),
                 ],
