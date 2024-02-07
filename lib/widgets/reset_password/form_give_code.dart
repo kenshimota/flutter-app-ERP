@@ -121,14 +121,25 @@ class _TextAboutToGoToSignin extends StatelessWidget {
     context.go("/signin");
   }
 
+  Color getColorText(BuildContext context) {
+    final Brightness currentBrightness = Theme.of(context).brightness;
+
+    if (currentBrightness == Brightness.dark) {
+      return Color(0xf9f9f9f9);
+    }
+
+    return Colors.black;
+  }
+
   @override
   Widget build(BuildContext context) {
     Color? color = Theme.of(context).colorScheme.surface;
+    Color? textColor = getColorText(context);
 
     return RichText(
       text: TextSpan(
         text: '¿Recordaste tu contraseña? ',
-        style: const TextStyle(color: Colors.black, fontSize: 18),
+        style: TextStyle(color: textColor, fontSize: 18),
         children: [
           TextSpan(
             recognizer: TapGestureRecognizer()
