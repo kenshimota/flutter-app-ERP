@@ -205,21 +205,21 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
             children: [
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.supervised_user_circle_sharp,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de usuarios",
+                  title: "Total de\nusuarios",
                   amount: dashboard!.totalUsers,
                 ),
               ),
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.warning,
                     size: 40,
@@ -235,8 +235,8 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
             children: [
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.check,
                     size: 40,
@@ -248,14 +248,14 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
               ),
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.monetization_on,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de factura\n de hoy",
+                  title: "Total de \nfactura de hoy",
                   amount: dashboard!.totalInvoicesToday,
                 ),
               ),
@@ -265,27 +265,27 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
             children: [
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.monetization_on,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de factura \n del mes",
+                  title: "Total de\nfactura del mes",
                   amount: dashboard!.totalInvoicesMonth,
                 ),
               ),
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.shopping_cart,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de \npedidos hoy",
+                  title: "Total de\npedidos hoy",
                   amount: dashboard!.totalOrdersToday,
                 ),
               ),
@@ -295,27 +295,27 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
             children: [
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.shopping_bag,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de productos \n comprados hoy",
+                  title: "Total de\nproductos\ncomprados hoy",
                   amount: dashboard!.totalProductsBoughtToday,
                 ),
               ),
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.shopping_bag,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de productos \n comprados en el mes",
+                  title: "Productos\ncomprados\nen el mes",
                   amount: dashboard!.totalProductsBoughtMonth,
                 ),
               ),
@@ -325,14 +325,14 @@ class _ShowHomeInformation extends State<ShowHomeInformation> {
             children: [
               FormControl(
                 child: Bloques(
-                  width: 130,
-                  height: 150,
+                  width: 135,
+                  height: 166,
                   icon: const Icon(
                     Icons.shopping_cart,
                     size: 40,
                     color: Colors.white,
                   ),
-                  title: "Total de pedidos \nen el mes",
+                  title: "Total de\npedidos\nen el mes",
                   amount: dashboard!.totalOrdersMonth,
                 ),
               ),

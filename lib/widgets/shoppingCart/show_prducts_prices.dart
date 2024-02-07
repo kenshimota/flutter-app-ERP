@@ -135,8 +135,30 @@ class _ShowProductsPrices extends State<ShowProductsPrices> {
     return Row(
       children: [
         Expanded(
-          child: buildListPrices(context: context),
-        ),
+            child: Column(
+          children: [
+            SizedBox(
+                height: 50,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 10,),
+ 
+                        IconButton(
+                          // color: Colors.white,
+                          icon: const Icon(Icons.close),
+                          onPressed: () => onClose(context),
+                        ),
+                      
+                  
+                  ],
+                )),
+            Expanded(
+              child: Row(children: [
+                Expanded(child: buildListPrices(context: context))
+              ]),
+            )
+          ],
+        )),
         Container(
           width: 400,
           color: background,

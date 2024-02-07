@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/widgets/alert_dialog_app.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/form_currencie_create.dart';
 
-class AlertDialogNewCurrencie extends StatefulWidget{
+class AlertDialogNewCurrencie extends StatefulWidget {
   final void Function()? onSave;
 
   const AlertDialogNewCurrencie({
@@ -15,9 +16,9 @@ class AlertDialogNewCurrencie extends StatefulWidget{
   _AlertDialogNewCurrencie createState() => _AlertDialogNewCurrencie();
 }
 
-class _AlertDialogNewCurrencie extends State<AlertDialogNewCurrencie>{
+class _AlertDialogNewCurrencie extends State<AlertDialogNewCurrencie> {
   void onAfterSave(context) {
-    if(context.mounted == false){
+    if (context.mounted == false) {
       return;
     }
 
@@ -26,16 +27,19 @@ class _AlertDialogNewCurrencie extends State<AlertDialogNewCurrencie>{
   }
 
   @override
-  Widget build(BuildContext context){
-    return AlertDialog(
+  Widget build(BuildContext context) {
+    return AlertDialogApp(
+      maxHeight: 430,
       title: const TypographyApp(
         text: 'Nueva Moneda',
-        variant: "h2",
+        variant: "h3",
       ),
-      actions: [
-        FormCurrencieCreate(
+      content: [
+        Expanded(
+          child: FormCurrencieCreate(
             onAfterSave: () => onAfterSave(context),
           ),
+        ),
       ],
     );
   }

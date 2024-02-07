@@ -34,7 +34,7 @@ class _AlertDialogEditInventory extends State<AlertDialogEditInventory> {
       maxHeight: 300,
       title: const TypographyApp(
         text: 'Editar Inventario',
-        variant: "h5",
+        variant: "h3",
       ),
       content: [
         Expanded(

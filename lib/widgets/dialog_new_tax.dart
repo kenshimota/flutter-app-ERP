@@ -29,7 +29,7 @@ class _AlertDialogNewTax extends State<AlertDialogNewTax> {
     return AlertDialog(
         title: const TypographyApp(
           text: 'Nuevo impuesto',
-          variant: "h2",
+          variant: "h3",
         ),
         actions: [
           FormTaxCreate(

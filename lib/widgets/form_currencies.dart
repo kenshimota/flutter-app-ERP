@@ -104,6 +104,9 @@ class _FormCurrencieState extends State<FormCurrencie> {
               errorText: widget.errors?.getValue("exchange_rate"),
             ),
           ),
+          SizedBox(
+            height: 40,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

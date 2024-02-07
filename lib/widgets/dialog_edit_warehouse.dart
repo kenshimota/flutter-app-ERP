@@ -32,7 +32,7 @@ class _AlertDialogEditWarehouse extends State<AlertDialogEditWarehouse> {
     return AlertDialog(
         title: const TypographyApp(
           text: 'Editar Deposito',
-          variant: "h2",
+          variant: "h3",
         ),
         actions: [
           FormWarehouseUpdate(

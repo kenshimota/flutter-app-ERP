@@ -30,7 +30,7 @@ class _AlertDialogNewWarehouse extends State<AlertDialogNewWarehouse>{
     return AlertDialog(
       title: const TypographyApp(
         text: 'Nuevo deposito',
-        variant: "h2",
+        variant: "h3",
       ),
       actions: [
         FormWarehouseCreate(

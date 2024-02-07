@@ -32,7 +32,7 @@ class _AlertDialogEditTax extends State<AlertDialogEditTax> {
     return AlertDialog(
         title: const TypographyApp(
           text: 'Editar Impuesto',
-          variant: "h2",
+          variant: "h3",
         ),
         actions: [
           FormTaxUpdate(

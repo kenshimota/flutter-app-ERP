@@ -32,7 +32,7 @@ class _AlertDialogEditCurrencie extends State<AlertDialgEditCurrencie> {
     return AlertDialog(
         title: const TypographyApp(
           text: 'Editar Moneda',
-          variant: "h2",
+          variant: "h3",
         ),
         actions: [
           FormCurrencieUpdate(

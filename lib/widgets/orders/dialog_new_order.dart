@@ -56,13 +56,19 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
 
   Widget buildTitle(BuildContext context) {
     if (isFound == null) {
-      return const TypographyApp(text: "Buscar Cliente", variant: "h4");
+      return const TypographyApp(
+        text: "Buscar Cliente", 
+        variant: "h3"
+      );
     } else if (isFound == true) {
-      return const TypographyApp(text: "Crear pedido", variant: "h4");
+      return const TypographyApp(
+        text: "Crear pedido", 
+        variant: "h3"
+      );
     }
     return const TypographyApp(
       text: "Crear cliente",
-      variant: "h4",
+      variant: "h3",
     );
   }
 
