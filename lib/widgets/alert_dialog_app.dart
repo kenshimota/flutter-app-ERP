@@ -4,12 +4,14 @@ class AlertDialogApp extends StatelessWidget {
   final Widget title;
   final double maxWidth;
   final double maxHeight;
+
   final List<Widget>? content;
 
   const AlertDialogApp({
     super.key,
     required this.title,
     this.content,
+ 
     this.maxWidth = 300,
     this.maxHeight = 300,
   });

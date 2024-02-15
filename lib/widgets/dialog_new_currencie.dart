@@ -29,12 +29,13 @@ class _AlertDialogNewCurrencie extends State<AlertDialogNewCurrencie> {
   @override
   Widget build(BuildContext context) {
     return AlertDialogApp(
-      maxHeight: 430,
+      maxHeight: 450,
+    
       title: const TypographyApp(
         text: 'Nueva Moneda',
         variant: "h3",
       ),
-      content: [
+      content:  [
         Expanded(
           child: FormCurrencieCreate(
             onAfterSave: () => onAfterSave(context),

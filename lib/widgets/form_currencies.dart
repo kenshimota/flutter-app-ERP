@@ -69,7 +69,7 @@ class _FormCurrencieState extends State<FormCurrencie> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
+      child: SingleChildScrollView( child:Column(
         children: [
           FormControl(
             child: InputName(
@@ -130,7 +130,7 @@ class _FormCurrencieState extends State<FormCurrencie> {
             ],
           ),
         ],
-      ),
+      ),),
     );
   }
 }
