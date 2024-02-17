@@ -1,3 +1,4 @@
+import "dart:io";
 import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/core/http/ordens_items/delete_order_item.dart';
 import 'package:flutter_app_erp/core/http/ordens_items/get_order_item.dart';
@@ -23,22 +24,30 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> getData({required String token}) async {
+    debugPrint("--- getData ----");
     await getOrderData(token: token);
     await getItems(token: token);
     notifyListeners();
   }
 
   Future<void> getOrderData({required String token}) async {
+    debugPrint("----  getOrderData ----");
     final OrdersResponse data = await getOrder(token: token, orderId: orderId);
     order = data;
+      debugPrint("---- Finish getOrderData ----");
   }
 
   Future<void> getItems({required String token}) async {
+    debugPrint("----  getItems ----");
     int page = 1;
 
     List<OrdersItemsResponse> list = [];
 
+       debugPrint("---- While getItems ----");
+
     while (list.length == 20 * (page - 1)) {
+      debugPrint("${page} --- ${list.length}");
+
       list = await getListOrdersItemsResponse(
         token: token,
         page: page,
@@ -52,6 +61,9 @@ class CartProvider extends ChangeNotifier {
 
       page += 1;
     }
+
+    debugPrint("---- After While getItems ----");
+    debugPrint("---- Finish getItems ----");
   }
 
   Future<void> addItem({
@@ -59,6 +71,8 @@ class CartProvider extends ChangeNotifier {
     required int quantity,
     required String token,
   }) async {
+    debugPrint("---- addItem ---");
+
     final OrdersItemsResponse item = await createOrdersItems(
       orderId: orderId,
       productId: productId,
@@ -66,13 +80,17 @@ class CartProvider extends ChangeNotifier {
       token: token,
     );
 
+    const duration = Duration(milliseconds: 300);
+    sleep(duration);
+
     final OrdersItemsResponse data =
         await getOrderItem(token: token, itemId: item.id);
 
     articles.add(data);
 
     await getOrderData(token: token);
-
+    
+    debugPrint("---- Finish addItem ---");
     notifyListeners();
   }
 

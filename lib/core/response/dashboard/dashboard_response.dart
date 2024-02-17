@@ -25,6 +25,9 @@ class DashboardResponse implements ResponseBase {
   });
 
   factory DashboardResponse.fromJson(Map<String, dynamic> json){
+
+    print(json);
+
     return DashboardResponse(
       totalUsers: json['total_users'], 
       totalProductsWithStock: json['total_products_with_stock'], 
