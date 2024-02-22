@@ -180,6 +180,8 @@ class _FormSignupState extends State<FormSignup> {
               ],
             ),
 
+            const SizedBox(height: 100),
+
             FormControl(
               child: ElevatedButtonShadow(
                 child: ElevatedButtonFuture(
