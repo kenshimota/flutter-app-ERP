@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_app_erp/core/exception/form_errors.dart';
+import 'package:flutter_app_erp/widgets/autocomplete/autocomplete_city.dart';
+import 'package:flutter_app_erp/widgets/autocomplete/autocomplete_states.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:flutter_app_erp/widgets/elevate_button_shadow.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +32,9 @@ class FormSignup extends StatefulWidget {
 }
 
 class _FormSignupState extends State<FormSignup> {
+  int? stateId;
+  int? cityId;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _username = TextEditingController();
@@ -50,6 +55,22 @@ class _FormSignupState extends State<FormSignup> {
       "first_name": _firstName.text,
       "email": _email.text,
       "identity_document": _identityDocument.text,
+      "state_id": stateId,
+      "city_id": cityId,
+    });
+  }
+
+  onSelectState(Map<String, dynamic>? state) {
+    setState(() {
+      int? value = state == null ? null : state["id"];
+      stateId = value;
+    });
+  }
+
+  onSelectCity(Map<String, dynamic>? city) {
+    setState(() {
+      int? value = city == null ? null : city["id"];
+      cityId = value;
     });
   }
 
@@ -135,6 +156,30 @@ class _FormSignupState extends State<FormSignup> {
                 ),
               ],
             ),
+
+            _GridItemRowToColumn(
+              children: [
+                _GridColumn(
+                  child: FormControl(
+                    child: AutocompleteStates(token: "", onSelect: onSelectState,),  /*InputUserName(
+                      future: widget.future,
+                      controller: _username,
+                      errorText: widget.errors?.getValue("username"),
+                    ),*/
+                  ),
+                ),
+                _GridColumn(
+                  child: FormControl(
+                    child: AutocompleteCity(token: "", onSelect: onSelectCity,),  /*InputPassword(
+                      future: widget.future,
+                      controller: _password,
+                      errorText: widget.errors?.getValue("password"),
+                    ),*/
+                  ),
+                ),
+              ],
+            ),
+
             FormControl(
               child: ElevatedButtonShadow(
                 child: ElevatedButtonFuture(

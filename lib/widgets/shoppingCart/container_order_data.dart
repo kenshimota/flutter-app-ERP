@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/constants/roles_constants.dart';
 import 'package:flutter_app_erp/core/formatters/number_formatter_app.dart';
 import 'package:flutter_app_erp/core/response/currencies/currencies_response.dart';
 import 'package:flutter_app_erp/core/response/orders/orders_response.dart';
 import 'package:flutter_app_erp/providers/cartProvider.dart';
+import 'package:flutter_app_erp/widgets/protected_child.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/button_create_invoice.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/list_order_items.dart';
 import 'package:flutter_app_erp/widgets/shoppingCart/print_invoice_from_order.dart';
@@ -47,7 +49,8 @@ class ContainerOrderData extends StatelessWidget {
   const ContainerOrderData({super.key, this.onAfterInvoice, this.onAfterSave});
 
   Future<void> onSaveInvoice(CartProvider cart) async {
-    await printInvoiceFromOrder(order: cart.order as OrdersResponse, articles: cart.articles);
+    await printInvoiceFromOrder(
+        order: cart.order as OrdersResponse, articles: cart.articles);
     onAfterInvoice!();
   }
 
@@ -115,8 +118,7 @@ class ContainerOrderData extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            child: Column(
-          children: [
+          child: Column(children: [
             buildTitle(),
             Expanded(
               child: Container(
@@ -141,9 +143,26 @@ class ContainerOrderData extends StatelessWidget {
                 orderId: cartProvider.orderId,
                 disabled: cartProvider.articles.isEmpty,
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ProtectedChild(
+                roles: [RolesConstants.customer()],
+                child: ElevatedButton(
+                  onPressed: () => onAfterInvoice!(),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.save),
+                      SizedBox(width: 5),
+                      TypographyApp(text: 'Guardar'),
+                    ],
+                  ),
+                ),
+              ),
             )
-          ],
-        ))
+          ]),
+        ),
       ],
     );
   }

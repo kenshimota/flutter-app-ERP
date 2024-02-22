@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/constants/roles_constants.dart';
+import 'package:flutter_app_erp/core/response/users/user_response.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_app_erp/widgets/form_signup.dart';
@@ -21,10 +25,10 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
     BuildContext context,
   ) async {
     bool success = false;
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     try {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
-
+      
       await authProvider.signUp(
         username: params["username"],
         password: params["password"],
@@ -32,6 +36,8 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
         lastName: params["last_name"],
         identityDocument: int.parse(params["identity_document"]),
         email: params["email"],
+        stateId: params["state_id"],
+        cityId: params["city_id"] ,
       );
 
       success = true;
@@ -46,6 +52,13 @@ class _FormSignupRequestState extends State<FormSignupRequest> {
     }
 
     if (success && context.mounted) {
+      final UserResponse current = authProvider.getCurrentUser() as UserResponse;
+      
+      if(current.roleId == RolesConstants.customer()){
+        GoRouter.of(context).go("/orders");
+        return;
+      }
+
       GoRouter.of(context).go("/");
     }
   }

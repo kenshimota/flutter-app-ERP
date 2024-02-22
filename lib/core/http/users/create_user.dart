@@ -12,6 +12,8 @@ Future<UserResponse> createUser({
   required String lastName,
   required int identityDocument,
   required String email,
+  required int stateId,
+  required int cityId,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
@@ -22,6 +24,13 @@ Future<UserResponse> createUser({
   };
 
   String body = jsonEncode({
+    "customer": {
+      "name": firstName,
+      "last_name": lastName,
+      "identity_document": identityDocument,
+      "state_id": stateId,
+      "city_id": cityId,
+    },
     "user": {
       "username": username,
       "first_name": firstName,

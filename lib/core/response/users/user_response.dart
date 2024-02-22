@@ -7,6 +7,8 @@ class UserResponse {
   final int identityDocument;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String roleId;
+  final int customerId;
   String? token;
 
   UserResponse({
@@ -18,6 +20,8 @@ class UserResponse {
     required this.identityDocument,
     required this.createdAt,
     required this.updatedAt,
+    required this.roleId,
+    required this.customerId,
     this.token,
   });
 
@@ -32,6 +36,8 @@ class UserResponse {
       identityDocument: json['identity_document'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+      roleId: json["role"] != null ? json["role"]["name"] : "customer",
+      customerId: json["customer"] != null ? json["customer"]["id"] : -1,
     );
   }
 }

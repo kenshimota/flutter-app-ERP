@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/constants/roles_constants.dart';
 import 'package:flutter_app_erp/core/http/invoices/create_invoice.dart';
 import 'package:flutter_app_erp/providers/auth_provider.dart';
+import 'package:flutter_app_erp/widgets/protected_child.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 import 'package:flutter_app_erp/widgets/elevated_button_future.dart';
 import 'package:provider/provider.dart';
@@ -47,19 +49,22 @@ class _ButtonCreateInvoice extends State<ButtonCreateInvoice> {
     final authProvider = Provider.of<AuthProvider>(context);
     final String token = authProvider.getToken() as String;
 
-    return ElevatedButtonFuture(
-      future: future,
-      onPressed: widget.disabled ? null : () => onInvoice(token),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.print),
-          const SizedBox(width: 5),
-          TypographyApp(
-            text: 'Facturar',
-            color: widget.disabled ? "inherit" : "white",
-          ),
-        ],
+    return ProtectedChild(
+      roles: [RolesConstants.salePerson(), RolesConstants.manager()],
+      child: ElevatedButtonFuture(
+        future: future,
+        onPressed: widget.disabled ? null : () => onInvoice(token),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.print),
+            const SizedBox(width: 5),
+            TypographyApp(
+              text: 'Facturar',
+              color: widget.disabled ? "inherit" : "white",
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,13 +7,15 @@ import 'package:flutter_app_erp/widgets/orders/form_orders_search.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
 
 class AlertDialogNewOrder extends StatefulWidget {
-  final void Function()? onSave;
   final String token;
+  final void Function()? onSave;
+  final CustomersResponse? defaultCustomer;
 
   const AlertDialogNewOrder({
     super.key,
     this.onSave,
     required this.token,
+    this.defaultCustomer,
   });
 
   @override
@@ -24,6 +26,17 @@ class AlertDialogNewOrder extends StatefulWidget {
 class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
   bool? isFound;
   CustomersResponse? customer;
+
+  @override
+  initState() {
+    setState(() {
+      customer = widget.defaultCustomer;
+      
+      if(widget.defaultCustomer != null) {
+        isFound = true; 
+      }
+    });
+  }
 
   getCustomer(CustomersResponse? client) {
     setState(() {
@@ -56,15 +69,9 @@ class _AlertDialogNewOrder extends State<AlertDialogNewOrder> {
 
   Widget buildTitle(BuildContext context) {
     if (isFound == null) {
-      return const TypographyApp(
-        text: "Buscar Cliente", 
-        variant: "h3"
-      );
+      return const TypographyApp(text: "Buscar Cliente", variant: "h3");
     } else if (isFound == true) {
-      return const TypographyApp(
-        text: "Crear pedido", 
-        variant: "h3"
-      );
+      return const TypographyApp(text: "Crear pedido", variant: "h3");
     }
     return const TypographyApp(
       text: "Crear cliente",

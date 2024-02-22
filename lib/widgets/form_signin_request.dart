@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/constants/roles_constants.dart';
 import 'package:flutter_app_erp/core/exception/auth_errors.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -20,8 +21,10 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
       Map<String, dynamic> params, BuildContext context) async {
     UserResponse? response;
 
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     try {
-      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      
 
       await authProvider.signIn(
         username: params["username"],
@@ -36,6 +39,13 @@ class _FormSigninRequestState extends State<FormSigninRequest> {
     }
 
     if (context.mounted) {
+      final UserResponse current = authProvider.getCurrentUser() as UserResponse;
+      
+      if(current.roleId == RolesConstants.customer()){
+        GoRouter.of(context).go("/orders");
+        return response;
+      }
+
       GoRouter.of(context).go("/");
     }
 

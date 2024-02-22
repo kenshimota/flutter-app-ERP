@@ -38,7 +38,10 @@ class AuthProvider extends ChangeNotifier {
     required String lastName,
     required int identityDocument,
     required String email,
+    required int stateId,
+    required int cityId,
   }) async {
+    
     final UserResponse user = await createUser(
       username: username,
       password: password,
@@ -46,6 +49,8 @@ class AuthProvider extends ChangeNotifier {
       lastName: lastName,
       identityDocument: identityDocument,
       email: email,
+      stateId: stateId,
+      cityId: cityId,
     );
 
     _currentUser = user;
@@ -53,7 +58,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> signOut() async {
-    _currentUser = null;
+    _currentUser = null;    
     notifyListeners();
   }
 }
