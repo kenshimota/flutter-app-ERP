@@ -9,6 +9,7 @@ Future<List<OrdersResponse>> getListOrders({
   String search = '',
   Map<String, String>? order,
   int page = 1,
+  int? customerId,
 }) async {
   final env = dotenv.env;
   final String hostname = env['HOSTNAME_API'] ?? '';
@@ -18,6 +19,10 @@ Future<List<OrdersResponse>> getListOrders({
     order.containsKey('field') &&
     order.containsKey('type')) {
     path = '$path&order_by[field]=${order['field']}&order_by[order]=${order['type']}';
+  }
+
+  if(customerId != null) {
+    path = "$path&customer_id=$customerId";
   }
 
   final Map<String, String> hearders = {

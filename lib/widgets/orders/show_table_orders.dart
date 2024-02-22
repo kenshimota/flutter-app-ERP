@@ -11,10 +11,12 @@ import 'package:flutter_app_erp/widgets/orders/toobal_orders.dart';
 
 class ShowTableOrders extends StatefulWidget {
   final String token;
+  final int? customerId;
 
   const ShowTableOrders({
     super.key,
     required this.token,
+    this.customerId,
   });
 
   @override
@@ -43,6 +45,7 @@ class _ShowTableOrders extends State<ShowTableOrders> {
       order: order,
       search: search,
       page: numberPage,
+      customerId: widget.customerId,
     );
 
     setState(() {
