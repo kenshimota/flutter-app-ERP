@@ -122,6 +122,13 @@ class DrawerApp extends StatelessWidget {
           pathname: "/products_prices",
           leading: const Icon(Icons.price_change),
           roles: [RolesConstants.manager()],
+        ),
+        listItemRouterProtected(
+          context: context,
+          title: "Usuarios",
+          pathname: "/users",
+          leading: const Icon(Icons.person),
+          roles: [RolesConstants.manager()],
         )
       ],
     );
