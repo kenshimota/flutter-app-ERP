@@ -11,7 +11,7 @@ Future<List<UserResponse>> getListUsers({
 }) async {
   final env = dotenv.env;
  final String hostname = env['HOSTNAME_API'] ?? '';
-  String path = "$hostname/users?q=$search&page=$page&";
+  String path = "$hostname/users?metadata=1&q=$search&page=$page&";
 
   final Map<String, String> headers = {
     'content-Type': 'application/json',
