@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_erp/widgets/input_search.dart';
 import 'package:flutter_app_erp/widgets/container_white.dart';
 import 'package:flutter_app_erp/widgets/layourt_twice_builder.dart';
+import 'package:flutter_app_erp/widgets/users/list_users_mobile.dart';
 import 'package:flutter_app_erp/widgets/users/table_users.dart';
 import 'package:flutter_app_erp/widgets/users/toobal_users.dart';
 import 'package:flutter_app_erp/core/http/users/get_list_users.dart';
@@ -88,15 +89,28 @@ class _ShowListUsers extends State<ShowListUsers> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          ToobalUsers(
+            inputSeach: InputSearch(onSearch: onSearch),
+          ),
           Expanded(
             child: ContainerWhite(
-              child: TableUsers(
+              child: LayourtTwiceBuilder(
+              mobile: ListTileUsers(
+                page: numberPage,
+                future: futureList,
+                onForward: onForwad,
+                list: result,
+                onAfterChange: onRequest,
+              ),
+              
+              desktop:TableUsers(
                 list: result,
                 onBack: onBack,
                 onForwad: onForwad,
                 numberPage: numberPage,
-                onAfterDelete: onRequest,)
-            ),
+                onAfterDelete: onRequest,
+              )
+            ),),
           ),
         ],
       ),

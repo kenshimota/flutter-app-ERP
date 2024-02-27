@@ -1,4 +1,6 @@
-class UserResponse {
+import 'package:flutter_app_erp/core/response/response_base.dart';
+
+class UserResponse implements ResponseBase {
   final int id;
   final String email;
   final String username;

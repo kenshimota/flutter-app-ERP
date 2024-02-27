@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_erp/core/constants/roles_constants.dart';
 import 'package:flutter_app_erp/core/formatters/date_formatter_app.dart';
 import 'package:flutter_app_erp/widgets/data_table_paginated.dart';
 import 'package:flutter_app_erp/core/response/users/user_response.dart';
 import 'package:flutter_app_erp/widgets/typography.dart';
+import 'package:flutter_app_erp/widgets/users/button_edit_users.dart';
 
 class TableUsers extends StatefulWidget {
   final int numberPage;
@@ -57,7 +59,7 @@ class _TableUsers extends State<TableUsers> {
               ),
               DataCell(
                 TypographyApp(
-                  text: user.roleId,
+                  text: roleSpanish[user.roleId],
                   variant: "body1",
                 ),
               ),
@@ -72,7 +74,10 @@ class _TableUsers extends State<TableUsers> {
               DataCell(
                 Row(
                   children: [
-                    Text("En construccion....."),
+                    ButtonEditUserRole(
+                      user: user,
+                      onSave: widget.onAfterDelete,
+                    ),
                 ],
               )
               ),

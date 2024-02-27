@@ -8,6 +8,11 @@ import 'package:flutter_app_erp/widgets/circular_button.dart';
 import 'package:flutter_app_erp/widgets/orders/dialog_new_order.dart';
 import 'package:provider/provider.dart';
 
+Map<String, bool> allowCreatOrders = {
+  RolesConstants.manager(): true,
+  RolesConstants.salePerson(): true,
+};
+
 class ButtonNewOrder extends StatelessWidget {
   final void Function()? onSave;
   final String token;
@@ -23,7 +28,7 @@ class ButtonNewOrder extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final UserResponse current = authProvider.getCurrentUser() as UserResponse;
 
-    if (current.roleId == RolesConstants.customer()) {
+    if (allowCreatOrders[current.roleId] == null) {
       customer = await getCustomer(token: token, id: current.customerId);
     }
 
